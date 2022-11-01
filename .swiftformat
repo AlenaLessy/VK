@@ -1,0 +1,12 @@
+# Отключаем следующие правила:
+--disable void, trailingCommas, unusedArguments, enumNamespaces
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--indent 4
+
+# Отключаем отступ
+--ifdef no-indent
+
+--swiftversion 5.7
