@@ -8,8 +8,8 @@
 import UIKit
 
 /// Универсальный алерт
-public extension UIViewController {
-    func showAlert(title: String?, message: String?, actionTitle: String?, handler: ((UIAlertAction) -> ())?) {
+extension UIViewController {
+    func showAlert(title: String?, message: String?, actionTitle: String?, handler: ((UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertControllerAction = UIAlertAction(title: actionTitle, style: .default, handler: handler)
         alertController.addAction(alertControllerAction)

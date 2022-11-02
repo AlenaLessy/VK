@@ -211,7 +211,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:~/.mint/bin\"\nswiftformat .\n";
+			shellScript = "export PATH=\"$PATH:~/.mint/bin\"\nswiftformat .\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
