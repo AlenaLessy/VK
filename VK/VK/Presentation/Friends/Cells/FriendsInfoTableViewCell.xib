@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendsInfo" rowHeight="134" id="KGk-i7-Jjw" customClass="FriendsInfoTableViewCell" customModule="VK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="497" height="134"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="497" height="134"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ccr-d3-GGY">
+                        <rect key="frame" x="10" y="6" width="50" height="48.666666666666671"/>
+                        <color key="tintColor" red="0.15714716911315918" green="0.81099694967269897" blue="0.072798244655132294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Gvk-Sv-oKA"/>
+                            <constraint firstAttribute="height" constant="50" id="enP-jJ-EQB"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Ky-98-AEv">
+                        <rect key="frame" x="3.3333333333333357" y="65.666666666666671" width="61.000000000000007" height="48"/>
+                        <color key="tintColor" name="blue"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавьте друзей из контактов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ru-0h-n9Z">
+                        <rect key="frame" x="68" y="13" width="233" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="I1K-V1-CoG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" name="white"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Найдите знакомых из телефонной книги" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bf1-SN-EKd">
+                        <rect key="frame" x="68" y="33" width="258" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавьте друзей из рекомендаций" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLU-jC-C9z">
+                        <rect key="frame" x="68" y="73" width="269" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="mtG-dF-Acf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" name="white"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Возможно, вы знаете этих людей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0g-DO-eCj">
+                        <rect key="frame" x="68" y="93" width="212" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8Ky-98-AEv" firstAttribute="top" secondItem="ccr-d3-GGY" secondAttribute="bottom" constant="10" id="3Sa-fe-KXG"/>
+                    <constraint firstItem="PLU-jC-C9z" firstAttribute="top" secondItem="Bf1-SN-EKd" secondAttribute="bottom" constant="24" id="5Or-AZ-p0e"/>
+                    <constraint firstItem="8Ky-98-AEv" firstAttribute="width" secondItem="ccr-d3-GGY" secondAttribute="width" multiplier="1.18667" id="5da-LT-RSA"/>
+                    <constraint firstItem="ccr-d3-GGY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9fx-ke-29G"/>
+                    <constraint firstItem="Bf1-SN-EKd" firstAttribute="top" secondItem="0ru-0h-n9Z" secondAttribute="bottom" constant="2" id="A5l-Ug-xq6"/>
+                    <constraint firstItem="0ru-0h-n9Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="Fqj-1a-ULm"/>
+                    <constraint firstItem="PLU-jC-C9z" firstAttribute="leading" secondItem="Bf1-SN-EKd" secondAttribute="leading" id="GQM-e2-Hx9"/>
+                    <constraint firstItem="8Ky-98-AEv" firstAttribute="height" secondItem="ccr-d3-GGY" secondAttribute="height" multiplier="0.98" id="JIE-vD-NFj"/>
+                    <constraint firstItem="e0g-DO-eCj" firstAttribute="top" secondItem="PLU-jC-C9z" secondAttribute="bottom" constant="2" id="Wny-kW-mgj"/>
+                    <constraint firstItem="ccr-d3-GGY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="YJF-7d-Cjv"/>
+                    <constraint firstItem="8Ky-98-AEv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5.0000000000000062" id="YPU-I2-t4n"/>
+                    <constraint firstItem="0ru-0h-n9Z" firstAttribute="leading" secondItem="ccr-d3-GGY" secondAttribute="trailing" constant="8" id="Zqr-rk-bAk"/>
+                    <constraint firstItem="e0g-DO-eCj" firstAttribute="leading" secondItem="PLU-jC-C9z" secondAttribute="leading" id="rmr-A0-fvU"/>
+                    <constraint firstItem="Bf1-SN-EKd" firstAttribute="leading" secondItem="0ru-0h-n9Z" secondAttribute="leading" id="txd-1H-eCY"/>
+                    <constraint firstAttribute="bottom" secondItem="8Ky-98-AEv" secondAttribute="bottom" constant="15" id="ul7-Vb-m1w"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="179.38931297709922" y="51.408450704225352"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="128" height="114"/>
+        <image name="phone.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="blue">
+            <color red="0.36899998784065247" green="0.60000002384185791" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="white">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

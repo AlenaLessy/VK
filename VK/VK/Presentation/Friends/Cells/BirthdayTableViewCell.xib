@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Birthday" rowHeight="136" id="KGk-i7-Jjw" customClass="BirthdayTableViewCell" customModule="VK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="136"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="377" height="136"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTg-Y7-sgK">
+                        <rect key="frame" x="15" y="15" width="72" height="72"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mi8" translatesAutoresizingMaskIntoConstraints="NO" id="kge-mk-NGy">
+                                <rect key="frame" x="1" y="1" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="MbQ-Iw-Ttj"/>
+                                    <constraint firstAttribute="width" constant="70" id="Znx-7R-foz"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="blue"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="72" id="2Ut-pk-Dxu"/>
+                            <constraint firstAttribute="width" constant="72" id="S7X-82-5Gc"/>
+                            <constraint firstItem="kge-mk-NGy" firstAttribute="centerY" secondItem="VTg-Y7-sgK" secondAttribute="centerY" id="T7Q-hp-xKk"/>
+                            <constraint firstItem="kge-mk-NGy" firstAttribute="centerX" secondItem="VTg-Y7-sgK" secondAttribute="centerX" id="ore-NA-n2g"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="36"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Анна Владимировна" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct3-gY-xcF">
+                        <rect key="frame" x="97" y="27" width="164" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="сегодня день рождения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQ7-Ph-T9n">
+                        <rect key="frame" x="97" y="48" width="141" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" systemColor="systemBlueColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swu-aa-oL4">
+                        <rect key="frame" x="322" y="31" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="pba-ph-Mmr"/>
+                            <constraint firstAttribute="height" constant="40" id="zVi-k9-Nx0"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="gift" catalog="system"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ct3-gY-xcF" firstAttribute="leading" secondItem="VTg-Y7-sgK" secondAttribute="trailing" constant="10" id="8HN-Xx-8fZ"/>
+                    <constraint firstItem="VTg-Y7-sgK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EL9-Ot-hVQ"/>
+                    <constraint firstItem="nQ7-Ph-T9n" firstAttribute="leading" secondItem="Ct3-gY-xcF" secondAttribute="leading" id="SGu-5Q-ycp"/>
+                    <constraint firstAttribute="bottom" secondItem="VTg-Y7-sgK" secondAttribute="bottom" constant="10" id="VkN-hu-tWS"/>
+                    <constraint firstItem="Swu-aa-oL4" firstAttribute="centerY" secondItem="VTg-Y7-sgK" secondAttribute="centerY" id="h18-7R-TLT"/>
+                    <constraint firstAttribute="trailing" secondItem="Swu-aa-oL4" secondAttribute="trailing" constant="15" id="l1B-Hj-agE"/>
+                    <constraint firstItem="Ct3-gY-xcF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="pgn-Sx-Jqw"/>
+                    <constraint firstItem="VTg-Y7-sgK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="vEu-Ms-psv"/>
+                    <constraint firstItem="nQ7-Ph-T9n" firstAttribute="top" secondItem="Ct3-gY-xcF" secondAttribute="bottom" id="zba-BA-UoJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="userImageView" destination="kge-mk-NGy" id="9ym-sq-mc3"/>
+                <outlet property="userNameLabel" destination="Ct3-gY-xcF" id="3TO-SV-PaK"/>
+            </connections>
+            <point key="canvasLocation" x="109.16030534351144" y="52.816901408450704"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="gift" catalog="system" width="128" height="125"/>
+        <image name="mi8" width="512" height="512"/>
+        <namedColor name="blue">
+            <color red="0.36899998784065247" green="0.60000002384185791" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
