@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Контрол для выставления и подсчета лайков
 final class LikeControl: UIControl {
     // MARK: - Constants
 
@@ -42,14 +43,18 @@ final class LikeControl: UIControl {
     @objc private func recognizerAction(_: UITapGestureRecognizer) {
         isLiked.toggle()
         guard isLiked else {
-            likeImageView.image = UIImage(systemName: SystemImageName.heart)
-            likeImageView.tintColor = .systemGray6
-            numberOfLikes -= 1
-            numberOfLikesLabel.text = numberOfLikes.description
-            numberOfLikesLabel.textColor = .systemGray6
-
+            setupDislike()
             return
         }
+        setupLike()
+    }
+
+    private func setupRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(recognizerAction(_:)))
+        addGestureRecognizer(recognizer)
+    }
+
+    private func setupLike() {
         likeImageView.image = UIImage(systemName: SystemImageName.heartFill)
         likeImageView.tintColor = .red
         numberOfLikes += 1
@@ -57,8 +62,11 @@ final class LikeControl: UIControl {
         numberOfLikesLabel.textColor = .red
     }
 
-    private func setupRecognizer() {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(recognizerAction(_:)))
-        addGestureRecognizer(recognizer)
+    private func setupDislike() {
+        likeImageView.image = UIImage(systemName: SystemImageName.heart)
+        likeImageView.tintColor = .systemGray6
+        numberOfLikes -= 1
+        numberOfLikesLabel.text = numberOfLikes.description
+        numberOfLikesLabel.textColor = .systemGray6
     }
 }

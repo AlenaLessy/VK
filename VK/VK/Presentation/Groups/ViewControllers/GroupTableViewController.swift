@@ -49,16 +49,13 @@ final class GroupTableViewController: UITableViewController {
         let casted = segue.destination as? RecommendationGroupTableViewController
         casted?.recommendationGroupsDataCourse = recommendationGroupsDataCourse
         casted?.backHandler = { [weak self] group in
-            self?.groupsDataCourse.insert(group, at: 0)
-            self?.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-            guard let index = self?.recommendationGroupsDataCourse.firstIndex(where: { $0 == group }) else { return }
-            self?.recommendationGroupsDataCourse.remove(at: index)
+            guard let self else { return }
+            self.groupsDataCourse.insert(group, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            guard let index = self.recommendationGroupsDataCourse.firstIndex(where: { $0 == group }) else { return }
+            self.recommendationGroupsDataCourse.remove(at: index)
         }
     }
-
-    // MARK: - IBAction
-
-    @IBAction func addGroupAction(_ sender: Any) {}
 
     // MARK: - Private Methods
 

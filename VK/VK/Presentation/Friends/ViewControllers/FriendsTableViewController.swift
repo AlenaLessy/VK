@@ -126,13 +126,7 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    private func setupNumberOfRows(section: Int) -> Int {
         let type = sections[section]
         switch type {
         case .friendsSearch, .friendsInfo, .friendsRequest:
@@ -144,11 +138,7 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        createCell(indexPath: indexPath)
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    private func setupTableViewHeader(section: Int) -> String? {
         let type = sections[section]
         switch type {
         case .friendsSearch, .friendsInfo, .friendsRequest:
@@ -160,13 +150,35 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Table view delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func setupTableViewSelect(indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 300, height: 300)
         let profileCollectionViewController = ProfileCollectionViewController(collectionViewLayout: layout)
         profileCollectionViewController.friend = friendsDataSource[indexPath.row]
         navigationController?.pushViewController(profileCollectionViewController, animated: true)
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        setupNumberOfRows(section: section)
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        createCell(indexPath: indexPath)
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        setupTableViewHeader(section: section)
+    }
+
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        setupTableViewSelect(indexPath: indexPath)
     }
 }

@@ -46,8 +46,6 @@ final class RecommendationGroupTableViewController: UITableViewController {
         navigationController?.popToRootViewController(animated: true)
     }
 
-    private func test() {}
-
     private func configureTableView() {
         tableView.register(
             UINib(nibName: Constants.groupNibName, bundle: nil),
