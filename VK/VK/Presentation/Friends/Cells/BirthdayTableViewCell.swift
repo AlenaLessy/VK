@@ -14,9 +14,9 @@ final class BirthdayTableViewCell: UITableViewCell {
     @IBOutlet private var userImageView: UIImageView!
     @IBOutlet private var userNameLabel: UILabel!
 
-    // MARK: - Public Properties
+    // MARK: - Public Methods
 
-    func update(birthdays: Birthdays) {
+    func update(birthdays: Birthday) {
         userImageView.image = UIImage(named: birthdays.imageName)
         userNameLabel.text = birthdays.name
     }

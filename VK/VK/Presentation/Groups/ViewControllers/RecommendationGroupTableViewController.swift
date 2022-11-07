@@ -34,6 +34,22 @@ final class RecommendationGroupTableViewController: UITableViewController {
         configureTableView()
     }
 
+    // MARK: - Public Methods
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        recommendationGroupsDataCourse.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        createCell(indexPath: indexPath)
+    }
+
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        goToRootVC(indexPath: indexPath)
+    }
+
     // MARK: - Private Methods
 
     private func goToRootVC(indexPath: IndexPath) {
@@ -54,28 +70,12 @@ final class RecommendationGroupTableViewController: UITableViewController {
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        let model = recommendationGroupsDataCourse[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
+        let model = recommendationGroupsDataCourse[indexPath.row]
         cell.update(group: model)
         return cell
-    }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recommendationGroupsDataCourse.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        createCell(indexPath: indexPath)
-    }
-
-    // MARK: - Table view delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goToRootVC(indexPath: indexPath)
     }
 }

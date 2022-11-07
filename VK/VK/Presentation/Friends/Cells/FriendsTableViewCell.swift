@@ -22,18 +22,18 @@ final class FriendsTableViewCell: UITableViewCell {
     @IBOutlet private var userNameLabel: UILabel!
     @IBOutlet private var userInfoLabel: UILabel!
 
-    // MARK: - Public Properties
+    // MARK: - Public Methods
 
-    func update(friends: Friends) {
-        userImageView.image = UIImage(named: friends.imageName)
-        userNameLabel.text = friends.name
-        if friends.city != nil, friends.age?.description != nil {
-            userInfoLabel.text = (friends.age?.description ?? Constants.emptyString) + Constants
-                .commaString + (friends.city ?? Constants.emptyString)
-        } else if friends.city != nil {
-            userInfoLabel.text = friends.city
-        } else if friends.age?.description != nil {
-            userInfoLabel.text = friends.age?.description
+    func update(friend: Friend) {
+        userImageView.image = UIImage(named: friend.imageName)
+        userNameLabel.text = friend.name
+        if friend.city != nil, friend.age?.description != nil {
+            userInfoLabel.text = (friend.age?.description ?? Constants.emptyString) + Constants
+                .commaString + (friend.city ?? Constants.emptyString)
+        } else if friend.city != nil {
+            userInfoLabel.text = friend.city
+        } else if friend.age?.description != nil {
+            userInfoLabel.text = friend.age?.description
         }
     }
 }

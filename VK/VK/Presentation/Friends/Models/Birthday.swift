@@ -8,7 +8,7 @@
 import Foundation
 
 /// Модель дней рождения
-struct Birthdays {
-    var name: String
-    var imageName: String
+struct Birthday {
+    let name: String
+    let imageName: String
 }

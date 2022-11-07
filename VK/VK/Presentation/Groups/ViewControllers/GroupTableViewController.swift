@@ -18,7 +18,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private Outlets
 
-    @IBOutlet var addGroupBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var addGroupBarButtonItem: UIBarButtonItem!
 
     // MARK: - Private Properties
 
@@ -57,27 +57,6 @@ final class GroupTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Private Methods
-
-    private func configureTableView() {
-        tableView.register(
-            UINib(nibName: Constants.groupNibName, bundle: nil),
-            forCellReuseIdentifier: Constants.groupIdentifier
-        )
-    }
-
-    private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        let model = groupsDataCourse[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.groupIdentifier,
-            for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.update(group: model)
-        return cell
-    }
-
-    // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         groupsDataCourse.count
     }
@@ -97,5 +76,24 @@ final class GroupTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
             recommendationGroupsDataCourse.append(model)
         }
+    }
+
+    // MARK: - Private Methods
+
+    private func configureTableView() {
+        tableView.register(
+            UINib(nibName: Constants.groupNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.groupIdentifier
+        )
+    }
+
+    private func createCell(indexPath: IndexPath) -> UITableViewCell {
+        let model = groupsDataCourse[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: Constants.groupIdentifier,
+            for: indexPath
+        ) as? GroupTableViewCell else { return UITableViewCell() }
+        cell.update(group: model)
+        return cell
     }
 }

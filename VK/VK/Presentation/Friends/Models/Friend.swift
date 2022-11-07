@@ -8,9 +8,9 @@
 import Foundation
 
 /// Модель Друзей
-struct Friends {
-    var name: String
-    var imageName: String
+struct Friend {
+    let name: String
+    let imageName: String
     var age: Int?
     var city: String?
 }

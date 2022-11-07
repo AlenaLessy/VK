@@ -38,20 +38,20 @@ final class FriendsTableViewController: UITableViewController {
 
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday, .friends]
 
-    private var birthdaysDataSource: [Birthdays] = [
-        Birthdays(name: "Михалыч", imageName: "mi5"),
-        Birthdays(name: "Потапка", imageName: "mi6"),
-        Birthdays(name: "Евгений Медведев", imageName: "mi7"),
-        Birthdays(name: "Топтышка Мишулин", imageName: "mi8")
+    private var birthdaysDataSource: [Birthday] = [
+        Birthday(name: "Михалыч", imageName: "mi5"),
+        Birthday(name: "Потапка", imageName: "mi6"),
+        Birthday(name: "Евгений Медведев", imageName: "mi7"),
+        Birthday(name: "Топтышка Мишулин", imageName: "mi8")
     ]
 
-    private var friendsDataSource: [Friends] = [
-        Friends(name: "Михаил Потапыч", imageName: "m1", city: "Сочи"),
-        Friends(name: "Медведь Бурый", imageName: "m2", age: 14, city: "Питер"),
-        Friends(name: "Мишка Белый", imageName: "mi1", age: 19, city: "Севастополь"),
-        Friends(name: "Коала Пропала", imageName: "m3"),
-        Friends(name: "Гризли Загрызли", imageName: "m4", age: 42),
-        Friends(name: "Миша Цирковой", imageName: "m5", age: 5, city: "Ростов"),
+    private var friendsDataSource: [Friend] = [
+        Friend(name: "Михаил Потапыч", imageName: "m1", city: "Сочи"),
+        Friend(name: "Медведь Бурый", imageName: "m2", age: 14, city: "Питер"),
+        Friend(name: "Мишка Белый", imageName: "mi1", age: 19, city: "Севастополь"),
+        Friend(name: "Коала Пропала", imageName: "m3"),
+        Friend(name: "Гризли Загрызли", imageName: "m4", age: 42),
+        Friend(name: "Миша Цирковой", imageName: "m5", age: 5, city: "Ростов"),
     ]
 
     // MARK: - Life Cycle
@@ -59,6 +59,28 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+    }
+
+    // MARK: - Public Method
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        sections.count
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        setupNumberOfRows(section: section)
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        createCell(indexPath: indexPath)
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        setupTableViewHeader(section: section)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        setupTableViewSelect(indexPath: indexPath)
     }
 
     // MARK: - Private Method
@@ -121,7 +143,7 @@ final class FriendsTableViewController: UITableViewController {
                 withIdentifier: Constants.friendsIdentifier,
                 for: indexPath
             ) as? FriendsTableViewCell else { return UITableViewCell() }
-            cell.update(friends: model)
+            cell.update(friend: model)
             return cell
         }
     }
@@ -156,29 +178,5 @@ final class FriendsTableViewController: UITableViewController {
         let profileCollectionViewController = ProfileCollectionViewController(collectionViewLayout: layout)
         profileCollectionViewController.friend = friendsDataSource[indexPath.row]
         navigationController?.pushViewController(profileCollectionViewController, animated: true)
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        sections.count
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        setupNumberOfRows(section: section)
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        createCell(indexPath: indexPath)
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        setupTableViewHeader(section: section)
-    }
-
-    // MARK: - Table view delegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        setupTableViewSelect(indexPath: indexPath)
     }
 }

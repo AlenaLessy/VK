@@ -18,7 +18,7 @@ final class ProfileCollectionViewController: UICollectionViewController {
 
     // MARK: - Public Properties
 
-    var friend: Friends?
+    var friend: Friend?
 
     // MARK: - Initializers
 
@@ -38,16 +38,7 @@ final class ProfileCollectionViewController: UICollectionViewController {
         cellRegister()
     }
 
-    // MARK: - Private Methods
-
-    private func cellRegister() {
-        collectionView.register(
-            UINib(nibName: Constants.FriendCellNibName, bundle: nil),
-            forCellWithReuseIdentifier: Constants.FriendCellIdentifier
-        )
-    }
-
-    // MARK: UICollectionViewDataSource
+    // MARK: - Public Method
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         1
@@ -57,12 +48,22 @@ final class ProfileCollectionViewController: UICollectionViewController {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.FriendCellIdentifier,
-            for: indexPath
-        ) as? FriendCollectionViewCell else { return UICollectionViewCell() }
-        guard let model = friend else { return UICollectionViewCell() }
-        cell.update(friends: model)
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Constants.FriendCellIdentifier,
+                for: indexPath
+            ) as? FriendCollectionViewCell,
+            let model = friend else { return UICollectionViewCell() }
+        cell.update(friend: model)
         return cell
+    }
+
+    // MARK: - Private Methods
+
+    private func cellRegister() {
+        collectionView.register(
+            UINib(nibName: Constants.FriendCellNibName, bundle: nil),
+            forCellWithReuseIdentifier: Constants.FriendCellIdentifier
+        )
     }
 }

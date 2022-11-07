@@ -14,7 +14,7 @@ final class GroupTableViewCell: UITableViewCell {
     @IBOutlet private var groupImageView: UIImageView!
     @IBOutlet private var groupNameLabel: UILabel!
 
-    // MARK: - Public Properties
+    // MARK: - Public Method
 
     func update(group: Group) {
         groupImageView.image = UIImage(named: group.groupImageName)

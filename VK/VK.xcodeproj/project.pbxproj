@@ -34,10 +34,10 @@
 		57B8D20F2916CEDA007DF516 /* FriendsRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B8D20D2916CEDA007DF516 /* FriendsRequestTableViewCell.xib */; };
 		57D1C6CF2916DCCB006731B1 /* BirthdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6CD2916DCCB006731B1 /* BirthdayTableViewCell.swift */; };
 		57D1C6D02916DCCB006731B1 /* BirthdayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D1C6CE2916DCCB006731B1 /* BirthdayTableViewCell.xib */; };
-		57D1C6D22916E672006731B1 /* Birthdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6D12916E672006731B1 /* Birthdays.swift */; };
+		57D1C6D22916E672006731B1 /* Birthday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6D12916E672006731B1 /* Birthday.swift */; };
 		57D1C6D72916EB47006731B1 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6D52916EB47006731B1 /* FriendsTableViewCell.swift */; };
 		57D1C6D82916EB47006731B1 /* FriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D1C6D62916EB47006731B1 /* FriendsTableViewCell.xib */; };
-		57D1C6DA2916EFEC006731B1 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6D92916EFEC006731B1 /* Friends.swift */; };
+		57D1C6DA2916EFEC006731B1 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6D92916EFEC006731B1 /* Friend.swift */; };
 		57D1C6DC29170ED0006731B1 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6DB29170ED0006731B1 /* ProfileCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,10 +71,10 @@
 		57B8D20D2916CEDA007DF516 /* FriendsRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsRequestTableViewCell.xib; sourceTree = "<group>"; };
 		57D1C6CD2916DCCB006731B1 /* BirthdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTableViewCell.swift; sourceTree = "<group>"; };
 		57D1C6CE2916DCCB006731B1 /* BirthdayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BirthdayTableViewCell.xib; sourceTree = "<group>"; };
-		57D1C6D12916E672006731B1 /* Birthdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birthdays.swift; sourceTree = "<group>"; };
+		57D1C6D12916E672006731B1 /* Birthday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birthday.swift; sourceTree = "<group>"; };
 		57D1C6D52916EB47006731B1 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		57D1C6D62916EB47006731B1 /* FriendsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsTableViewCell.xib; sourceTree = "<group>"; };
-		57D1C6D92916EFEC006731B1 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		57D1C6D92916EFEC006731B1 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		57D1C6DB29170ED0006731B1 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,8 +265,8 @@
 		57D1C6D32916E678006731B1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				57D1C6D12916E672006731B1 /* Birthdays.swift */,
-				57D1C6D92916EFEC006731B1 /* Friends.swift */,
+				57D1C6D12916E672006731B1 /* Birthday.swift */,
+				57D1C6D92916EFEC006731B1 /* Friend.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -432,8 +432,8 @@
 				57994A862911BE19008D4267 /* SceneDelegate.swift in Sources */,
 				577BAB0F2918460000BD741B /* Group.swift in Sources */,
 				57B8D20529167B00007DF516 /* FriendsSearchTableViewCell.swift in Sources */,
-				57D1C6DA2916EFEC006731B1 /* Friends.swift in Sources */,
-				57D1C6D22916E672006731B1 /* Birthdays.swift in Sources */,
+				57D1C6DA2916EFEC006731B1 /* Friend.swift in Sources */,
+				57D1C6D22916E672006731B1 /* Birthday.swift in Sources */,
 				5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */,
 				577BAB1B2918998A00BD741B /* AvatarView.swift in Sources */,
 				577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */,
