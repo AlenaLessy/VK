@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		571EB0CC291BFF6D00295BED /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0CB291BFF6D00295BED /* Loading.swift */; };
+		571EB0CE291C283E00295BED /* VKTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0CD291C283E00295BED /* VKTabBarController.swift */; };
 		5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */; };
 		5767EF3629180E53000CD65C /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */; };
 		577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB0429183F8400BD741B /* GroupTableViewController.swift */; };
@@ -19,6 +21,10 @@
 		577BAB1B2918998A00BD741B /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB1A2918998A00BD741B /* AvatarView.swift */; };
 		577BAB1E291B103A00BD741B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB1D291B103A00BD741B /* HeaderView.swift */; };
 		577BAB23291B10DE00BD741B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577BAB22291B10DE00BD741B /* HeaderView.xib */; };
+		577BAB27291B544A00BD741B /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB26291B544A00BD741B /* NewsTableViewController.swift */; };
+		577BAB2C291B558D00BD741B /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB2A291B558D00BD741B /* NewsTableViewCell.swift */; };
+		577BAB2D291B558D00BD741B /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577BAB2B291B558D00BD741B /* NewsTableViewCell.xib */; };
+		577BAB30291B5A1800BD741B /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB2F291B5A1800BD741B /* News.swift */; };
 		57994A842911BE19008D4267 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A832911BE19008D4267 /* AppDelegate.swift */; };
 		57994A862911BE19008D4267 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A852911BE19008D4267 /* SceneDelegate.swift */; };
 		57994A882911BE19008D4267 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A872911BE19008D4267 /* LoginViewController.swift */; };
@@ -44,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		571EB0CB291BFF6D00295BED /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		571EB0CD291C283E00295BED /* VKTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKTabBarController.swift; sourceTree = "<group>"; };
 		5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
 		577BAB0429183F8400BD741B /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +64,10 @@
 		577BAB1A2918998A00BD741B /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		577BAB1D291B103A00BD741B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		577BAB22291B10DE00BD741B /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		577BAB26291B544A00BD741B /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		577BAB2A291B558D00BD741B /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		577BAB2B291B558D00BD741B /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		577BAB2F291B5A1800BD741B /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		57994A802911BE19008D4267 /* VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57994A832911BE19008D4267 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57994A852911BE19008D4267 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				57994A872911BE19008D4267 /* LoginViewController.swift */,
+				571EB0CD291C283E00295BED /* VKTabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -125,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				577BAB10291882C000BD741B /* GradientView.swift */,
+				571EB0CB291BFF6D00295BED /* Loading.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,6 +194,41 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		577BAB28291B544E00BD741B /* News */ = {
+			isa = PBXGroup;
+			children = (
+				577BAB29291B548600BD741B /* ViewControllers */,
+				577BAB2E291B559B00BD741B /* Cells */,
+				577BAB31291B5D1800BD741B /* Models */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		577BAB29291B548600BD741B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				577BAB26291B544A00BD741B /* NewsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		577BAB2E291B559B00BD741B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				577BAB2A291B558D00BD741B /* NewsTableViewCell.swift */,
+				577BAB2B291B558D00BD741B /* NewsTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		577BAB31291B5D1800BD741B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				577BAB2F291B5A1800BD741B /* News.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		57994A772911BE19008D4267 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +270,7 @@
 				57B8D1FE291679D6007DF516 /* Friends */,
 				57D1C6DD29170F29006731B1 /* Profile */,
 				577BAB0629183FB500BD741B /* Groups */,
+				577BAB28291B544E00BD741B /* News */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -349,7 +399,7 @@
 				};
 			};
 			buildConfigurationList = 57994A7B2911BE19008D4267 /* Build configuration list for PBXProject "VK" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -379,6 +429,7 @@
 				57B8D20629167B00007DF516 /* FriendsSearchTableViewCell.xib in Resources */,
 				57D1C6D02916DCCB006731B1 /* BirthdayTableViewCell.xib in Resources */,
 				57994A8B2911BE19008D4267 /* Main.storyboard in Resources */,
+				577BAB2D291B558D00BD741B /* NewsTableViewCell.xib in Resources */,
 				57B8D20F2916CEDA007DF516 /* FriendsRequestTableViewCell.xib in Resources */,
 				577BAB0C291842A200BD741B /* GroupTableViewCell.xib in Resources */,
 				57B8D20B2916C685007DF516 /* FriendsInfoTableViewCell.xib in Resources */,
@@ -406,7 +457,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n\n";
+			shellScript = "
+
+";
 		};
 		57994A982911BECD008D4267 /* Run SwitfFormat */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -425,7 +478,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:~/.mint/bin\"\nswiftformat .\n\n";
+			shellScript = "export PATH=\"$PATH:~/.mint/bin\"\nswiftformat .\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -436,6 +489,9 @@
 			files = (
 				577BAB11291882C000BD741B /* GradientView.swift in Sources */,
 				577BAB082918416000BD741B /* RecommendationGroupTableViewController.swift in Sources */,
+				571EB0CC291BFF6D00295BED /* Loading.swift in Sources */,
+				571EB0CE291C283E00295BED /* VKTabBarController.swift in Sources */,
+				577BAB2C291B558D00BD741B /* NewsTableViewCell.swift in Sources */,
 				577BAB182918893E00BD741B /* LikeControl.swift in Sources */,
 				577BAB0B291842A200BD741B /* GroupTableViewCell.swift in Sources */,
 				579F24A22911F46F00678837 /* ViewController + extension.swift in Sources */,
@@ -449,7 +505,9 @@
 				577BAB0F2918460000BD741B /* Group.swift in Sources */,
 				57B8D20529167B00007DF516 /* FriendsSearchTableViewCell.swift in Sources */,
 				57D1C6DA2916EFEC006731B1 /* Friend.swift in Sources */,
+				577BAB27291B544A00BD741B /* NewsTableViewController.swift in Sources */,
 				57D1C6D22916E672006731B1 /* Birthday.swift in Sources */,
+				577BAB30291B5A1800BD741B /* News.swift in Sources */,
 				5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */,
 				577BAB1B2918998A00BD741B /* AvatarView.swift in Sources */,
 				577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */,
@@ -610,6 +668,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,6 +697,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -201,7 +201,7 @@ final class FriendsTableViewController: UITableViewController {
 
     private func setupTableViewSelect(indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 300, height: 300)
+        layout.itemSize = CGSize(width: 390, height: 400)
         let profileCollectionViewController = ProfileCollectionViewController(collectionViewLayout: layout)
         profileCollectionViewController.friend = friendsDataSource[indexPath.row]
         navigationController?.pushViewController(profileCollectionViewController, animated: true)

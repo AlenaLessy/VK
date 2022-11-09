@@ -9,6 +9,10 @@ import UIKit
 
 /// Ячейка коллекции друзей
 final class FriendCollectionViewCell: UICollectionViewCell {
+    // MARK: - Public Outlets
+
+    @IBOutlet var cellHeightLayoutConstraint: NSLayoutConstraint!
+
     // MARK: - Private Outlets
 
     @IBOutlet private var friendImageView: UIImageView!
@@ -17,5 +21,9 @@ final class FriendCollectionViewCell: UICollectionViewCell {
 
     func update(friend: Friend) {
         friendImageView.image = UIImage(named: friend.imageName)
+    }
+
+    func update(news: News) {
+        friendImageView.image = UIImage(named: news.postImageName.imageName)
     }
 }

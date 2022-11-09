@@ -12,13 +12,15 @@ final class LoginViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let homeIdentifierName = "home"
+        static let homeIdentifierName = "TabBarController"
         static let alertTitleText = "Внимание!"
         static let alertMessageWrongPassText = "Пароль и/или логин введен неверно!"
         static let alertActionTitleText = "Ok"
         static let alertMessageEmptyFieldsText = "Заполните логин и пароль"
-        static let userLogin = ""
-        static let userPassword = ""
+        static let userLogin = "1"
+        static let userPassword = "1"
+        static let storyBoardIDName = "TabBarController"
+        static let uIStoryboardName = "Main"
     }
 
     // MARK: - Private Outlets
@@ -26,6 +28,8 @@ final class LoginViewController: UIViewController {
     @IBOutlet private var loginScrollView: UIScrollView!
     @IBOutlet private var loginTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+
+    @IBOutlet private var loadingView: Loading!
 
     // MARK: - LifeCycle
 
@@ -42,15 +46,16 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
-        guard identifier == Constants.homeIdentifierName,
-              // emptyInfo(),
-              authenticationInfo()
-        else {
-            return false
-        }
-        return true
-    }
+//
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
+//        guard identifier == Constants.homeIdentifierName,
+//              // emptyInfo(),
+//              authenticationInfo()
+//        else {
+//            return false
+//        }
+//        return true
+//    }
 
     // MARK: Private Method
 
@@ -70,11 +75,9 @@ final class LoginViewController: UIViewController {
         loginScrollView.endEditing(true)
     }
 
-    private func emptyInfo() -> Bool {
-        guard let login = loginTextField.text,
-              !login.isEmpty,
-              let password = passwordTextField.text,
-              !password.isEmpty
+    @IBAction func homeButtonAction(_ sender: Any) {
+        guard emptyInfo(),
+              authenticationInfo()
         else {
             showAlert(
                 title: Constants.alertTitleText,
@@ -82,6 +85,25 @@ final class LoginViewController: UIViewController {
                 actionTitle: Constants.alertActionTitleText,
                 handler: nil
             )
+            return
+        }
+        loadingView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let storyBoard = UIStoryboard(name: Constants.uIStoryboardName, bundle: nil)
+            guard let vKTabBarController = storyBoard
+                .instantiateViewController(withIdentifier: Constants.homeIdentifierName) as? VKTabBarController
+            else { return }
+            vKTabBarController.modalPresentationStyle = .fullScreen
+            self.present(vKTabBarController, animated: true)
+        }
+    }
+
+    private func emptyInfo() -> Bool {
+        guard let login = loginTextField.text,
+              !login.isEmpty,
+              let password = passwordTextField.text,
+              !password.isEmpty
+        else {
             return false
         }
         return true

@@ -55,18 +55,22 @@ final class LikeControl: UIControl {
     }
 
     private func setupLike() {
-        likeImageView.image = UIImage(systemName: SystemImageName.heartFill)
-        likeImageView.tintColor = .red
-        numberOfLikes += 1
-        numberOfLikesLabel.text = numberOfLikes.description
-        numberOfLikesLabel.textColor = .red
+        UIView.animate(withDuration: 0.5) {
+            self.likeImageView.image = UIImage(systemName: SystemImageName.heartFill)
+            self.likeImageView.tintColor = .red
+            self.numberOfLikes += 1
+            self.numberOfLikesLabel.text = self.numberOfLikes.description
+            self.numberOfLikesLabel.textColor = .red
+        }
     }
 
     private func setupDislike() {
-        likeImageView.image = UIImage(systemName: SystemImageName.heart)
-        likeImageView.tintColor = .systemGray6
-        numberOfLikes -= 1
-        numberOfLikesLabel.text = numberOfLikes.description
-        numberOfLikesLabel.textColor = .systemGray6
+        UIView.animate(withDuration: 0.5) {
+            self.likeImageView.image = UIImage(systemName: SystemImageName.heart)
+            self.likeImageView.tintColor = .white
+            self.numberOfLikes -= 1
+            self.numberOfLikesLabel.text = self.numberOfLikes.description
+            self.numberOfLikesLabel.textColor = .white
+        }
     }
 }

@@ -18,6 +18,10 @@ final class RecommendationGroupTableViewController: UITableViewController {
         static let groupNibName = "GroupTableViewCell"
     }
 
+    // MARK: - Private Outlets
+
+    @IBOutlet private var searchBar: UISearchBar!
+
     // MARK: - Public Properties
 
     var backHandler: GoBackHandler?
@@ -26,6 +30,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private var selectedGroup: Group?
+    private var searchingResults: [Group] = []
 
     // MARK: - Life Cycle
 
@@ -37,7 +42,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
     // MARK: - Public Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        recommendationGroupsDataCourse.count
+        searchingResults.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,8 +58,9 @@ final class RecommendationGroupTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func goToRootVC(indexPath: IndexPath) {
-        let group = recommendationGroupsDataCourse[indexPath.row]
-        recommendationGroupsDataCourse.remove(at: indexPath.row)
+        // guard isSearchBegun
+        let group = searchingResults[indexPath.row]
+        searchingResults.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
         tableView.reloadData()
         selectedGroup = group
@@ -63,6 +69,8 @@ final class RecommendationGroupTableViewController: UITableViewController {
     }
 
     private func configureTableView() {
+        tableView.tableHeaderView = searchBar
+        searchingResults = recommendationGroupsDataCourse
         tableView.register(
             UINib(nibName: Constants.groupNibName, bundle: nil),
             forCellReuseIdentifier: Constants.groupIdentifier
@@ -74,8 +82,25 @@ final class RecommendationGroupTableViewController: UITableViewController {
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        let model = recommendationGroupsDataCourse[indexPath.row]
+        let model = searchingResults[indexPath.row]
         cell.update(group: model)
         return cell
+    }
+}
+
+extension RecommendationGroupTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchingResults = []
+        if searchText.isEmpty {
+            searchingResults = recommendationGroupsDataCourse
+        } else {
+            for group in recommendationGroupsDataCourse
+                where
+                group.groupName.lowercased().contains(searchText.lowercased())
+            {
+                searchingResults.append(group)
+            }
+        }
+        tableView.reloadData()
     }
 }
