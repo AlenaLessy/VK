@@ -17,6 +17,8 @@
 		577BAB11291882C000BD741B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB10291882C000BD741B /* GradientView.swift */; };
 		577BAB182918893E00BD741B /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB172918893E00BD741B /* LikeControl.swift */; };
 		577BAB1B2918998A00BD741B /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB1A2918998A00BD741B /* AvatarView.swift */; };
+		577BAB1E291B103A00BD741B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB1D291B103A00BD741B /* HeaderView.swift */; };
+		577BAB23291B10DE00BD741B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577BAB22291B10DE00BD741B /* HeaderView.xib */; };
 		57994A842911BE19008D4267 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A832911BE19008D4267 /* AppDelegate.swift */; };
 		57994A862911BE19008D4267 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A852911BE19008D4267 /* SceneDelegate.swift */; };
 		57994A882911BE19008D4267 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57994A872911BE19008D4267 /* LoginViewController.swift */; };
@@ -52,6 +54,8 @@
 		577BAB10291882C000BD741B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		577BAB172918893E00BD741B /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		577BAB1A2918998A00BD741B /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		577BAB1D291B103A00BD741B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		577BAB22291B10DE00BD741B /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		57994A802911BE19008D4267 /* VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57994A832911BE19008D4267 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57994A852911BE19008D4267 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +171,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		577BAB1F291B103F00BD741B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				577BAB1D291B103A00BD741B /* HeaderView.swift */,
+				577BAB22291B10DE00BD741B /* HeaderView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		57994A772911BE19008D4267 = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +253,7 @@
 			children = (
 				57D1C6D32916E678006731B1 /* Models */,
 				57D1C6D42916E6BF006731B1 /* ViewControllers */,
+				577BAB1F291B103F00BD741B /* Views */,
 				57B8D20729167B0A007DF516 /* Cells */,
 			);
 			path = Friends;
@@ -360,6 +374,7 @@
 				5767EF3629180E53000CD65C /* FriendCollectionViewCell.xib in Resources */,
 				57994A902911BE1B008D4267 /* LaunchScreen.storyboard in Resources */,
 				57994A9A2911C0D8008D4267 /* Colors.xcassets in Resources */,
+				577BAB23291B10DE00BD741B /* HeaderView.xib in Resources */,
 				57994A8D2911BE1B008D4267 /* Assets.xcassets in Resources */,
 				57B8D20629167B00007DF516 /* FriendsSearchTableViewCell.xib in Resources */,
 				57D1C6D02916DCCB006731B1 /* BirthdayTableViewCell.xib in Resources */,
@@ -426,6 +441,7 @@
 				579F24A22911F46F00678837 /* ViewController + extension.swift in Sources */,
 				57B8D20E2916CEDA007DF516 /* FriendsRequestTableViewCell.swift in Sources */,
 				57994A882911BE19008D4267 /* LoginViewController.swift in Sources */,
+				577BAB1E291B103A00BD741B /* HeaderView.swift in Sources */,
 				57D1C6DC29170ED0006731B1 /* ProfileCollectionViewController.swift in Sources */,
 				57D1C6D72916EB47006731B1 /* FriendsTableViewCell.swift in Sources */,
 				57994A842911BE19008D4267 /* AppDelegate.swift in Sources */,

@@ -24,6 +24,8 @@ final class FriendsTableViewController: UITableViewController {
         static let friendsNibName = "FriendsTableViewCell"
         static let birthdaySectionName = "Дни рождения"
         static let friendsSectionName = "Друзья"
+        static let headerIdentifier = "Header"
+        static let headerNibName = "HeaderView"
     }
 
     private enum SectionType {
@@ -31,12 +33,16 @@ final class FriendsTableViewController: UITableViewController {
         case friendsInfo
         case friendsRequest
         case birthday
-        case friends
+        case friends(String)
     }
 
     // MARK: - Private Properties
 
-    private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday, .friends]
+    private var friendSections: [Character: [Friend]] = [:]
+    private var sectionTitles: [Character] = []
+    private var generalSectionsCount = 4
+
+    private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
 
     private var birthdaysDataSource: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
@@ -52,6 +58,9 @@ final class FriendsTableViewController: UITableViewController {
         Friend(name: "Коала Пропала", imageName: "m3"),
         Friend(name: "Гризли Загрызли", imageName: "m4", age: 42),
         Friend(name: "Миша Цирковой", imageName: "m5", age: 5, city: "Ростов"),
+        Friend(name: "Леха Именинник", imageName: "m7", age: 31, city: "Краснодар"),
+        Friend(name: "Лена Сказочная", imageName: "mi5", age: 18, city: "Тридевятое царство"),
+        Friend(name: "Потап Браун", imageName: "mi8", age: 16, city: "Сказочный лес")
     ]
 
     // MARK: - Life Cycle
@@ -59,6 +68,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        createSections()
     }
 
     // MARK: - Public Method
@@ -75,12 +85,16 @@ final class FriendsTableViewController: UITableViewController {
         createCell(indexPath: indexPath)
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        setupTableViewHeader(section: section)
-    }
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         setupTableViewSelect(indexPath: indexPath)
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        sectionTitles.map { String($0) }
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        headerConfigure(section: section)
     }
 
     // MARK: - Private Method
@@ -106,6 +120,30 @@ final class FriendsTableViewController: UITableViewController {
             UINib(nibName: Constants.friendsNibName, bundle: nil),
             forCellReuseIdentifier: Constants.friendsIdentifier
         )
+
+        tableView.register(
+            UINib(nibName: Constants.headerNibName, bundle: nil),
+            forHeaderFooterViewReuseIdentifier: Constants.headerIdentifier
+        )
+    }
+
+    private func headerConfigure(section: Int) -> UIView? {
+        let type = sections[section]
+        switch type {
+        case .friendsSearch, .friendsInfo, .friendsRequest:
+            return nil
+        case .birthday:
+            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.headerIdentifier)
+                as? HeaderView else { return UITableViewHeaderFooterView() }
+            header.titleLabel.text = Constants.birthdaySectionName
+            return header
+        case .friends:
+            guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.headerIdentifier)
+                as? HeaderView else { return UITableViewHeaderFooterView() }
+            let title = String(sectionTitles[section - generalSectionsCount])
+            header.titleLabel.text = title
+            return header
+        }
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
@@ -138,12 +176,13 @@ final class FriendsTableViewController: UITableViewController {
             cell.update(birthdays: model)
             return cell
         case .friends:
-            let model = friendsDataSource[indexPath.row]
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.friendsIdentifier,
-                for: indexPath
-            ) as? FriendsTableViewCell else { return UITableViewCell() }
-            cell.update(friend: model)
+            guard let friend = friendSections[sectionTitles[indexPath.section - generalSectionsCount]]?[indexPath.row],
+                  let cell = tableView.dequeueReusableCell(
+                      withIdentifier: Constants.friendsIdentifier,
+                      for: indexPath
+                  ) as? FriendsTableViewCell else { return UITableViewCell() }
+            cell.update(friend: friend)
+            print(friend)
             return cell
         }
     }
@@ -156,19 +195,7 @@ final class FriendsTableViewController: UITableViewController {
         case .birthday:
             return birthdaysDataSource.count
         case .friends:
-            return friendsDataSource.count
-        }
-    }
-
-    private func setupTableViewHeader(section: Int) -> String? {
-        let type = sections[section]
-        switch type {
-        case .friendsSearch, .friendsInfo, .friendsRequest:
-            return nil
-        case .birthday:
-            return Constants.birthdaySectionName
-        case .friends:
-            return Constants.friendsSectionName
+            return friendSections[sectionTitles[section - generalSectionsCount]]?.count ?? 0
         }
     }
 
@@ -178,5 +205,18 @@ final class FriendsTableViewController: UITableViewController {
         let profileCollectionViewController = ProfileCollectionViewController(collectionViewLayout: layout)
         profileCollectionViewController.friend = friendsDataSource[indexPath.row]
         navigationController?.pushViewController(profileCollectionViewController, animated: true)
+    }
+
+    private func createSections() {
+        for friend in friendsDataSource {
+            guard let firstLetter = friend.name.first else { return }
+            if friendSections[firstLetter] != nil {
+                friendSections[firstLetter]?.append(friend)
+            } else {
+                friendSections[firstLetter] = [friend]
+                sections.append(.friends(String(firstLetter)))
+            }
+            sectionTitles = Array(friendSections.keys)
+        }
     }
 }

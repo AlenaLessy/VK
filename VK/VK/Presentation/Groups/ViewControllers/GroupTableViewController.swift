@@ -14,6 +14,7 @@ final class GroupTableViewController: UITableViewController {
     private enum Constants {
         static let groupIdentifier = "Group"
         static let groupNibName = "GroupTableViewCell"
+        static let recommendationGroupSegueName = "RecommendationGroup"
     }
 
     // MARK: - Private Outlets
@@ -45,7 +46,7 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Public Methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "RecommendationGroup" else { return }
+        guard segue.identifier == Constants.recommendationGroupSegueName else { return }
         let casted = segue.destination as? RecommendationGroupTableViewController
         casted?.recommendationGroupsDataCourse = recommendationGroupsDataCourse
         casted?.backHandler = { [weak self] group in

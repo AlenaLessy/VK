@@ -94,6 +94,20 @@
                     <constraint firstAttribute="bottom" secondItem="yp7-67-9iG" secondAttribute="bottom" constant="10" id="e11-9O-5DI"/>
                     <constraint firstAttribute="trailingMargin" secondItem="g1K-bQ-OXR" secondAttribute="trailing" id="mih-2y-OeX"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                        <color key="value" name="brightBlue"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                        <color key="value" name="lightBlue"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                        <point key="value" x="0.0" y="0.0"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                        <point key="value" x="1" y="0.0"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
@@ -110,6 +124,12 @@
         <image name="phone" catalog="system" width="128" height="115"/>
         <namedColor name="blue">
             <color red="0.36899998784065247" green="0.60000002384185791" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="brightBlue">
+            <color red="0.25900000333786011" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="lightBlue">
+            <color red="0.45899999141693115" green="0.69800001382827759" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
