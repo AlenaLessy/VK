@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendsSearch" rowHeight="65" id="KGk-i7-Jjw" customClass="FriendsSearchTableViewCell" customModule="VK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="476" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="476" height="65"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rm6-Es-Jpj">
+                        <rect key="frame" x="15" y="10" width="446" height="40"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0i7-2G-75a">
+                                <rect key="frame" x="5" y="10.999999999999996" width="20" height="18.333333333333336"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="mGZ-GD-SzF"/>
+                                    <constraint firstAttribute="width" constant="20" id="tPk-j7-cY1"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите имя и фамилию" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jya-mr-jlD">
+                                <rect key="frame" x="28" y="3" width="346" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="09h-9v-f6u">
+                                <rect key="frame" x="418" y="11.666666666666668" width="20" height="19.66666666666665"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="CW9-8b-JtG"/>
+                                    <constraint firstAttribute="height" constant="20" id="suP-OY-l4w"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slider.horizontal.3" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TPf-VH-Nqu">
+                                <rect key="frame" x="388" y="13.999999999999998" width="20" height="16"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="9hO-GQ-G2a"/>
+                                    <constraint firstAttribute="width" constant="20" id="hwY-ic-B8e"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="09h-9v-f6u" secondAttribute="trailing" constant="8" id="2OQ-wC-xNg"/>
+                            <constraint firstAttribute="height" constant="40" id="B4n-Pp-BHR"/>
+                            <constraint firstItem="TPf-VH-Nqu" firstAttribute="leading" secondItem="Jya-mr-jlD" secondAttribute="trailing" constant="14" id="CKu-fP-hFv"/>
+                            <constraint firstItem="09h-9v-f6u" firstAttribute="leading" secondItem="TPf-VH-Nqu" secondAttribute="trailing" constant="10" id="DJa-O3-OWs"/>
+                            <constraint firstItem="Jya-mr-jlD" firstAttribute="top" secondItem="rm6-Es-Jpj" secondAttribute="top" constant="3" id="cLO-nN-SJK"/>
+                            <constraint firstItem="09h-9v-f6u" firstAttribute="top" secondItem="rm6-Es-Jpj" secondAttribute="top" constant="12.000000000000002" id="cgS-OL-87m"/>
+                            <constraint firstItem="0i7-2G-75a" firstAttribute="centerY" secondItem="rm6-Es-Jpj" secondAttribute="centerY" id="oyG-NY-8ri"/>
+                            <constraint firstItem="Jya-mr-jlD" firstAttribute="leading" secondItem="rm6-Es-Jpj" secondAttribute="leading" constant="28" id="q6n-Xz-gpu"/>
+                            <constraint firstAttribute="bottom" secondItem="Jya-mr-jlD" secondAttribute="bottom" constant="3" id="sYy-js-MuG"/>
+                            <constraint firstItem="0i7-2G-75a" firstAttribute="leading" secondItem="rm6-Es-Jpj" secondAttribute="leading" constant="5" id="u5C-XJ-IhK"/>
+                            <constraint firstItem="TPf-VH-Nqu" firstAttribute="top" secondItem="rm6-Es-Jpj" secondAttribute="top" constant="12.000000000000002" id="wzg-xe-q2T"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="rm6-Es-Jpj" secondAttribute="bottom" constant="10" id="Pyy-sH-aV3"/>
+                    <constraint firstAttribute="trailing" secondItem="rm6-Es-Jpj" secondAttribute="trailing" constant="15" id="UKY-n0-SBB"/>
+                    <constraint firstItem="rm6-Es-Jpj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="YHf-8m-e33"/>
+                    <constraint firstItem="rm6-Es-Jpj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eF1-jW-7NB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="175.57251908396947" y="27.816901408450704"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="mic" catalog="system" width="110" height="128"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
