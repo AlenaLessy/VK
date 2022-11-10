@@ -9,7 +9,7 @@ import UIKit
 
 /// Экран входа
 final class LoginViewController: UIViewController {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum Constants {
         static let homeIdentifierName = "TabBarController"
@@ -28,7 +28,6 @@ final class LoginViewController: UIViewController {
     @IBOutlet private var loginScrollView: UIScrollView!
     @IBOutlet private var loginTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
-
     @IBOutlet private var loadingView: Loading!
 
     // MARK: - LifeCycle
@@ -44,36 +43,7 @@ final class LoginViewController: UIViewController {
         removeKeyboardObserver()
     }
 
-    // MARK: - Public Methods
-
-//
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
-//        guard identifier == Constants.homeIdentifierName,
-//              // emptyInfo(),
-//              authenticationInfo()
-//        else {
-//            return false
-//        }
-//        return true
-//    }
-
-    // MARK: Private Method
-
-    @objc private func keyboardWillShowAction(notification: Notification) {
-        let info = notification.userInfo as? NSDictionary
-        let kbSize = (info?.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize?.height ?? 0.0, right: 0.0)
-        loginScrollView.contentInset = contentInsets
-    }
-
-    @objc private func keyboardWillHideAction(notification _: Notification) {
-        loginScrollView.contentInset = UIEdgeInsets.zero
-        loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
-    }
-
-    @objc private func hideKeyboardAction() {
-        loginScrollView.endEditing(true)
-    }
+    // MARK: - Private IBActions
 
     @IBAction func homeButtonAction(_ sender: Any) {
         guard emptyInfo(),
@@ -96,6 +66,24 @@ final class LoginViewController: UIViewController {
             vKTabBarController.modalPresentationStyle = .fullScreen
             self.present(vKTabBarController, animated: true)
         }
+    }
+
+    // MARK: Private Method
+
+    @objc private func keyboardWillShowAction(notification: Notification) {
+        let info = notification.userInfo as? NSDictionary
+        let kbSize = (info?.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue)?.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize?.height ?? 0.0, right: 0.0)
+        loginScrollView.contentInset = contentInsets
+    }
+
+    @objc private func keyboardWillHideAction(notification _: Notification) {
+        loginScrollView.contentInset = UIEdgeInsets.zero
+        loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+
+    @objc private func hideKeyboardAction() {
+        loginScrollView.endEditing(true)
     }
 
     private func emptyInfo() -> Bool {

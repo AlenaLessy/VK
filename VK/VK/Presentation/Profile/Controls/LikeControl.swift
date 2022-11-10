@@ -9,7 +9,7 @@ import UIKit
 
 /// Контрол для выставления и подсчета лайков
 final class LikeControl: UIControl {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum SystemImageName {
         static let heartFill = "heart.fill"

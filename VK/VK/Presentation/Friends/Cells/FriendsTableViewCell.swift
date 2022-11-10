@@ -43,20 +43,19 @@ final class FriendsTableViewCell: UITableViewCell {
             userInfoLabel.text = friend.age?.description
         }
     }
-    
+
     // MARK: - Private Methods
-   
+
     @objc private func gestureRecognizerAction() {
         UIView.animate(withDuration: 0.4, delay: 0) {
             self.userImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         }
         userImageView.transform = .identity
     }
-    
+
     private func addTapGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizerAction))
         userImageView.addGestureRecognizer(tapGestureRecognizer)
         userImageView.isUserInteractionEnabled = true
     }
-
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Модель дней рождения
+/// Дни рождения
 struct Birthday {
     let name: String
     let imageName: String

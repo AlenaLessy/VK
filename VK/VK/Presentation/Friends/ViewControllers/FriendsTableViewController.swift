@@ -9,7 +9,7 @@ import UIKit
 
 // Экран друзей
 final class FriendsTableViewController: UITableViewController {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum Constants {
         static let friendsSearchIdentifier = "FriendsSearch"

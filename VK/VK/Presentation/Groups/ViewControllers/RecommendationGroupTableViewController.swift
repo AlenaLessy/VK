@@ -58,7 +58,6 @@ final class RecommendationGroupTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func goToRootVC(indexPath: IndexPath) {
-        // guard isSearchBegun
         let group = searchingResults[indexPath.row]
         searchingResults.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)

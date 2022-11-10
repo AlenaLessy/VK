@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Модель новостей
+/// Новости
 struct News {
     let userImageName: String
     let userName: String

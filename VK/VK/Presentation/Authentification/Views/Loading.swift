@@ -8,7 +8,6 @@
 import UIKit
 
 /// Анимация загрузки
-
 final class Loading: UIView {
     // MARK: - Private Constants
 
