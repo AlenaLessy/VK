@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Модель Друзей
+/// Друзья
 struct Friend {
     let name: String
     let imageName: String

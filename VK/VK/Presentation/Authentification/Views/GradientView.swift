@@ -9,13 +9,13 @@ import UIKit
 
 /// Вью градиента
 final class GradientView: UIView {
-    // MARK: - Public property
+    // MARK: - Public Properties
 
     override static var layerClass: AnyClass {
         CAGradientLayer.self
     }
 
-    // MARK: - Private property
+    // MARK: - Private Properties
 
     private var gradientLayer: CAGradientLayer? {
         layer as? CAGradientLayer

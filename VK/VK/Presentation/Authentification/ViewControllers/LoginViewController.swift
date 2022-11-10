@@ -9,16 +9,18 @@ import UIKit
 
 /// Экран входа
 final class LoginViewController: UIViewController {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum Constants {
-        static let homeIdentifierName = "home"
+        static let homeIdentifierName = "TabBarController"
         static let alertTitleText = "Внимание!"
         static let alertMessageWrongPassText = "Пароль и/или логин введен неверно!"
         static let alertActionTitleText = "Ok"
         static let alertMessageEmptyFieldsText = "Заполните логин и пароль"
-        static let userLogin = ""
-        static let userPassword = ""
+        static let userLogin = "1"
+        static let userPassword = "1"
+        static let storyBoardIDName = "TabBarController"
+        static let uIStoryboardName = "Main"
     }
 
     // MARK: - Private Outlets
@@ -26,6 +28,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private var loginScrollView: UIScrollView!
     @IBOutlet private var loginTextField: UITextField!
     @IBOutlet private var passwordTextField: UITextField!
+    @IBOutlet private var loadingView: Loading!
 
     // MARK: - LifeCycle
 
@@ -40,16 +43,21 @@ final class LoginViewController: UIViewController {
         removeKeyboardObserver()
     }
 
-    // MARK: - Public Methods
+    // MARK: - Private IBActions
 
-    override func shouldPerformSegue(withIdentifier identifier: String, sender _: Any?) -> Bool {
-        guard identifier == Constants.homeIdentifierName,
-              // emptyInfo(),
+    @IBAction private func homeButtonAction(_ sender: Any) {
+        guard emptyInfo(),
               authenticationInfo()
         else {
-            return false
+            showAlert(
+                title: Constants.alertTitleText,
+                message: Constants.alertMessageEmptyFieldsText,
+                actionTitle: Constants.alertActionTitleText,
+                handler: nil
+            )
+            return
         }
-        return true
+        gotoTabBarController()
     }
 
     // MARK: Private Method
@@ -76,15 +84,21 @@ final class LoginViewController: UIViewController {
               let password = passwordTextField.text,
               !password.isEmpty
         else {
-            showAlert(
-                title: Constants.alertTitleText,
-                message: Constants.alertMessageEmptyFieldsText,
-                actionTitle: Constants.alertActionTitleText,
-                handler: nil
-            )
             return false
         }
         return true
+    }
+
+    private func gotoTabBarController() {
+        loadingView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let storyBoard = UIStoryboard(name: Constants.uIStoryboardName, bundle: nil)
+            guard let vKTabBarController = storyBoard
+                .instantiateViewController(withIdentifier: Constants.homeIdentifierName) as? VKTabBarController
+            else { return }
+            vKTabBarController.modalPresentationStyle = .fullScreen
+            self.present(vKTabBarController, animated: true)
+        }
     }
 
     private func authenticationInfo() -> Bool {

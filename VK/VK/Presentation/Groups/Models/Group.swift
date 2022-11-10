@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Модель Группы
+/// Группы
 struct Group: Equatable {
     var groupName: String
     var groupImageName: String

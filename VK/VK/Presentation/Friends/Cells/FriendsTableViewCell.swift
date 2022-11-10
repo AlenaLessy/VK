@@ -9,7 +9,7 @@ import UIKit
 
 /// Ячейка друзей
 final class FriendsTableViewCell: UITableViewCell {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum Constants {
         static let emptyString = ""
@@ -21,6 +21,13 @@ final class FriendsTableViewCell: UITableViewCell {
     @IBOutlet private var userImageView: UIImageView!
     @IBOutlet private var userNameLabel: UILabel!
     @IBOutlet private var userInfoLabel: UILabel!
+
+    // MARK: - LifeCycle
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addTapGesture()
+    }
 
     // MARK: - Public Methods
 
@@ -35,5 +42,20 @@ final class FriendsTableViewCell: UITableViewCell {
         } else if friend.age?.description != nil {
             userInfoLabel.text = friend.age?.description
         }
+    }
+
+    // MARK: - Private Methods
+
+    @objc private func gestureRecognizerAction() {
+        UIView.animate(withDuration: 0.4, delay: 0) {
+            self.userImageView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }
+        userImageView.transform = .identity
+    }
+
+    private func addTapGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizerAction))
+        userImageView.addGestureRecognizer(tapGestureRecognizer)
+        userImageView.isUserInteractionEnabled = true
     }
 }
