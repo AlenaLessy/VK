@@ -22,39 +22,7 @@ final class NewsTableViewController: UITableViewController {
 
     private var currentIndex = 0
 
-    private var newsDataCourse: [News] = [
-        News(
-            userImageName: "mi1",
-            userName: "Потап Михалыч",
-            date: "12.05.2022",
-            post: "Все виды медведей невероятно умны. Эти животные очень любознательны",
-            postImageName: Friend(name: "Потап Михалыч", imageName: "mi1")
-        ),
-        News(
-            userImageName: "mi2",
-            userName: "Топотун Бурый",
-            date: "13.05.2022",
-            post: "Самый крупный медведь - полярный. Вес взрослого самца доходит до 500 кг.",
-            postImageName: Friend(name: "Топотун Бурый", imageName: "m2")
-        ),
-        News(
-            userImageName: "mi3",
-            userName: "Медведь Гризли",
-            date: "14.05.2022",
-            post: """
-            У всех медведей два слоя шерсти. \
-            Один слой легкий и пушистый для тепла, второй тяжелый и непромокаемый
-            """,
-            postImageName: Friend(name: "Медведь Гризли", imageName: "m3")
-        ),
-        News(
-            userImageName: "mi4",
-            userName: "Белый Медвежуля",
-            date: "15.05.2022",
-            post: "Медведей принято считать косолапыми, но это совсем не так.",
-            postImageName: Friend(name: "Белый Медвежуля", imageName: "m4")
-        ),
-    ]
+    private var newsDataCourse: [News] = News.newsDataCourse()
 
     // MARK: - LifeCycle
 
@@ -83,13 +51,13 @@ final class NewsTableViewController: UITableViewController {
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        let model = newsDataCourse[indexPath.row]
-        currentIndex = indexPath.row
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.newsIdentifier,
             for: indexPath
         ) as? NewsTableViewCell else { return UITableViewCell() }
-        cell.update(news: model)
+        let news = newsDataCourse[indexPath.row]
+        currentIndex = indexPath.row
+        cell.update(news: news)
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self
         cell.collectionView.register(
@@ -105,7 +73,8 @@ final class NewsTableViewController: UITableViewController {
         switch numberImages {
         case 1:
             return view.bounds.width
-        default: return (view.bounds.width / 2) * CGFloat(lroundf(Float(numberImages) / 2))
+        default:
+            return (view.bounds.width / 2) * CGFloat(lroundf(Float(numberImages) / 2))
         }
     }
 }
@@ -120,14 +89,14 @@ extension NewsTableViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        let model = newsDataCourse[currentIndex]
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.friendIdentifier,
             for: indexPath
         ) as? FriendCollectionViewCell
         else { return UICollectionViewCell() }
         cell.cellHeightLayoutConstraint.constant = collectionViewCellHeight(indexPath: indexPath)
-        cell.update(news: model)
+        let news = newsDataCourse[currentIndex]
+        cell.update(news: news)
         return cell
     }
 }

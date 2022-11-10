@@ -9,7 +9,7 @@ import UIKit
 
 /// Ячейка друзей
 final class FriendsTableViewCell: UITableViewCell {
-    // MARK: - Constants
+    // MARK: - Private Constants
 
     private enum Constants {
         static let emptyString = ""

@@ -45,7 +45,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Private IBActions
 
-    @IBAction func homeButtonAction(_ sender: Any) {
+    @IBAction private func homeButtonAction(_ sender: Any) {
         guard emptyInfo(),
               authenticationInfo()
         else {
@@ -57,15 +57,7 @@ final class LoginViewController: UIViewController {
             )
             return
         }
-        loadingView.isHidden = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            let storyBoard = UIStoryboard(name: Constants.uIStoryboardName, bundle: nil)
-            guard let vKTabBarController = storyBoard
-                .instantiateViewController(withIdentifier: Constants.homeIdentifierName) as? VKTabBarController
-            else { return }
-            vKTabBarController.modalPresentationStyle = .fullScreen
-            self.present(vKTabBarController, animated: true)
-        }
+        gotoTabBarController()
     }
 
     // MARK: Private Method
@@ -95,6 +87,18 @@ final class LoginViewController: UIViewController {
             return false
         }
         return true
+    }
+
+    private func gotoTabBarController() {
+        loadingView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            let storyBoard = UIStoryboard(name: Constants.uIStoryboardName, bundle: nil)
+            guard let vKTabBarController = storyBoard
+                .instantiateViewController(withIdentifier: Constants.homeIdentifierName) as? VKTabBarController
+            else { return }
+            vKTabBarController.modalPresentationStyle = .fullScreen
+            self.present(vKTabBarController, animated: true)
+        }
     }
 
     private func authenticationInfo() -> Bool {

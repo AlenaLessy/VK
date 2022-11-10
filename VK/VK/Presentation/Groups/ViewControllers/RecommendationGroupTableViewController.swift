@@ -81,12 +81,13 @@ final class RecommendationGroupTableViewController: UITableViewController {
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        let model = searchingResults[indexPath.row]
-        cell.update(group: model)
+        let group = searchingResults[indexPath.row]
+        cell.update(group: group)
         return cell
     }
 }
 
+/// UISearchBarDelegate
 extension RecommendationGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchingResults = []
