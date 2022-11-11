@@ -69,7 +69,7 @@ final class NewsTableViewController: UITableViewController {
 
     private func collectionViewCellHeight(indexPath: IndexPath) -> CGFloat {
         guard indexPath.row < newsDataCourse.count else { return 0 }
-        let numberImages = newsDataCourse[indexPath.row].postImageName.imageName.count
+        let numberImages = newsDataCourse[indexPath.row].postImageName.imageNames.count
         switch numberImages {
         case 1:
             return view.bounds.width

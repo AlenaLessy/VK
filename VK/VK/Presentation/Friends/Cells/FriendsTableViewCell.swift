@@ -32,7 +32,8 @@ final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func update(friend: Friend) {
-        userImageView.image = UIImage(named: friend.imageName)
+        guard let imageName = friend.imageNames.first else { return }
+        userImageView.image = UIImage(named: imageName)
         userNameLabel.text = friend.name
         if friend.city != nil, friend.age?.description != nil {
             userInfoLabel.text = (friend.age?.description ?? Constants.emptyString) + Constants

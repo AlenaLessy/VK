@@ -19,8 +19,6 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private Outlets
 
-    @IBOutlet private var addGroupBarButtonItem: UIBarButtonItem!
-
     // MARK: - Private Properties
 
     private var groupsDataCourse: [Group] = [

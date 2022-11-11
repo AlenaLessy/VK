@@ -10,7 +10,7 @@ import Foundation
 /// Друзья
 struct Friend {
     let name: String
-    let imageName: String
+    let imageNames: [String]
     var age: Int?
     var city: String?
 }

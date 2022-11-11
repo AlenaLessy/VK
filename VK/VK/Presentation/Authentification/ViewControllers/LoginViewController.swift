@@ -17,8 +17,8 @@ final class LoginViewController: UIViewController {
         static let alertMessageWrongPassText = "Пароль и/или логин введен неверно!"
         static let alertActionTitleText = "Ok"
         static let alertMessageEmptyFieldsText = "Заполните логин и пароль"
-        static let userLogin = "1"
-        static let userPassword = "1"
+        static let userLogin = ""
+        static let userPassword = ""
         static let storyBoardIDName = "TabBarController"
         static let uIStoryboardName = "Main"
     }
@@ -46,8 +46,8 @@ final class LoginViewController: UIViewController {
     // MARK: - Private IBActions
 
     @IBAction private func homeButtonAction(_ sender: Any) {
-        guard emptyInfo(),
-              authenticationInfo()
+        guard // emptyInfo(),
+            authenticationInfo()
         else {
             showAlert(
                 title: Constants.alertTitleText,

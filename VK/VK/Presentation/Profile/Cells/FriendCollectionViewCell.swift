@@ -20,10 +20,12 @@ final class FriendCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Method
 
     func update(friend: Friend) {
-        friendImageView.image = UIImage(named: friend.imageName)
+        guard let imageName = friend.imageNames.first else { return }
+        friendImageView.image = UIImage(named: imageName)
     }
 
     func update(news: News) {
-        friendImageView.image = UIImage(named: news.postImageName.imageName)
+        guard let imageName = news.postImageName.imageNames.first else { return }
+        friendImageView.image = UIImage(named: imageName)
     }
 }
