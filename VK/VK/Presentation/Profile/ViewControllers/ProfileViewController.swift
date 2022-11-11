@@ -26,7 +26,8 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImages()
-        addTapGestures()
+        addRightTapGestures()
+        addLeftTapGestures()
     }
 
     // MARK: - Private Methods
@@ -47,14 +48,18 @@ final class ProfileViewController: UIViewController {
         profileImageView.image = UIImage(named: imageName)
     }
 
-    private func addTapGestures() {
+    private func addRightTapGestures() {
         let gestureRight = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
         gestureRight.direction = .right
         profileImageView.addGestureRecognizer(gestureRight)
+    }
+    
+    private func addLeftTapGestures() {
         let gestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
         gestureLeft.direction = .left
         profileImageView.addGestureRecognizer(gestureLeft)
     }
+    
 
     private func swipe(xShift: Int, currentIndex: Int) {
         index += currentIndex

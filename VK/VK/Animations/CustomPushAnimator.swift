@@ -18,9 +18,7 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let source = transitionContext.viewController(forKey: .from),
               let destination = transitionContext.viewController(forKey: .to)
-        else {
-            return
-        }
+        else { return }
 
         transitionContext.containerView.addSubview(destination.view)
         destination.view.frame = source.view.frame
