@@ -26,6 +26,8 @@ final class FriendsTableViewController: UITableViewController {
         static let friendsSectionName = "Друзья"
         static let headerIdentifier = "Header"
         static let headerNibName = "HeaderView"
+        static let storyBoardName = "Main"
+        static let profileVCIdentifier = "ProfileVC"
     }
 
     private enum SectionType {
@@ -200,9 +202,9 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func setupTableViewSelect(indexPath: IndexPath) {
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard(name: Constants.storyBoardName, bundle: nil)
         guard let profileViewController = storyBoard
-            .instantiateViewController(withIdentifier: "ProfileVC") as? ProfileViewController
+            .instantiateViewController(withIdentifier: Constants.profileVCIdentifier) as? ProfileViewController
         else { return }
         profileViewController.imageNames = friendsDataSource[indexPath.row].imageNames
         present(profileViewController, animated: true)

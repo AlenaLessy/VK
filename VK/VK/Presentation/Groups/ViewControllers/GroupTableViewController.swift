@@ -17,8 +17,6 @@ final class GroupTableViewController: UITableViewController {
         static let recommendationGroupSegueName = "RecommendationGroup"
     }
 
-    // MARK: - Private Outlets
-
     // MARK: - Private Properties
 
     private var groupsDataCourse: [Group] = [

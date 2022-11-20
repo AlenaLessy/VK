@@ -7,7 +7,17 @@
 
 import UIKit
 
+/// Кастомное закрытие экрана
 final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
+    // MARK: - Private Constants
+
+    private enum Constants {
+        static let maxProgress: CGFloat = 0
+        static let minProgress: CGFloat = 1
+        static let thirdProgress: CGFloat = 0.33
+        static let thirdBoundsWidth: CGFloat = 0.3
+    }
+
     // MARK: - Public properties
 
     var viewController: UIViewController? {
@@ -36,9 +46,9 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
             viewController?.navigationController?.popViewController(animated: true)
         case .changed:
             let translation = recognizer.translation(in: recognizer.view)
-            let relativeTranslation = translation.y / (recognizer.view?.bounds.width ?? 0.3)
-            let progress = max(0, min(1, relativeTranslation))
-            isFinish = progress > 0.33
+            let relativeTranslation = translation.y / (recognizer.view?.bounds.width ?? Constants.thirdBoundsWidth)
+            let progress = max(Constants.maxProgress, min(Constants.minProgress, relativeTranslation))
+            isFinish = progress > Constants.thirdProgress
             update(progress)
         case .ended:
             isStarted = false

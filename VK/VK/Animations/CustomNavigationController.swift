@@ -19,8 +19,9 @@ final class CustomNavigationViewController: UINavigationController {
         super.viewDidLoad()
         addNavigationControllerDelegate()
     }
-    
+
     // MARK: - Private Methods
+
     private func addNavigationControllerDelegate() {
         delegate = self
     }

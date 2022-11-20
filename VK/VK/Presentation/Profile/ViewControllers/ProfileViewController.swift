@@ -9,6 +9,21 @@ import UIKit
 
 /// Профиль
 final class ProfileViewController: UIViewController {
+    // MARK: Private Constants
+
+    private enum Constants {
+        static let leftSwipeXShift = -500
+        static let rightSwipeXShift = 500
+        static let leftSwipeCurrentIndex = 1
+        static let rightSwipeCurrentIndex = -1
+        static let swipeAnimationDuration = 0.5
+        static let animateTranslationY: CGFloat = 0
+        static let animateTransformScaleX = 0.6
+        static let animateTransformScaleY = 0.6
+        static let animateDisappearingProfileImageViewLayerOpacity: Float = 0.2
+        static let animateEmergingProfileImageViewLayerOpacity: Float = 1
+    }
+
     // MARK: - Private Outlets
 
     @IBOutlet private var profileImageView: UIImageView!
@@ -35,9 +50,9 @@ final class ProfileViewController: UIViewController {
     @objc private func tapGestureAction(gesture: UISwipeGestureRecognizer) {
         switch gesture.direction {
         case .left:
-            swipe(xShift: -500, currentIndex: 1)
+            swipe(xShift: Constants.leftSwipeXShift, currentIndex: Constants.leftSwipeCurrentIndex)
         case .right:
-            swipe(xShift: 500, currentIndex: -1)
+            swipe(xShift: Constants.rightSwipeXShift, currentIndex: Constants.rightSwipeCurrentIndex)
         default:
             break
         }
@@ -49,17 +64,16 @@ final class ProfileViewController: UIViewController {
     }
 
     private func addRightTapGestures() {
-        let gestureRight = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
-        gestureRight.direction = .right
-        profileImageView.addGestureRecognizer(gestureRight)
+        let swipeGestureRight = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        swipeGestureRight.direction = .right
+        profileImageView.addGestureRecognizer(swipeGestureRight)
     }
-    
+
     private func addLeftTapGestures() {
-        let gestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
-        gestureLeft.direction = .left
-        profileImageView.addGestureRecognizer(gestureLeft)
+        let swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: #selector(tapGestureAction))
+        swipeGestureLeft.direction = .left
+        profileImageView.addGestureRecognizer(swipeGestureLeft)
     }
-    
 
     private func swipe(xShift: Int, currentIndex: Int) {
         index += currentIndex
@@ -69,15 +83,22 @@ final class ProfileViewController: UIViewController {
             index -= currentIndex
             return
         }
-        UIView.animate(withDuration: 0.5) {
-            let shift = CGAffineTransform(translationX: CGFloat(xShift), y: 0)
-            self.profileImageView.transform = shift.concatenating(CGAffineTransform(scaleX: 0.6, y: 0.6))
-            self.profileImageView.layer.opacity = 0.2
+        UIView.animate(withDuration: Constants.swipeAnimationDuration) {
+            let shift = CGAffineTransform(translationX: CGFloat(xShift), y: Constants.animateTranslationY)
+            self.profileImageView.transform = shift
+                .concatenating(CGAffineTransform(
+                    scaleX: Constants.animateTransformScaleX,
+                    y: Constants.animateTransformScaleY
+                ))
+            self.profileImageView.layer.opacity = Constants.animateDisappearingProfileImageViewLayerOpacity
         }
     completion: { _ in
-            self.profileImageView.transform = CGAffineTransform(translationX: CGFloat(-xShift), y: 0)
-            UIView.animate(withDuration: 0.5, animations: {
-                self.profileImageView.layer.opacity = 1
+            self.profileImageView.transform = CGAffineTransform(
+                translationX: CGFloat(-xShift),
+                y: Constants.animateTranslationY
+            )
+            UIView.animate(withDuration: Constants.swipeAnimationDuration, animations: {
+                self.profileImageView.layer.opacity = Constants.animateEmergingProfileImageViewLayerOpacity
                 self.profileImageView.transform = .identity
                 self.profileImageView.image = UIImage(named: self.imageNames[self.index])
             })

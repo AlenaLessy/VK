@@ -9,10 +9,23 @@ import UIKit
 
 /// Анимация при пуш переходе
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Private Constants
+
+    private enum Constants {
+        static let timeInterval: Double = 1
+        static let translationFrameWidthX = 1.5
+        static let translationFrameWidthY: CGFloat = 2
+        static let rotationOfPiAngel: CGFloat = 2
+        static let delay = 0.0
+        static let relativeStartTime: Double = 0
+        static let relativeDuration = 0.75
+        static let animateKeyframesTranslationY: CGFloat = 0
+    }
+
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        1
+        Constants.timeInterval
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -22,32 +35,56 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
 
         transitionContext.containerView.addSubview(destination.view)
         destination.view.frame = source.view.frame
-        let rotation = CGAffineTransform(rotationAngle: -.pi / 2)
+        let rotation = CGAffineTransform(rotationAngle: -.pi / Constants.rotationOfPiAngel)
         let translation = CGAffineTransform(
-            translationX: source.view.frame.width * 1.5,
-            y: -source.view.frame.width / 2
+            translationX: source.view.frame.width * Constants.translationFrameWidthX,
+            y: -source.view.frame.width / Constants.translationFrameWidthY
         )
+        let durations = transitionDuration(using: transitionContext)
         destination.view.transform = rotation.concatenating(translation)
+        transitionAnimations(
+            transitionContext: transitionContext,
+            source: source,
+            destination: destination,
+            durations: durations
+        )
+    }
 
+    // MARK: - Private Methods
+
+    private func transitionAnimations(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController,
+        durations: TimeInterval
+    ) {
         UIView.animateKeyframes(
-            withDuration: transitionDuration(using: transitionContext),
-            delay: 0,
+            withDuration: durations,
+            delay: Constants.delay,
             options: .calculationModePaced,
             animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.75) {
-                    let rotation = CGAffineTransformMakeRotation(.pi / 2)
-                    let translation = CGAffineTransform(translationX: -(source.view.frame.width), y: 0)
+                UIView.addKeyframe(
+                    withRelativeStartTime: Constants.relativeStartTime,
+                    relativeDuration: Constants.relativeDuration
+                ) {
+                    let rotation = CGAffineTransformMakeRotation(.pi / Constants.rotationOfPiAngel)
+                    let translation = CGAffineTransform(
+                        translationX: -(source.view.frame.width),
+                        y: Constants.animateKeyframesTranslationY
+                    )
                     source.view.transform = rotation.concatenating(translation)
                 }
 
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.75) {
+                UIView.addKeyframe(
+                    withRelativeStartTime: Constants.relativeStartTime,
+                    relativeDuration: Constants.relativeDuration
+                ) {
                     destination.view.transform = .identity
                 }
             }
         ) { finished in
             if finished, !transitionContext.transitionWasCancelled {
                 source.view.transform = .identity
-                //  source.removeFromParent()
             } else if transitionContext.transitionWasCancelled {
                 destination.view.transform = .identity
             }
