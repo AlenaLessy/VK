@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gh8-sk-WHM">
     <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -249,6 +249,37 @@
             </objects>
             <point key="canvasLocation" x="2636" y="-657"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="XxX-hx-75c">
+            <objects>
+                <viewController storyboardIdentifier="ProfileVC" id="Rc5-By-cxv" customClass="ProfileViewController" customModule="VK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D0m-Tt-Cd9">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tpj-aD-ujU">
+                                <rect key="frame" x="20" y="253.66666666666663" width="350" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="G7D-jz-YqS"/>
+                                    <constraint firstAttribute="width" secondItem="Tpj-aD-ujU" secondAttribute="height" multiplier="1:1" id="Wrx-Cg-BjQ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ylj-Gy-mEL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tpj-aD-ujU" firstAttribute="centerX" secondItem="ylj-Gy-mEL" secondAttribute="centerX" id="1wS-Qn-0sG"/>
+                            <constraint firstItem="Tpj-aD-ujU" firstAttribute="centerY" secondItem="ylj-Gy-mEL" secondAttribute="centerY" id="EKd-r0-RvW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="profileImageView" destination="Tpj-aD-ujU" id="0UG-zg-BcW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fvj-dE-Mtc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3407.6923076923076" y="-658.29383886255926"/>
+        </scene>
         <!--Profile Collection View Controller-->
         <scene sceneID="TY4-BP-djj">
             <objects>
@@ -273,12 +304,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hx9-dj-Gg3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3496.9230769230767" y="-658.29383886255926"/>
+            <point key="canvasLocation" x="4197" y="-658"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="JvI-6p-MJu">
             <objects>
-                <navigationController id="UKG-vN-uXJ" sceneMemberID="viewController">
+                <navigationController id="UKG-vN-uXJ" customClass="CustomNavigationViewController" customModule="VK" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="person.2.fill" catalog="system" id="fLG-1Z-CPQ">
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
@@ -312,13 +343,10 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Oii-wm-rl0">
                             <connections>
                                 <action selector="addGroupAction:" destination="QBk-5N-B90" id="r1g-Iz-UEf"/>
-                                <segue destination="Tdv-1W-trY" kind="show" identifier="RecommendationGroup" id="rq4-Qf-QoE"/>
+                                <segue destination="Tdv-1W-trY" kind="show" identifier="RecommendationGroup" id="aVq-ab-dTv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="addGroupBarButtonItem" destination="Oii-wm-rl0" id="Oau-lB-9TU"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xsb-IC-hhe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -352,12 +380,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbn-9g-B8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3497" y="23"/>
+            <point key="canvasLocation" x="3438" y="23"/>
         </scene>
         <!--Группы-->
         <scene sceneID="S4M-2T-W3V">
             <objects>
-                <navigationController id="Yz1-Yd-ORU" sceneMemberID="viewController">
+                <navigationController id="Yz1-Yd-ORU" customClass="CustomNavigationViewController" customModule="VK" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Группы" image="person.crop.rectangle.stack.fill" catalog="system" id="B8G-uE-uub"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WEY-sW-SBk">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
@@ -394,7 +422,11 @@
                             <outlet property="delegate" destination="gcy-Th-dAx" id="Kip-pe-Zxm"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="fiC-RQ-RoR"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Новости" id="XHK-IU-hTd"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHj-Te-9uz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -419,6 +451,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="2" width="225" height="225"/>
         <image name="newspaper.fill" catalog="system" width="128" height="112"/>
         <image name="person.2.fill" catalog="system" width="128" height="81"/>
         <image name="person.crop.rectangle.stack.fill" catalog="system" width="128" height="122"/>

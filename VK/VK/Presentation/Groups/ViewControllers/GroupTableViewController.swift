@@ -17,10 +17,6 @@ final class GroupTableViewController: UITableViewController {
         static let recommendationGroupSegueName = "RecommendationGroup"
     }
 
-    // MARK: - Private Outlets
-
-    @IBOutlet private var addGroupBarButtonItem: UIBarButtonItem!
-
     // MARK: - Private Properties
 
     private var groupsDataCourse: [Group] = [

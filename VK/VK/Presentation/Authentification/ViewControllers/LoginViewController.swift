@@ -17,8 +17,8 @@ final class LoginViewController: UIViewController {
         static let alertMessageWrongPassText = "Пароль и/или логин введен неверно!"
         static let alertActionTitleText = "Ok"
         static let alertMessageEmptyFieldsText = "Заполните логин и пароль"
-        static let userLogin = "1"
-        static let userPassword = "1"
+        static let userLogin = "admin"
+        static let userPassword = "12345"
         static let storyBoardIDName = "TabBarController"
         static let uIStoryboardName = "Main"
     }

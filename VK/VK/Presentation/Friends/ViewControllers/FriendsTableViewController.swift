@@ -26,6 +26,8 @@ final class FriendsTableViewController: UITableViewController {
         static let friendsSectionName = "Друзья"
         static let headerIdentifier = "Header"
         static let headerNibName = "HeaderView"
+        static let storyBoardName = "Main"
+        static let profileVCIdentifier = "ProfileVC"
     }
 
     private enum SectionType {
@@ -52,15 +54,15 @@ final class FriendsTableViewController: UITableViewController {
     ]
 
     private var friendsDataSource: [Friend] = [
-        Friend(name: "Михаил Потапыч", imageName: "m1", city: "Сочи"),
-        Friend(name: "Медведь Бурый", imageName: "m2", age: 14, city: "Питер"),
-        Friend(name: "Мишка Белый", imageName: "mi1", age: 19, city: "Севастополь"),
-        Friend(name: "Коала Пропала", imageName: "m3"),
-        Friend(name: "Гризли Загрызли", imageName: "m4", age: 42),
-        Friend(name: "Миша Цирковой", imageName: "m5", age: 5, city: "Ростов"),
-        Friend(name: "Леха Именинник", imageName: "m7", age: 31, city: "Краснодар"),
-        Friend(name: "Лена Сказочная", imageName: "mi5", age: 18, city: "Тридевятое царство"),
-        Friend(name: "Потап Браун", imageName: "mi8", age: 16, city: "Сказочный лес")
+        Friend(name: "Михаил Потапыч", imageNames: ["m1", "m2", "m3"], city: "Сочи"),
+        Friend(name: "Медведь Бурый", imageNames: ["m2", "m3", "mi1"], age: 14, city: "Питер"),
+        Friend(name: "Мишка Белый", imageNames: ["mi1", "mi6", "mi4"], age: 19, city: "Севастополь"),
+        Friend(name: "Коала Пропала", imageNames: ["m3", "mi3", "mi1"]),
+        Friend(name: "Гризли Загрызли", imageNames: ["m4", "mi6", "mi4"], age: 42),
+        Friend(name: "Миша Цирковой", imageNames: ["m5", "mi6", "mi4"], age: 5, city: "Ростов"),
+        Friend(name: "Леха Именинник", imageNames: ["m7", "mi6", "mi4"], age: 31, city: "Краснодар"),
+        Friend(name: "Лена Сказочная", imageNames: ["mi5", "mi6", "mi4"], age: 18, city: "Тридевятое царство"),
+        Friend(name: "Потап Браун", imageNames: ["mi8", "mi6", "mi4"], age: 16, city: "Сказочный лес")
     ]
 
     // MARK: - Life Cycle
@@ -200,11 +202,12 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func setupTableViewSelect(indexPath: IndexPath) {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 390, height: 400)
-        let profileCollectionViewController = ProfileCollectionViewController(collectionViewLayout: layout)
-        profileCollectionViewController.friend = friendsDataSource[indexPath.row]
-        navigationController?.pushViewController(profileCollectionViewController, animated: true)
+        let storyBoard = UIStoryboard(name: Constants.storyBoardName, bundle: nil)
+        guard let profileViewController = storyBoard
+            .instantiateViewController(withIdentifier: Constants.profileVCIdentifier) as? ProfileViewController
+        else { return }
+        profileViewController.imageNames = friendsDataSource[indexPath.row].imageNames
+        present(profileViewController, animated: true)
     }
 
     private func createSections() {

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		571EB0CC291BFF6D00295BED /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0CB291BFF6D00295BED /* Loading.swift */; };
 		571EB0CE291C283E00295BED /* VKTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0CD291C283E00295BED /* VKTabBarController.swift */; };
+		571EB0D0291D941300295BED /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0CF291D941300295BED /* ProfileViewController.swift */; };
+		571EB0D2291DA82400295BED /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0D1291DA82400295BED /* CustomNavigationController.swift */; };
+		571EB0D5291DA91500295BED /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0D4291DA91500295BED /* CustomPushAnimator.swift */; };
+		571EB0D7291DA97A00295BED /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0D6291DA97A00295BED /* CustomPopAnimator.swift */; };
+		571EB0D9291DC2E700295BED /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571EB0D8291DC2E700295BED /* CustomInteractiveTransition.swift */; };
 		5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */; };
 		5767EF3629180E53000CD65C /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */; };
 		577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB0429183F8400BD741B /* GroupTableViewController.swift */; };
@@ -52,6 +57,11 @@
 /* Begin PBXFileReference section */
 		571EB0CB291BFF6D00295BED /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		571EB0CD291C283E00295BED /* VKTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKTabBarController.swift; sourceTree = "<group>"; };
+		571EB0CF291D941300295BED /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		571EB0D1291DA82400295BED /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		571EB0D4291DA91500295BED /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
+		571EB0D6291DA97A00295BED /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
+		571EB0D8291DC2E700295BED /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
 		577BAB0429183F8400BD741B /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +115,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		571EB0D3291DA83000295BED /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				571EB0D1291DA82400295BED /* CustomNavigationController.swift */,
+				571EB0D4291DA91500295BED /* CustomPushAnimator.swift */,
+				571EB0D6291DA97A00295BED /* CustomPopAnimator.swift */,
+				571EB0D8291DC2E700295BED /* CustomInteractiveTransition.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		577BAB0629183FB500BD741B /* Groups */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +269,7 @@
 		57994A822911BE19008D4267 /* VK */ = {
 			isa = PBXGroup;
 			children = (
+				571EB0D3291DA83000295BED /* Animations */,
 				579F24A32911F9FC00678837 /* Extensions */,
 				579F24A52911FA5C00678837 /* Application */,
 				579F24A42911FA1E00678837 /* Presentation */,
@@ -357,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				57D1C6DB29170ED0006731B1 /* ProfileCollectionViewController.swift */,
+				571EB0CF291D941300295BED /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -487,14 +510,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				571EB0D9291DC2E700295BED /* CustomInteractiveTransition.swift in Sources */,
 				577BAB11291882C000BD741B /* GradientView.swift in Sources */,
 				577BAB082918416000BD741B /* RecommendationGroupTableViewController.swift in Sources */,
 				571EB0CC291BFF6D00295BED /* Loading.swift in Sources */,
+				571EB0D5291DA91500295BED /* CustomPushAnimator.swift in Sources */,
 				571EB0CE291C283E00295BED /* VKTabBarController.swift in Sources */,
 				577BAB2C291B558D00BD741B /* NewsTableViewCell.swift in Sources */,
 				577BAB182918893E00BD741B /* LikeControl.swift in Sources */,
 				577BAB0B291842A200BD741B /* GroupTableViewCell.swift in Sources */,
 				579F24A22911F46F00678837 /* ViewController + extension.swift in Sources */,
+				571EB0D2291DA82400295BED /* CustomNavigationController.swift in Sources */,
 				57B8D20E2916CEDA007DF516 /* FriendsRequestTableViewCell.swift in Sources */,
 				57994A882911BE19008D4267 /* LoginViewController.swift in Sources */,
 				577BAB1E291B103A00BD741B /* HeaderView.swift in Sources */,
@@ -505,10 +531,12 @@
 				577BAB0F2918460000BD741B /* Group.swift in Sources */,
 				57B8D20529167B00007DF516 /* FriendsSearchTableViewCell.swift in Sources */,
 				57D1C6DA2916EFEC006731B1 /* Friend.swift in Sources */,
+				571EB0D0291D941300295BED /* ProfileViewController.swift in Sources */,
 				577BAB27291B544A00BD741B /* NewsTableViewController.swift in Sources */,
 				57D1C6D22916E672006731B1 /* Birthday.swift in Sources */,
 				577BAB30291B5A1800BD741B /* News.swift in Sources */,
 				5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */,
+				571EB0D7291DA97A00295BED /* CustomPopAnimator.swift in Sources */,
 				577BAB1B2918998A00BD741B /* AvatarView.swift in Sources */,
 				577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */,
 				57B8D20A2916C685007DF516 /* FriendsInfoTableViewCell.swift in Sources */,
