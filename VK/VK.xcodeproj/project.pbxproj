@@ -17,7 +17,7 @@
 		5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */; };
 		5767EF3629180E53000CD65C /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */; };
 		577A3728292D164B00EF4ADB /* AuthentificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A3727292D164B00EF4ADB /* AuthentificationViewController.swift */; };
-		577A372B292D1DC000EF4ADB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A372A292D1DC000EF4ADB /* Settings.swift */; };
+		577A372B292D1DC000EF4ADB /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A372A292D1DC000EF4ADB /* Session.swift */; };
 		577A372E292D1F5700EF4ADB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A372D292D1F5700EF4ADB /* NetworkService.swift */; };
 		577BAB0529183F8400BD741B /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB0429183F8400BD741B /* GroupTableViewController.swift */; };
 		577BAB082918416000BD741B /* RecommendationGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577BAB072918416000BD741B /* RecommendationGroupTableViewController.swift */; };
@@ -70,7 +70,7 @@
 		5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
 		577A3727292D164B00EF4ADB /* AuthentificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewController.swift; sourceTree = "<group>"; };
-		577A372A292D1DC000EF4ADB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		577A372A292D1DC000EF4ADB /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		577A372D292D1F5700EF4ADB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		577BAB0429183F8400BD741B /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		577BAB072918416000BD741B /* RecommendationGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationGroupTableViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		577A372C292D1DC400EF4ADB /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				577A372A292D1DC000EF4ADB /* Settings.swift */,
+				577A372A292D1DC000EF4ADB /* Session.swift */,
 				577A372D292D1F5700EF4ADB /* NetworkService.swift */,
 			);
 			name = Session;
@@ -609,7 +609,7 @@
 				57D1C6DC29170ED0006731B1 /* ProfileCollectionViewController.swift in Sources */,
 				57D1C6D72916EB47006731B1 /* FriendsTableViewCell.swift in Sources */,
 				57994A842911BE19008D4267 /* AppDelegate.swift in Sources */,
-				577A372B292D1DC000EF4ADB /* Settings.swift in Sources */,
+				577A372B292D1DC000EF4ADB /* Session.swift in Sources */,
 				57994A862911BE19008D4267 /* SceneDelegate.swift in Sources */,
 				577A372E292D1F5700EF4ADB /* NetworkService.swift in Sources */,
 				577BAB0F2918460000BD741B /* Group.swift in Sources */,

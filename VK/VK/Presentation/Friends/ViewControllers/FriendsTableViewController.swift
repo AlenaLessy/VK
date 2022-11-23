@@ -38,14 +38,13 @@ final class FriendsTableViewController: UITableViewController {
         case friends(String)
     }
 
-    private lazy var service = NetworkService()
-
     // MARK: - Private Properties
+
+    private lazy var networkService = NetworkService()
 
     private var friendSections: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
-
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
 
     private var birthdaysDataSource: [Birthday] = [
@@ -73,14 +72,10 @@ final class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         createSections()
-        print("friends")
-        service.getFriends()
-        print("photos")
-        service.getAllPhotos()
-        print("groups")
-        service.getGroups()
-        print("search")
-        service.searchGroups()
+        networkService.getFriends()
+        networkService.getAllPhotos()
+        networkService.getGroups()
+        networkService.searchGroups()
     }
 
     // MARK: - Public Method

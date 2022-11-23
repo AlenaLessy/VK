@@ -25,13 +25,15 @@ final class NetworkService {
         static let queryItemLandName = "land"
         static let queryItemExtendedName = "extended"
         static let queryItemQName = "q"
-        static let queryItemOwner_id = "owner_id"
+        static let queryItemOwnerId = "owner_id"
         static let queryItemLandValue = "ru"
         static let queryItemVersionValue = "5.131"
         static let queryItemExtendedValue = "1"
         static let queryItemfieldsValue = "nickname"
         static let queryItemQValue = "Bears"
     }
+
+    // MARK: - Types
 
     enum MethodKind: CustomStringConvertible {
         case getFriends
@@ -56,29 +58,29 @@ final class NetworkService {
     // MARK: - Private Properties
 
     private let friendsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Settings.shared.token)"),
+        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
         URLQueryItem(name: Constants.queryItemfieldsName, value: Constants.queryItemfieldsValue),
         URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
         URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
     ]
 
     private let allPhotosQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Settings.shared.token)"),
+        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
         URLQueryItem(name: Constants.queryItemExtendedName, value: Constants.queryItemExtendedValue),
-        URLQueryItem(name: Constants.queryItemOwner_id, value: "-\(Settings.shared.userId)"),
+        URLQueryItem(name: Constants.queryItemOwnerId, value: "-\(Session.shared.userId)"),
         URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
         URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue),
     ]
 
     private let groupsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Settings.shared.token)"),
+        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
         URLQueryItem(name: Constants.queryItemExtendedName, value: Constants.queryItemExtendedValue),
         URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
         URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
     ]
 
     private let searchGroupsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Settings.shared.token)"),
+        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
         URLQueryItem(name: Constants.queryItemQName, value: Constants.queryItemQValue),
         URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
         URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
@@ -87,24 +89,24 @@ final class NetworkService {
     // MARK: - Public Methods
 
     func getFriends() {
-        getService(componentsPath: .getFriends, queryItems: friendsQueryItem)
+        getServiceRequest(componentsPath: .getFriends, queryItems: friendsQueryItem)
     }
 
     func getAllPhotos() {
-        getService(componentsPath: .getAllPhotos, queryItems: allPhotosQueryItem)
+        getServiceRequest(componentsPath: .getAllPhotos, queryItems: allPhotosQueryItem)
     }
 
     func getGroups() {
-        getService(componentsPath: .getGroups, queryItems: groupsQueryItem)
+        getServiceRequest(componentsPath: .getGroups, queryItems: groupsQueryItem)
     }
 
     func searchGroups() {
-        getService(componentsPath: .searchGroups, queryItems: searchGroupsQueryItem)
+        getServiceRequest(componentsPath: .searchGroups, queryItems: searchGroupsQueryItem)
     }
 
     // MARK: - Private Methods
 
-    private func getService(componentsPath: MethodKind, queryItems: [URLQueryItem]) {
+    private func getServiceRequest(componentsPath: MethodKind, queryItems: [URLQueryItem]) {
         var components = URLComponents()
         components.scheme = Constants.uRLComponentsSchemeName
         components.host = Constants.uRLComponentsHostName

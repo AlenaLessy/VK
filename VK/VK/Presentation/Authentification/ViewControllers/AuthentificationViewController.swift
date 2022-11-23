@@ -6,13 +6,12 @@
 //
 
 import UIKit
-
 import WebKit
 
 /// Экран аутентификации
 final class AuthentificationViewController: UIViewController {
-    
     // MARK: - Private Constants
+
     private enum Constants {
         static let urlComponentsSchemeName = "https"
         static let urlComponentsHostName = "oauth.vk.com"
@@ -36,13 +35,15 @@ final class AuthentificationViewController: UIViewController {
         static let accessTokenName = "access_token"
         static let storyBoardName = "Main"
         static let tabBarControllerIdentifier = "TabBar"
-        
+        static let userId = "user_id"
     }
+
     // MARK: - Private Outlets
 
-    @IBOutlet var wKWebView: WKWebView! { didSet {
-        wKWebView.navigationDelegate = self
-    }
+    @IBOutlet var wKWebView: WKWebView! {
+        didSet {
+            wKWebView.navigationDelegate = self
+        }
     }
 
     // MARK: - Life Cycle
@@ -60,11 +61,11 @@ final class AuthentificationViewController: UIViewController {
         urlComponents.host = Constants.urlComponentsHostName
         urlComponents.path = Constants.urlComponentsPathName
         urlComponents.queryItems = [
-            URLQueryItem(name: Constants.queryItemsIdName, value: "\(Settings.shared.clientId)"),
+            URLQueryItem(name: Constants.queryItemsIdName, value: "\(Session.shared.clientId)"),
             URLQueryItem(
                 name: Constants.queryItemsURLRedirectName,
                 value:
-                    Constants.queryItemsURLRedirectValue
+                Constants.queryItemsURLRedirectValue
             ),
             URLQueryItem(name: Constants.queryItemsDisplayName, value: Constants.queryItemsDisplayValue),
             URLQueryItem(name: Constants.queryItemsScopeName, value: Constants.queryItemsScopeValue),
@@ -76,9 +77,18 @@ final class AuthentificationViewController: UIViewController {
         let request = URLRequest(url: url)
         wKWebView.load(request)
     }
+
+    private func goToTabBar() {
+        let mainStoryboard = UIStoryboard(name: Constants.storyBoardName, bundle: nil)
+        let viewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Constants.tabBarControllerIdentifier)
+        view.window?.rootViewController = viewController
+        view.window?.makeKeyAndVisible()
+    }
 }
 
-/// WKNavigationDelegate
+// MARK: - WKNavigationDelegate
+
 extension AuthentificationViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
@@ -86,7 +96,9 @@ extension AuthentificationViewController: WKNavigationDelegate {
         WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {
-        guard let url = navigationResponse.response.url, url.path == Constants.urlPath, let fragment = url.fragment else {
+        guard let url = navigationResponse.response.url, url.path == Constants.urlPath,
+              let fragment = url.fragment
+        else {
             decisionHandler(.allow)
             return
         }
@@ -99,13 +111,12 @@ extension AuthentificationViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
             }
-        guard let token = params[Constants.accessTokenName] else { return }
-        Settings.shared.token = token
+        guard let token = params[Constants.accessTokenName],
+              let userId = params[Constants.userId]
+        else { return }
+        Session.shared.token = token
+        Session.shared.userId = userId
         decisionHandler(.cancel)
-        // performSegue(withIdentifier: "TabBar", sender: nil)
-        let mainStoryboard = UIStoryboard(name: Constants.storyBoardName, bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: Constants.tabBarControllerIdentifier)
-        view.window?.rootViewController = viewController
-        view.window?.makeKeyAndVisible()
+        goToTabBar()
     }
 }
