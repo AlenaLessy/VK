@@ -1,9 +1,5 @@
-//
-//  FriendsTableViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 05.11.2022.
-//
+// FriendsTableViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -40,21 +36,21 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private lazy var networkService = NetworkService()
+    private var networkService = NetworkService()
 
-    private var friendSections: [Character: [Friend]] = [:]
+    private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
 
-    private var birthdaysDataSource: [Birthday] = [
+    private var birthdays: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
         Birthday(name: "Потапка", imageName: "mi6"),
         Birthday(name: "Евгений Медведев", imageName: "mi7"),
         Birthday(name: "Топтышка Мишулин", imageName: "mi8")
     ]
 
-    private var friendsDataSource: [Friend] = [
+    private var friends: [Friend] = [
         Friend(name: "Михаил Потапыч", imageNames: ["m1", "m2", "m3"], city: "Сочи"),
         Friend(name: "Медведь Бурый", imageNames: ["m2", "m3", "mi1"], age: 14, city: "Питер"),
         Friend(name: "Мишка Белый", imageNames: ["mi1", "mi6", "mi4"], age: 19, city: "Севастополь"),
@@ -72,10 +68,10 @@ final class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         createSections()
-        networkService.getFriends()
-        networkService.getAllPhotos()
-        networkService.getGroups()
-        networkService.searchGroups()
+        networkService.fetchFriends()
+        networkService.fetchAllPhotos()
+        networkService.fetchGroups()
+        networkService.fetchSearchGroups()
     }
 
     // MARK: - Public Method
@@ -175,7 +171,7 @@ final class FriendsTableViewController: UITableViewController {
             ) as? FriendsRequestTableViewCell else { return UITableViewCell() }
             return cell
         case .birthday:
-            let model = birthdaysDataSource[indexPath.row]
+            let model = birthdays[indexPath.row]
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Constants.birthdayIdentifier,
                 for: indexPath
@@ -183,11 +179,12 @@ final class FriendsTableViewController: UITableViewController {
             cell.update(birthdays: model)
             return cell
         case .friends:
-            guard let friend = friendSections[sectionTitles[indexPath.section - generalSectionsCount]]?[indexPath.row],
-                  let cell = tableView.dequeueReusableCell(
-                      withIdentifier: Constants.friendsIdentifier,
-                      for: indexPath
-                  ) as? FriendsTableViewCell else { return UITableViewCell() }
+            guard let friend =
+                friendSectionsMap[sectionTitles[indexPath.section - generalSectionsCount]]?[indexPath.row],
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: Constants.friendsIdentifier,
+                    for: indexPath
+                ) as? FriendsTableViewCell else { return UITableViewCell() }
             cell.update(friend: friend)
             print(friend)
             return cell
@@ -200,9 +197,9 @@ final class FriendsTableViewController: UITableViewController {
         case .friendsSearch, .friendsInfo, .friendsRequest:
             return 1
         case .birthday:
-            return birthdaysDataSource.count
+            return birthdays.count
         case .friends:
-            return friendSections[sectionTitles[section - generalSectionsCount]]?.count ?? 0
+            return friendSectionsMap[sectionTitles[section - generalSectionsCount]]?.count ?? 0
         }
     }
 
@@ -211,20 +208,20 @@ final class FriendsTableViewController: UITableViewController {
         guard let profileViewController = storyBoard
             .instantiateViewController(withIdentifier: Constants.profileVCIdentifier) as? ProfileViewController
         else { return }
-        profileViewController.imageNames = friendsDataSource[indexPath.row].imageNames
+        profileViewController.imageNames = friends[indexPath.row].imageNames
         present(profileViewController, animated: true)
     }
 
     private func createSections() {
-        for friend in friendsDataSource {
+        for friend in friends {
             guard let firstLetter = friend.name.first else { return }
-            if friendSections[firstLetter] != nil {
-                friendSections[firstLetter]?.append(friend)
+            if friendSectionsMap[firstLetter] != nil {
+                friendSectionsMap[firstLetter]?.append(friend)
             } else {
-                friendSections[firstLetter] = [friend]
+                friendSectionsMap[firstLetter] = [friend]
                 sections.append(.friends(String(firstLetter)))
             }
-            sectionTitles = Array(friendSections.keys)
+            sectionTitles = Array(friendSectionsMap.keys)
         }
     }
 }

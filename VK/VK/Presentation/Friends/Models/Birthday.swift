@@ -1,9 +1,5 @@
-//
-//  Birthdays.swift
-//  VK
-//
-//  Created by Алена Панченко on 05.11.2022.
-//
+// Birthday.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

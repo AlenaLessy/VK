@@ -1,9 +1,5 @@
-//
-//  RecommendationGroupTableViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 05.11.2022.
-//
+// RecommendationGroupTableViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 

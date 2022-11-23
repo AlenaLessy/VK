@@ -8,6 +8,9 @@
 --indent 4
 --exclude **/Pods
 
+# Генерируем хедер
+--header "{file}\nCopyright © RoadMap. All rights reserved."
+
 # Отключаем отступ
 --ifdef no-indent
 

@@ -1,9 +1,5 @@
-//
-//  News.swift
-//  VK
-//
-//  Created by Алена Панченко on 09.11.2022.
-//
+// News.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

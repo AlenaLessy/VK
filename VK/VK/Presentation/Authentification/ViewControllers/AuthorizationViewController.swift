@@ -1,15 +1,11 @@
-//
-//  AuthentificationViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 22.11.2022.
-//
+// AuthorizationViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 import WebKit
 
-/// Экран аутентификации
-final class AuthentificationViewController: UIViewController {
+/// Экран авторизации
+final class AuthorizationViewController: UIViewController {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -40,7 +36,7 @@ final class AuthentificationViewController: UIViewController {
 
     // MARK: - Private Outlets
 
-    @IBOutlet var wKWebView: WKWebView! {
+    @IBOutlet private var wKWebView: WKWebView! {
         didSet {
             wKWebView.navigationDelegate = self
         }
@@ -78,18 +74,18 @@ final class AuthentificationViewController: UIViewController {
         wKWebView.load(request)
     }
 
-    private func goToTabBar() {
+    private func showTabBarController() {
         let mainStoryboard = UIStoryboard(name: Constants.storyBoardName, bundle: nil)
-        let viewController = mainStoryboard
+        let tabBarController = mainStoryboard
             .instantiateViewController(withIdentifier: Constants.tabBarControllerIdentifier)
-        view.window?.rootViewController = viewController
+        view.window?.rootViewController = tabBarController
         view.window?.makeKeyAndVisible()
     }
 }
 
 // MARK: - WKNavigationDelegate
 
-extension AuthentificationViewController: WKNavigationDelegate {
+extension AuthorizationViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationResponse:
@@ -117,6 +113,6 @@ extension AuthentificationViewController: WKNavigationDelegate {
         Session.shared.token = token
         Session.shared.userId = userId
         decisionHandler(.cancel)
-        goToTabBar()
+        showTabBarController()
     }
 }

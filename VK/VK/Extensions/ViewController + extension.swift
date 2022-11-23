@@ -1,9 +1,5 @@
-//
-//  ViewController + extension.swift
-//  VK
-//
-//  Created by Алена Панченко on 02.11.2022.
-//
+// ViewController + extension.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 

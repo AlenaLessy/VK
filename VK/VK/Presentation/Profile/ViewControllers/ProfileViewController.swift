@@ -1,9 +1,5 @@
-//
-//  ProfileViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 10.11.2022.
-//
+// ProfileViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -44,7 +40,7 @@ final class ProfileViewController: UIViewController {
         setupImages()
         addRightTapGestures()
         addLeftTapGestures()
-        networkService.getFriends()
+        networkService.fetchFriends()
     }
 
     // MARK: - Private Methods

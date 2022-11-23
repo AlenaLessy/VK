@@ -1,24 +1,14 @@
-//
-//  NetworkService.swift
-//  VK
-//
-//  Created by Алена Панченко on 22.11.2022.
-//
+// NetworkService.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
 /// Сетевые запросы
-final class NetworkService {
+final class NetworkService: LoadDataServiceViewController {
     // MARK: - Private Constants
 
     private enum Constants {
         static let recommendationsText = "/recommendations"
-        static let uRLComponentsSchemeName = "https"
-        static let uRLComponentsHostName = "api.vk.com"
-        static let getFriendsDescription = "/method/friends.get"
-        static let getAllPhotosDescription = "/method/photos.getAll"
-        static let getGroupsDescription = "/method/groups.get"
-        static let searchGroupsDescription = "/method/groups.search"
         static let queryItemTokenName = "access_token"
         static let queryItemfieldsName = "fields"
         static let queryItemVName = "v"
@@ -31,28 +21,6 @@ final class NetworkService {
         static let queryItemExtendedValue = "1"
         static let queryItemfieldsValue = "nickname"
         static let queryItemQValue = "Bears"
-    }
-
-    // MARK: - Types
-
-    enum MethodKind: CustomStringConvertible {
-        case getFriends
-        case getAllPhotos
-        case getGroups
-        case searchGroups
-
-        var description: String {
-            switch self {
-            case .getFriends:
-                return Constants.getFriendsDescription
-            case .getAllPhotos:
-                return Constants.getAllPhotosDescription
-            case .getGroups:
-                return Constants.getGroupsDescription
-            case .searchGroups:
-                return Constants.searchGroupsDescription
-            }
-        }
     }
 
     // MARK: - Private Properties
@@ -88,40 +56,19 @@ final class NetworkService {
 
     // MARK: - Public Methods
 
-    func getFriends() {
-        getServiceRequest(componentsPath: .getFriends, queryItems: friendsQueryItem)
+    func fetchFriends() {
+        loadData(componentsPath: .getFriends, queryItems: friendsQueryItem)
     }
 
-    func getAllPhotos() {
-        getServiceRequest(componentsPath: .getAllPhotos, queryItems: allPhotosQueryItem)
+    func fetchAllPhotos() {
+        loadData(componentsPath: .getAllPhotos, queryItems: allPhotosQueryItem)
     }
 
-    func getGroups() {
-        getServiceRequest(componentsPath: .getGroups, queryItems: groupsQueryItem)
+    func fetchGroups() {
+        loadData(componentsPath: .getGroups, queryItems: groupsQueryItem)
     }
 
-    func searchGroups() {
-        getServiceRequest(componentsPath: .searchGroups, queryItems: searchGroupsQueryItem)
-    }
-
-    // MARK: - Private Methods
-
-    private func getServiceRequest(componentsPath: MethodKind, queryItems: [URLQueryItem]) {
-        var components = URLComponents()
-        components.scheme = Constants.uRLComponentsSchemeName
-        components.host = Constants.uRLComponentsHostName
-        components.path = componentsPath.description
-        components.queryItems = queryItems
-
-        guard let url = components.url else { return }
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { data, _, _ in
-
-            if let data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print("TEST \(componentsPath) \(json ?? "")")
-            }
-        }
-        task.resume()
+    func fetchSearchGroups() {
+        loadData(componentsPath: .searchGroups, queryItems: searchGroupsQueryItem)
     }
 }

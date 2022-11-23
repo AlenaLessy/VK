@@ -1,13 +1,9 @@
-//
-//  Settings.swift
-//  VK
-//
-//  Created by Алена Панченко on 21.11.2022.
-//
+// Session.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Хранение данных о текущей сессии
+/// Данные о текущей сессии
 final class Session {
     // MARK: - Public Properties
 
