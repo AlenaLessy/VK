@@ -38,6 +38,8 @@ final class FriendsTableViewController: UITableViewController {
         case friends(String)
     }
 
+    private lazy var service = NetworkService()
+
     // MARK: - Private Properties
 
     private var friendSections: [Character: [Friend]] = [:]
@@ -71,6 +73,14 @@ final class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         createSections()
+        print("friends")
+        service.getFriends()
+        print("photos")
+        service.getAllPhotos()
+        print("groups")
+        service.getGroups()
+        print("search")
+        service.searchGroups()
     }
 
     // MARK: - Public Method

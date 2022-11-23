@@ -94,12 +94,15 @@ extension RecommendationGroupTableViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             searchingResults = recommendationGroupsDataCourse
         } else {
-            for group in recommendationGroupsDataCourse
-                where
-                group.groupName.lowercased().contains(searchText.lowercased())
-            {
-                searchingResults.append(group)
-            }
+            let groups = recommendationGroupsDataCourse
+                .filter { $0.groupName.lowercased().contains(searchText.lowercased()) }
+            searchingResults += groups
+//
+//            for group in recommendationGroupsDataCourse where
+//                group.groupName.lowercased().contains(searchText.lowercased())
+//            {
+//                searchingResults.append(group)
+//            }
         }
         tableView.reloadData()
     }

@@ -35,6 +35,7 @@ final class ProfileViewController: UIViewController {
     // MARK: - Private Properties
 
     private var index = 0
+    private var session = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -43,6 +44,7 @@ final class ProfileViewController: UIViewController {
         setupImages()
         addRightTapGestures()
         addLeftTapGestures()
+        session.getFriends()
     }
 
     // MARK: - Private Methods
