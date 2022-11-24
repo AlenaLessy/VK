@@ -1,9 +1,5 @@
-//
-//  CustomPushAnimator.swift
-//  VK
-//
-//  Created by Алена Панченко on 11.11.2022.
-//
+// CustomPushAnimator.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -12,12 +8,12 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
     // MARK: - Private Constants
 
     private enum Constants {
-        static let timeInterval: Double = 1
+        static let timeInterval = 1.0
         static let translationFrameWidthX = 1.5
         static let translationFrameWidthY: CGFloat = 2
         static let rotationOfPiAngel: CGFloat = 2
         static let delay = 0.0
-        static let relativeStartTime: Double = 0
+        static let relativeStartTime = 0.0
         static let relativeDuration = 0.75
         static let animateKeyframesTranslationY: CGFloat = 0
     }
@@ -81,17 +77,17 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
                 ) {
                     destination.view.transform = .identity
                 }
+            }, completion: { finished in
+                if finished, !transitionContext.transitionWasCancelled {
+                    source.view.transform = .identity
+                } else if transitionContext.transitionWasCancelled {
+                    destination.view.transform = .identity
+                }
+                transitionContext.completeTransition(
+                    finished &&
+                        !transitionContext.transitionWasCancelled
+                )
             }
-        ) { finished in
-            if finished, !transitionContext.transitionWasCancelled {
-                source.view.transform = .identity
-            } else if transitionContext.transitionWasCancelled {
-                destination.view.transform = .identity
-            }
-            transitionContext.completeTransition(
-                finished &&
-                    !transitionContext.transitionWasCancelled
-            )
-        }
+        )
     }
 }

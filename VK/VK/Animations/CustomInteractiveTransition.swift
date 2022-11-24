@@ -1,9 +1,5 @@
-//
-//  CustomInteractiveTransition.swift
-//  VK
-//
-//  Created by Алена Панченко on 11.11.2022.
-//
+// CustomInteractiveTransition.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 

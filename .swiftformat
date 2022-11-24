@@ -1,12 +1,16 @@
 # Отключаем следующие правила:
 --disable void, trailingCommas, unusedArguments, enumNamespaces
+--swiftversion 5.7
 --maxwidth 120
 --wraparguments before-first
 --wrapparameters before-first
 --wrapcollections before-first
 --indent 4
+--exclude **/Pods
+
+# Генерируем хедер
+--header "{file}\nCopyright © RoadMap. All rights reserved."
 
 # Отключаем отступ
 --ifdef no-indent
 
---swiftversion 5.7

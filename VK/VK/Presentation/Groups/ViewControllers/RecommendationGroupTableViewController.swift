@@ -1,9 +1,5 @@
-//
-//  RecommendationGroupTableViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 05.11.2022.
-//
+// RecommendationGroupTableViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -94,12 +90,9 @@ extension RecommendationGroupTableViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             searchingResults = recommendationGroupsDataCourse
         } else {
-            for group in recommendationGroupsDataCourse
-                where
-                group.groupName.lowercased().contains(searchText.lowercased())
-            {
-                searchingResults.append(group)
-            }
+            let groups = recommendationGroupsDataCourse
+                .filter { $0.groupName.lowercased().contains(searchText.lowercased()) }
+            searchingResults += groups
         }
         tableView.reloadData()
     }

@@ -1,9 +1,5 @@
-//
-//  AppDelegate.swift
-//  ElectronicsStore
-//
-//  Created by Алена Панченко on 06.10.2022.
-//
+// AppDelegate.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 

@@ -1,9 +1,5 @@
-//
-//  GroupTableViewController.swift
-//  VK
-//
-//  Created by Алена Панченко on 05.11.2022.
-//
+// GroupTableViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 

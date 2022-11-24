@@ -1,9 +1,5 @@
-//
-//  CustomPopAnimator.swift
-//  VK
-//
-//  Created by Алена Панченко on 11.11.2022.
-//
+// CustomPopAnimator.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -12,12 +8,12 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - Private Constants
 
     private enum Constants {
-        static let timeInterval: Double = 1
+        static let timeInterval = 1.0
         static let translationFrameWidthX: CGFloat = -1
         static let translationFrameWidthY: CGFloat = 2
         static let rotationOfPiAngel: CGFloat = 2
         static let delay = 0.0
-        static let relativeStartTime: Double = 0
+        static let relativeStartTime = 0.0
         static let relativeDisappearingVCDuration = 0.3
         static let relativeEmergingVCDuration = 0.75
         static let animateKeyframesTranslationOfFrameWidthX: CGFloat = 1.5
@@ -87,17 +83,17 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 ) {
                     destination.view.transform = .identity
                 }
+            }, completion: { finished in
+                if finished, !transitionContext.transitionWasCancelled {
+                    source.removeFromParent()
+                } else if transitionContext.transitionWasCancelled {
+                    destination.view.transform = .identity
+                }
+                transitionContext.completeTransition(
+                    finished &&
+                        !transitionContext.transitionWasCancelled
+                )
             }
-        ) { finished in
-            if finished, !transitionContext.transitionWasCancelled {
-                source.removeFromParent()
-            } else if transitionContext.transitionWasCancelled {
-                destination.view.transform = .identity
-            }
-            transitionContext.completeTransition(
-                finished &&
-                    !transitionContext.transitionWasCancelled
-            )
-        }
+        )
     }
 }
