@@ -3,7 +3,7 @@
 
 import RealmSwift
 
-/// Друзья
+/// Путь к фото
 final class PhotoPath: Object, Decodable {
     @objc dynamic var url: String
 }

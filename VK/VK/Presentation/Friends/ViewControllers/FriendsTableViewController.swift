@@ -98,7 +98,7 @@ final class FriendsTableViewController: UITableViewController {
             guard let self else { return }
             switch result {
             case let .success(data):
-                self.friends = data.response.items
+                self.friends = data.response.friends
                 self.createSections()
                 self.tableView.reloadData()
                 print(self.friends)

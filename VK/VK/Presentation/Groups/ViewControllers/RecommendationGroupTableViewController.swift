@@ -91,7 +91,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
             guard let self else { return }
             switch result {
             case let .success(data):
-                self.searchingResults = data.response.items
+                self.searchingResults = data.response.groups
                 self.tableView.reloadData()
             case .failure(.unknown):
                 print(Constants.urlFailureName)

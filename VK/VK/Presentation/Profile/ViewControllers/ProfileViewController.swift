@@ -41,10 +41,9 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // setupImages()
         addRightTapGestures()
         addLeftTapGestures()
-        loadFriends()
+        loadPhoto()
     }
 
     // MARK: - Private Methods
@@ -60,15 +59,13 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func loadFriends() {
+    private func loadPhoto() {
         networkService.fetchAllPhotos(userId: userId) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(data):
-                print(data.response.items)
-                self.photoNames = data.response.items
-                print(self.photoNames)
-//                self.profileImageView = UIImageView.loadImage(data.response.items)
+                self.photoNames = data.response.photos
+                self.setupImages()
             case .failure(.unknown):
                 print(Constants.urlFailureName)
             case .failure(.decodingFailure):
@@ -79,9 +76,10 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func setupImages(url: String) {
-        guard let imageName = photoNames.first else { return }
-        profileImageView.loadImage(imageURL: url)
+    private func setupImages() {
+        guard let imageName = photoNames.first?.photoPath.first?.url
+        else { return }
+        profileImageView.loadImage(imageURL: imageName)
     }
 
     private func addRightTapGestures() {
@@ -121,7 +119,6 @@ final class ProfileViewController: UIViewController {
             UIView.animate(withDuration: Constants.swipeAnimationDuration, animations: {
                 self.profileImageView.layer.opacity = Constants.animateEmergingProfileImageViewLayerOpacity
                 self.profileImageView.transform = .identity
-                // self.profileImageView.image = UIImage(named: self.photoNames[self.index])
             })
         }
     }

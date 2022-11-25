@@ -24,7 +24,7 @@
 		5751715C293070C600AD441B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5751715B293070C600AD441B /* Group.swift */; };
 		5767EF3529180E53000CD65C /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */; };
 		5767EF3629180E53000CD65C /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */; };
-		5773845829305183001B9FD5 /* ImageView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773845729305183001B9FD5 /* ImageView + extension.swift */; };
+		5773845829305183001B9FD5 /* ImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773845729305183001B9FD5 /* ImageView + Extension.swift */; };
 		577A3728292D164B00EF4ADB /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A3727292D164B00EF4ADB /* AuthorizationViewController.swift */; };
 		577A372B292D1DC000EF4ADB /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A372A292D1DC000EF4ADB /* Session.swift */; };
 		577A372E292D1F5700EF4ADB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577A372D292D1F5700EF4ADB /* NetworkService.swift */; };
@@ -53,7 +53,7 @@
 		57994A8D2911BE1B008D4267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57994A8C2911BE1B008D4267 /* Assets.xcassets */; };
 		57994A902911BE1B008D4267 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57994A8E2911BE1B008D4267 /* LaunchScreen.storyboard */; };
 		57994A9A2911C0D8008D4267 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57994A992911C0D8008D4267 /* Colors.xcassets */; };
-		579F24A22911F46F00678837 /* ViewController + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F24A12911F46F00678837 /* ViewController + extension.swift */; };
+		579F24A22911F46F00678837 /* ViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F24A12911F46F00678837 /* ViewController + Extension.swift */; };
 		57B8D1FD291679CC007DF516 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B8D1FC291679CC007DF516 /* FriendsTableViewController.swift */; };
 		57B8D20529167B00007DF516 /* FriendsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B8D20329167B00007DF516 /* FriendsSearchTableViewCell.swift */; };
 		57B8D20629167B00007DF516 /* FriendsSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57B8D20429167B00007DF516 /* FriendsSearchTableViewCell.xib */; };
@@ -88,7 +88,7 @@
 		5751715B293070C600AD441B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		5767EF3329180E53000CD65C /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
 		5767EF3429180E53000CD65C /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
-		5773845729305183001B9FD5 /* ImageView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView + extension.swift"; sourceTree = "<group>"; };
+		5773845729305183001B9FD5 /* ImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView + Extension.swift"; sourceTree = "<group>"; };
 		577A3727292D164B00EF4ADB /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		577A372A292D1DC000EF4ADB /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		577A372D292D1F5700EF4ADB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		57994A8F2911BE1B008D4267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57994A912911BE1B008D4267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57994A992911C0D8008D4267 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		579F24A12911F46F00678837 /* ViewController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + extension.swift"; sourceTree = "<group>"; };
+		579F24A12911F46F00678837 /* ViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + Extension.swift"; sourceTree = "<group>"; };
 		57B8D1FC291679CC007DF516 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsTableViewController.swift; path = VK/Presentation/Friends/ViewControllers/FriendsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		57B8D20329167B00007DF516 /* FriendsSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSearchTableViewCell.swift; sourceTree = "<group>"; };
 		57B8D20429167B00007DF516 /* FriendsSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsSearchTableViewCell.xib; sourceTree = "<group>"; };
@@ -301,6 +301,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		578D89EC2930996E00CA7C0B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5751714F29305F3700AD441B /* PhotoResponse.swift */,
+				5751715129305FD300AD441B /* PhotoItemResponse.swift */,
+				575171532930600000AD441B /* Photo.swift */,
+				57517155293066B100AD441B /* PhotoPath.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		57994A772911BE19008D4267 = {
 			isa = PBXGroup;
 			children = (
@@ -334,8 +345,8 @@
 		579F24A32911F9FC00678837 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				579F24A12911F46F00678837 /* ViewController + extension.swift */,
-				5773845729305183001B9FD5 /* ImageView + extension.swift */,
+				579F24A12911F46F00678837 /* ViewController + Extension.swift */,
+				5773845729305183001B9FD5 /* ImageView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -426,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				57D1C6DE29170F65006731B1 /* ViewControllers */,
+				578D89EC2930996E00CA7C0B /* Models */,
 				577BAB16291888AC00BD741B /* Cells */,
 				577BAB192918894F00BD741B /* Controls */,
 			);
@@ -437,10 +449,6 @@
 			children = (
 				57D1C6DB29170ED0006731B1 /* ProfileCollectionViewController.swift */,
 				571EB0CF291D941300295BED /* ProfileViewController.swift */,
-				5751714F29305F3700AD441B /* PhotoResponse.swift */,
-				5751715129305FD300AD441B /* PhotoItemResponse.swift */,
-				575171532930600000AD441B /* Photo.swift */,
-				57517155293066B100AD441B /* PhotoPath.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -643,7 +651,7 @@
 				577BAB182918893E00BD741B /* LikeControl.swift in Sources */,
 				5751715C293070C600AD441B /* Group.swift in Sources */,
 				577BAB0B291842A200BD741B /* GroupTableViewCell.swift in Sources */,
-				579F24A22911F46F00678837 /* ViewController + extension.swift in Sources */,
+				579F24A22911F46F00678837 /* ViewController + Extension.swift in Sources */,
 				571EB0D2291DA82400295BED /* CustomNavigationController.swift in Sources */,
 				57B8D20E2916CEDA007DF516 /* FriendsRequestTableViewCell.swift in Sources */,
 				577BAB1E291B103A00BD741B /* HeaderView.swift in Sources */,
@@ -654,7 +662,7 @@
 				577A372B292D1DC000EF4ADB /* Session.swift in Sources */,
 				57994A862911BE19008D4267 /* SceneDelegate.swift in Sources */,
 				577A3734292E835400EF4ADB /* LoadDataServiceViewController.swift in Sources */,
-				5773845829305183001B9FD5 /* ImageView + extension.swift in Sources */,
+				5773845829305183001B9FD5 /* ImageView + Extension.swift in Sources */,
 				575171542930600000AD441B /* Photo.swift in Sources */,
 				577A372E292D1F5700EF4ADB /* NetworkService.swift in Sources */,
 				577BAB0F2918460000BD741B /* Groups.swift in Sources */,

@@ -1,13 +1,11 @@
 // Photo.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
-/// Друзья
+/// Фото
 struct Photo: Decodable {
-    var photo: [PhotoPath]
+    var photoPath: [PhotoPath]
 
     enum CodingKeys: String, CodingKey {
-        case photo = "sizes"
+        case photoPath = "sizes"
     }
 }

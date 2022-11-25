@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Структура ответа ВК на группы
+/// ответ ВК на группы
 struct GroupResponse: Decodable {
     var response: GroupItemResponse
 }

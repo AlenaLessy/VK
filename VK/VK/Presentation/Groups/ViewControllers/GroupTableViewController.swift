@@ -19,10 +19,8 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private var groupsDataCourse: [Group] = []
-
     private var networkService = NetworkService()
     private var groups: [Group] = []
-
     private var recommendationGroups: [Group] = []
 
     // MARK: - Life Cycle
@@ -92,7 +90,7 @@ final class GroupTableViewController: UITableViewController {
             guard let self else { return }
             switch result {
             case let .success(data):
-                self.groups = data.response.items
+                self.groups = data.response.groups
                 self.tableView.reloadData()
             case .failure(.unknown):
                 print(Constants.urlFailureName)

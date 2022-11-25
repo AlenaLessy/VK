@@ -4,8 +4,19 @@
 import Foundation
 
 /// Вид сетевых ошибок
-enum NetworkError: Error {
+enum NetworkError: Error, CustomStringConvertible {
     case unknown
     case decodingFailure
     case urlFailure
+
+    var description: String {
+        switch self {
+        case .unknown:
+            return "Неизвестная ошибка"
+        case .decodingFailure:
+            return "Ошибка декодирования"
+        case .urlFailure:
+            return "Ошибка URL"
+        }
+    }
 }

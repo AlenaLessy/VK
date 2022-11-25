@@ -5,10 +5,9 @@ import Foundation
 
 /// Элементы ответа ВК
 struct VKItemResponse: Decodable {
-    var items: [Friend]
-}
+    var friends: [Friend]
 
-///// Элементы ответа ВК
-// struct VKItemResponse<T>: Decodable where T: Decodable {
-//    let items: [T]
-// }
+    enum CodingKeys: String, CodingKey {
+        case friends = "items"
+    }
+}
