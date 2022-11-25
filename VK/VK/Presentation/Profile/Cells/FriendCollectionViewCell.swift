@@ -15,7 +15,7 @@ final class FriendCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Method
 
-    func update(friend: Friend) {
+    func update(friend: NewsFriends) {
         guard let imageName = friend.imageNames.first else { return }
         friendImageView.image = UIImage(named: imageName)
     }

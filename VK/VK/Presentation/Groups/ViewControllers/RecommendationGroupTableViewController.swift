@@ -12,6 +12,9 @@ final class RecommendationGroupTableViewController: UITableViewController {
     private enum Constants {
         static let groupIdentifier = "Group"
         static let groupNibName = "GroupTableViewCell"
+        static let unknownFailureName = "Неизвестная ошибка"
+        static let decodingFailureName = "Ошибка декодирования"
+        static let urlFailureName = "Ошибка URL"
     }
 
     // MARK: - Private Outlets
@@ -21,7 +24,8 @@ final class RecommendationGroupTableViewController: UITableViewController {
     // MARK: - Public Properties
 
     var backHandler: GoBackHandler?
-    var recommendationGroupsDataCourse: [Group] = []
+    var recommendationGroups: [Group] = []
+    var networkService = NetworkService()
 
     // MARK: - Private Properties
 
@@ -65,7 +69,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
 
     private func configureTableView() {
         tableView.tableHeaderView = searchBar
-        searchingResults = recommendationGroupsDataCourse
+        searchingResults = recommendationGroups
         tableView.register(
             UINib(nibName: Constants.groupNibName, bundle: nil),
             forCellReuseIdentifier: Constants.groupIdentifier
@@ -81,6 +85,23 @@ final class RecommendationGroupTableViewController: UITableViewController {
         cell.update(group: group)
         return cell
     }
+
+    private func loadSearchGroups(searchingGroups: String) {
+        networkService.fetchSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                self.searchingResults = data.response.items
+                self.tableView.reloadData()
+            case .failure(.unknown):
+                print(Constants.urlFailureName)
+            case .failure(.decodingFailure):
+                print(Constants.decodingFailureName)
+            case .failure(.urlFailure):
+                print(Constants.urlFailureName)
+            }
+        }
+    }
 }
 
 /// UISearchBarDelegate
@@ -88,11 +109,9 @@ extension RecommendationGroupTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchingResults = []
         if searchText.isEmpty {
-            searchingResults = recommendationGroupsDataCourse
+            searchingResults = recommendationGroups
         } else {
-            let groups = recommendationGroupsDataCourse
-                .filter { $0.groupName.lowercased().contains(searchText.lowercased()) }
-            searchingResults += groups
+            loadSearchGroups(searchingGroups: searchText.lowercased())
         }
         tableView.reloadData()
     }

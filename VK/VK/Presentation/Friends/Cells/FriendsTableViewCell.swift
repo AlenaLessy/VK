@@ -16,7 +16,6 @@ final class FriendsTableViewCell: UITableViewCell {
 
     @IBOutlet private var userImageView: UIImageView!
     @IBOutlet private var userNameLabel: UILabel!
-    @IBOutlet private var userInfoLabel: UILabel!
 
     // MARK: - LifeCycle
 
@@ -28,17 +27,8 @@ final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func update(friend: Friend) {
-        guard let imageName = friend.imageNames.first else { return }
-        userImageView.image = UIImage(named: imageName)
-        userNameLabel.text = friend.name
-        if friend.city != nil, friend.age?.description != nil {
-            userInfoLabel.text = (friend.age?.description ?? Constants.emptyString) + Constants
-                .commaString + (friend.city ?? Constants.emptyString)
-        } else if friend.city != nil {
-            userInfoLabel.text = friend.city
-        } else if friend.age?.description != nil {
-            userInfoLabel.text = friend.age?.description
-        }
+        userImageView.loadImage(imageURL: friend.imageName)
+        userNameLabel.text = friend.firstName + " " + friend.lastName
     }
 
     // MARK: - Private Methods

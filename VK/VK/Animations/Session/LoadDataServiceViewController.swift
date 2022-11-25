@@ -1,6 +1,7 @@
 // LoadDataServiceViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Формирование запроса
@@ -12,8 +13,7 @@ class LoadDataServiceViewController: UIViewController {
         static let getAllPhotosDescription = "/method/photos.getAll"
         static let getGroupsDescription = "/method/groups.get"
         static let searchGroupsDescription = "/method/groups.search"
-        static let uRLComponentsSchemeName = "https"
-        static let uRLComponentsHostName = "api.vk.com"
+        static let baseUrl = "https://api.vk.com/"
     }
 
     // MARK: - Types
@@ -46,22 +46,25 @@ class LoadDataServiceViewController: UIViewController {
 
     // MARK: - Public Methods
 
-    func loadData(componentsPath: NetworkServiceMethodKind, queryItems: [URLQueryItem]) {
-        var components = URLComponents()
-        components.scheme = Constants.uRLComponentsSchemeName
-        components.host = Constants.uRLComponentsHostName
-        components.path = componentsPath.description
-        components.queryItems = queryItems
-
-        guard let url = components.url else { return }
-        let session = URLSession.shared
-        let task = session.dataTask(with: url) { data, _, _ in
-
-            if let data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print("TEST \(componentsPath) \(json ?? "")")
+    func loadData<T: Decodable>(
+        componentsPath: NetworkServiceMethodKind,
+        parameters: Parameters,
+        handler: @escaping (Result<T, NetworkError>) -> ()
+    ) {
+        let baseURL = Constants.baseUrl
+        let path = "\(componentsPath.description)"
+        guard let url = URL(string: baseURL + path) else {
+            handler(.failure(.urlFailure))
+            return
+        }
+        AF.request(url, parameters: parameters).responseData { response in
+            guard let data = response.data else { return }
+            do {
+                let vKResponse = try JSONDecoder().decode(T.self, from: data)
+                handler(.success(vKResponse))
+            } catch {
+                handler(.failure(.decodingFailure))
             }
         }
-        task.resume()
     }
 }

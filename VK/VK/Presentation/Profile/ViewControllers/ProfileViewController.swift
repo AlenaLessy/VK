@@ -18,6 +18,9 @@ final class ProfileViewController: UIViewController {
         static let animateTransformScaleY = 0.6
         static let animateDisappearingProfileImageViewLayerOpacity: Float = 0.2
         static let animateEmergingProfileImageViewLayerOpacity: Float = 1
+        static let unknownFailureName = "Неизвестная ошибка"
+        static let decodingFailureName = "Ошибка декодирования"
+        static let urlFailureName = "Ошибка URL"
     }
 
     // MARK: - Private Outlets
@@ -26,7 +29,8 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var imageNames: [String] = []
+    var photoNames: [Photo] = []
+    var userId = 0
 
     // MARK: - Private Properties
 
@@ -37,10 +41,10 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupImages()
+        // setupImages()
         addRightTapGestures()
         addLeftTapGestures()
-        networkService.fetchFriends()
+        loadFriends()
     }
 
     // MARK: - Private Methods
@@ -56,9 +60,28 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func setupImages() {
-        guard let imageName = imageNames.first else { return }
-        profileImageView.image = UIImage(named: imageName)
+    private func loadFriends() {
+        networkService.fetchAllPhotos(userId: userId) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                print(data.response.items)
+                self.photoNames = data.response.items
+                print(self.photoNames)
+//                self.profileImageView = UIImageView.loadImage(data.response.items)
+            case .failure(.unknown):
+                print(Constants.urlFailureName)
+            case .failure(.decodingFailure):
+                print(Constants.decodingFailureName)
+            case .failure(.urlFailure):
+                print(Constants.urlFailureName)
+            }
+        }
+    }
+
+    private func setupImages(url: String) {
+        guard let imageName = photoNames.first else { return }
+        profileImageView.loadImage(imageURL: url)
     }
 
     private func addRightTapGestures() {
@@ -75,7 +98,7 @@ final class ProfileViewController: UIViewController {
 
     private func swipe(xShift: Int, currentIndex: Int) {
         index += currentIndex
-        guard index < imageNames.count,
+        guard index < photoNames.count,
               index >= 0
         else {
             index -= currentIndex
@@ -98,7 +121,7 @@ final class ProfileViewController: UIViewController {
             UIView.animate(withDuration: Constants.swipeAnimationDuration, animations: {
                 self.profileImageView.layer.opacity = Constants.animateEmergingProfileImageViewLayerOpacity
                 self.profileImageView.transform = .identity
-                self.profileImageView.image = UIImage(named: self.imageNames[self.index])
+                // self.profileImageView.image = UIImage(named: self.photoNames[self.index])
             })
         }
     }
