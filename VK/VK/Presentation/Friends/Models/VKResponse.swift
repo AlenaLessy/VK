@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ответ ВК друзья
+/// Ответ ВК друзья
 struct VKResponse: Decodable {
     var response: VKItemResponse
 }

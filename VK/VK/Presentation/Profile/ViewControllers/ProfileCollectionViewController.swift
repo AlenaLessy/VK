@@ -14,7 +14,7 @@ final class ProfileCollectionViewController: UICollectionViewController {
 
     // MARK: - Public Properties
 
-    var friend: NewsFriends?
+    var friend: FriendNews?
 
     // MARK: - Initializers
 

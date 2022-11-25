@@ -3,8 +3,8 @@
 
 import Foundation
 
-/// Друзья
-struct NewsFriends {
+/// Новости друзей
+struct FriendNews {
     let name: String
     let imageNames: [String]
     var age: Int?

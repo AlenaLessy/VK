@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// элементы ответа фото
+/// Элементы ответа фото
 struct PhotoItemResponse: Decodable {
     var photos: [Photo]
 

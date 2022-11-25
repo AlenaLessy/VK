@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// ответ ВК фото
+/// Ответ ВК фото
 struct PhotoResponse: Decodable {
     var response: PhotoItemResponse
 }

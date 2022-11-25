@@ -3,9 +3,9 @@
 
 /// Фото
 struct Photo: Decodable {
-    var photoPath: [PhotoPath]
+    var photoPaths: [PhotoPath]
 
     enum CodingKeys: String, CodingKey {
-        case photoPath = "sizes"
+        case photoPaths = "sizes"
     }
 }

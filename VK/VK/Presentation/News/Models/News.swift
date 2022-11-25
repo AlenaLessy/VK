@@ -9,23 +9,23 @@ struct News {
     let userName: String
     let date: String
     let post: String
-    let postImageName: NewsFriends
+    let postImageName: FriendNews
 
-    static func newsDataCourse() -> [News] {
+    static func createNews() -> [News] {
         let newsDataCourse: [News] = [
             News(
                 userImageName: "mi1",
                 userName: "Потап Михалыч",
                 date: "12.05.2022",
                 post: "Все виды медведей невероятно умны. Эти животные очень любознательны",
-                postImageName: NewsFriends(name: "Потап Михалыч", imageNames: ["mi1"])
+                postImageName: FriendNews(name: "Потап Михалыч", imageNames: ["mi1"])
             ),
             News(
                 userImageName: "mi2",
                 userName: "Топотун Бурый",
                 date: "13.05.2022",
                 post: "Самый крупный медведь - полярный. Вес взрослого самца доходит до 500 кг.",
-                postImageName: NewsFriends(name: "Топотун Бурый", imageNames: ["m2"])
+                postImageName: FriendNews(name: "Топотун Бурый", imageNames: ["m2"])
             ),
             News(
                 userImageName: "mi3",
@@ -35,14 +35,14 @@ struct News {
                 У всех медведей два слоя шерсти. \
                 Один слой легкий и пушистый для тепла, второй тяжелый и непромокаемый
                 """,
-                postImageName: NewsFriends(name: "Медведь Гризли", imageNames: ["m3"])
+                postImageName: FriendNews(name: "Медведь Гризли", imageNames: ["m3"])
             ),
             News(
                 userImageName: "mi4",
                 userName: "Белый Медвежуля",
                 date: "15.05.2022",
                 post: "Медведей принято считать косолапыми, но это совсем не так.",
-                postImageName: NewsFriends(name: "Белый Медвежуля", imageNames: ["m4"])
+                postImageName: FriendNews(name: "Белый Медвежуля", imageNames: ["m4"])
             ),
         ]
         return newsDataCourse

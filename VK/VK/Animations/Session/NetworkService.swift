@@ -5,7 +5,7 @@ import Alamofire
 import UIKit
 
 /// Сетевые запросы
-final class NetworkService: LoadDataServiceViewController {
+final class NetworkService: LoadDataService {
     // MARK: - Private Constants
 
     private enum Constants {

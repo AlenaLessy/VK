@@ -82,7 +82,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = searchingResults[indexPath.row]
-        cell.update(group: group)
+        cell.configure(group: group)
         return cell
     }
 

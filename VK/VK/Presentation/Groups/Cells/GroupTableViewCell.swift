@@ -12,7 +12,7 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public Method
 
-    func update(group: Group) {
+    func configure(group: Group) {
         groupImageView.loadImage(imageURL: group.photo)
         groupNameLabel.text = group.name
     }

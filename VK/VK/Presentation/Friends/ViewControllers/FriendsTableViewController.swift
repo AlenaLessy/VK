@@ -62,7 +62,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        loadFriends()
+        fetchFriends()
     }
 
     // MARK: - Public Method
@@ -93,7 +93,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func loadFriends() {
+    private func fetchFriends() {
         networkService.fetchFriends { [weak self] result in
             guard let self else { return }
             switch result {
@@ -101,7 +101,6 @@ final class FriendsTableViewController: UITableViewController {
                 self.friends = data.response.friends
                 self.createSections()
                 self.tableView.reloadData()
-                print(self.friends)
             case .failure(.unknown):
                 print(Constants.urlFailureName)
             case .failure(.decodingFailure):

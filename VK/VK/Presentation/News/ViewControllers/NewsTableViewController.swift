@@ -18,7 +18,7 @@ final class NewsTableViewController: UITableViewController {
 
     private var currentIndex = 0
 
-    private var newsDataCourse: [News] = News.newsDataCourse()
+    private var newsDataCourse: [News] = News.createNews()
 
     // MARK: - LifeCycle
 

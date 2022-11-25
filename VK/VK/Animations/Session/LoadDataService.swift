@@ -1,11 +1,11 @@
-// LoadDataServiceViewController.swift
+// LoadDataService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
 import UIKit
 
 /// Формирование запроса
-class LoadDataServiceViewController: UIViewController {
+class LoadDataService {
     // MARK: - Private Constants
 
     private enum Constants {
@@ -36,12 +36,6 @@ class LoadDataServiceViewController: UIViewController {
                 return Constants.searchGroupsDescription
             }
         }
-    }
-
-    // MARK: - Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 
     // MARK: - Public Methods

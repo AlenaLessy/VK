@@ -18,7 +18,6 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var groupsDataCourse: [Group] = []
     private var networkService = NetworkService()
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
@@ -28,7 +27,7 @@ final class GroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        loadGroups()
+        fetchGroups()
     }
 
     // MARK: - Public Methods
@@ -59,9 +58,8 @@ final class GroupTableViewController: UITableViewController {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        let model = groupsDataCourse[indexPath.row]
         if editingStyle == .delete {
-            groupsDataCourse.remove(at: indexPath.row)
+            groups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -76,16 +74,16 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        let model = groups[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
-        cell.update(group: model)
+        let group = groups[indexPath.row]
+        cell.configure(group: group)
         return cell
     }
 
-    private func loadGroups() {
+    private func fetchGroups() {
         networkService.fetchGroups { [weak self] result in
             guard let self else { return }
             switch result {

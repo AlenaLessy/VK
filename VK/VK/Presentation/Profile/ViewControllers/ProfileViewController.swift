@@ -43,7 +43,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         addRightTapGestures()
         addLeftTapGestures()
-        loadPhoto()
+        fetchAllPhotos()
     }
 
     // MARK: - Private Methods
@@ -59,7 +59,7 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func loadPhoto() {
+    private func fetchAllPhotos() {
         networkService.fetchAllPhotos(userId: userId) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -77,7 +77,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setupImages() {
-        guard let imageName = photoNames.first?.photoPath.first?.url
+        guard let imageName = photoNames.first?.photoPaths.last?.url
         else { return }
         profileImageView.loadImage(imageURL: imageName)
     }
