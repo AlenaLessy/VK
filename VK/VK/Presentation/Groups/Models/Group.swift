@@ -1,10 +1,15 @@
 // Group.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
+import RealmSwift
 
 /// Группы
-struct Group: Equatable {
-    var groupName: String
-    var groupImageName: String
+final class Group: Object, Decodable {
+    @objc dynamic var name: String
+    @objc dynamic var photo: String
+
+    enum CodingKeys: String, CodingKey {
+        case photo = "photo_100"
+        case name
+    }
 }

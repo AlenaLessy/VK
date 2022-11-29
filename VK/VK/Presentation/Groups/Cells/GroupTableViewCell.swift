@@ -12,8 +12,8 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public Method
 
-    func update(group: Group) {
-        groupImageView.image = UIImage(named: group.groupImageName)
-        groupNameLabel.text = group.groupName
+    func configure(group: Group) {
+        groupImageView.loadImage(imageURL: group.photo)
+        groupNameLabel.text = group.name
     }
 }

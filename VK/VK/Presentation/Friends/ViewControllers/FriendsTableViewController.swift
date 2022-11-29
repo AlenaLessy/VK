@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 // Экран друзей
@@ -24,6 +25,9 @@ final class FriendsTableViewController: UITableViewController {
         static let headerNibName = "HeaderView"
         static let storyBoardName = "Main"
         static let profileVCIdentifier = "ProfileVC"
+        static let unknownFailureName = "Неизвестная ошибка"
+        static let decodingFailureName = "Ошибка декодирования"
+        static let urlFailureName = "Ошибка URL"
     }
 
     private enum SectionType {
@@ -38,6 +42,7 @@ final class FriendsTableViewController: UITableViewController {
 
     private var networkService = NetworkService()
 
+//    private var friendSectionsMap: [Character: [Friend]] = [:]
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
@@ -50,28 +55,14 @@ final class FriendsTableViewController: UITableViewController {
         Birthday(name: "Топтышка Мишулин", imageName: "mi8")
     ]
 
-    private var friends: [Friend] = [
-        Friend(name: "Михаил Потапыч", imageNames: ["m1", "m2", "m3"], city: "Сочи"),
-        Friend(name: "Медведь Бурый", imageNames: ["m2", "m3", "mi1"], age: 14, city: "Питер"),
-        Friend(name: "Мишка Белый", imageNames: ["mi1", "mi6", "mi4"], age: 19, city: "Севастополь"),
-        Friend(name: "Коала Пропала", imageNames: ["m3", "mi3", "mi1"]),
-        Friend(name: "Гризли Загрызли", imageNames: ["m4", "mi6", "mi4"], age: 42),
-        Friend(name: "Миша Цирковой", imageNames: ["m5", "mi6", "mi4"], age: 5, city: "Ростов"),
-        Friend(name: "Леха Именинник", imageNames: ["m7", "mi6", "mi4"], age: 31, city: "Краснодар"),
-        Friend(name: "Лена Сказочная", imageNames: ["mi5", "mi6", "mi4"], age: 18, city: "Тридевятое царство"),
-        Friend(name: "Потап Браун", imageNames: ["mi8", "mi6", "mi4"], age: 16, city: "Сказочный лес")
-    ]
+    private var friends: [Friend] = []
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        createSections()
-        networkService.fetchFriends()
-        networkService.fetchAllPhotos()
-        networkService.fetchGroups()
-        networkService.fetchSearchGroups()
+        fetchFriends()
     }
 
     // MARK: - Public Method
@@ -101,6 +92,24 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     // MARK: - Private Method
+
+    private func fetchFriends() {
+        networkService.fetchFriends { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(data):
+                self.friends = data.response.friends
+                self.createSections()
+                self.tableView.reloadData()
+            case .failure(.unknown):
+                print(Constants.urlFailureName)
+            case .failure(.decodingFailure):
+                print(Constants.decodingFailureName)
+            case .failure(.urlFailure):
+                print(Constants.urlFailureName)
+            }
+        }
+    }
 
     private func configureTableView() {
         tableView.register(
@@ -208,20 +217,20 @@ final class FriendsTableViewController: UITableViewController {
         guard let profileViewController = storyBoard
             .instantiateViewController(withIdentifier: Constants.profileVCIdentifier) as? ProfileViewController
         else { return }
-        profileViewController.imageNames = friends[indexPath.row].imageNames
+        profileViewController.userId = friends[indexPath.row].id
         present(profileViewController, animated: true)
     }
 
     private func createSections() {
         for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
+            guard let firstLetter = friend.firstName.first else { return }
             if friendSectionsMap[firstLetter] != nil {
                 friendSectionsMap[firstLetter]?.append(friend)
             } else {
                 friendSectionsMap[firstLetter] = [friend]
                 sections.append(.friends(String(firstLetter)))
             }
-            sectionTitles = Array(friendSectionsMap.keys)
+            sectionTitles = Array(friendSectionsMap.keys).sorted()
         }
     }
 }

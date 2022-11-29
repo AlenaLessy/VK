@@ -1,74 +1,85 @@
 // NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
+import Alamofire
 import UIKit
 
 /// Сетевые запросы
-final class NetworkService: LoadDataServiceViewController {
+final class NetworkService: LoadDataService {
     // MARK: - Private Constants
 
     private enum Constants {
         static let recommendationsText = "/recommendations"
-        static let queryItemTokenName = "access_token"
-        static let queryItemfieldsName = "fields"
-        static let queryItemVName = "v"
-        static let queryItemLandName = "land"
-        static let queryItemExtendedName = "extended"
-        static let queryItemQName = "q"
-        static let queryItemOwnerId = "owner_id"
-        static let queryItemLandValue = "ru"
-        static let queryItemVersionValue = "5.131"
-        static let queryItemExtendedValue = "1"
-        static let queryItemfieldsValue = "nickname"
-        static let queryItemQValue = "Bears"
+        static let parameterTokenName = "access_token"
+        static let parameterfieldsName = "fields"
+        static let parameterVName = "v"
+        static let parameterLandName = "land"
+        static let parameterExtendedName = "extended"
+        static let parameterQName = "q"
+        static let parameterOwnerId = "owner_id"
+        static let parameterLandValue = "ru"
+        static let parameterVersionValue = "5.131"
+        static let parameterExtendedValue = "1"
+        static let parameterfieldsValue = "photo_100"
+        static let parameterQValue = "Bears"
+        static let parameterOrderValue = "order"
+        static let parameterOrderName = "name"
     }
 
     // MARK: - Private Properties
 
-    private let friendsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
-        URLQueryItem(name: Constants.queryItemfieldsName, value: Constants.queryItemfieldsValue),
-        URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
-        URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
+    private let friendsParameters: Parameters = [
+        Constants.parameterTokenName: "\(Session.shared.token)",
+        Constants.parameterfieldsName: Constants.parameterfieldsValue,
+        Constants.parameterVName: Constants.parameterVersionValue,
+        Constants.parameterLandName: Constants.parameterLandValue,
+        Constants.parameterOrderName: Constants.parameterOrderValue
     ]
 
-    private let allPhotosQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
-        URLQueryItem(name: Constants.queryItemExtendedName, value: Constants.queryItemExtendedValue),
-        URLQueryItem(name: Constants.queryItemOwnerId, value: "-\(Session.shared.userId)"),
-        URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
-        URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue),
+    private let allPhotosParameters: Parameters = [
+        Constants.parameterTokenName: "\(Session.shared.token)",
+        Constants.parameterExtendedName: Constants.parameterExtendedValue,
+        Constants.parameterOwnerId: "-\(Session.shared.userId)",
+        Constants.parameterVName: Constants.parameterVersionValue,
+        Constants.parameterLandName: Constants.parameterLandValue,
     ]
 
-    private let groupsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
-        URLQueryItem(name: Constants.queryItemExtendedName, value: Constants.queryItemExtendedValue),
-        URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
-        URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
-    ]
-
-    private let searchGroupsQueryItem = [
-        URLQueryItem(name: Constants.queryItemTokenName, value: "\(Session.shared.token)"),
-        URLQueryItem(name: Constants.queryItemQName, value: Constants.queryItemQValue),
-        URLQueryItem(name: Constants.queryItemVName, value: Constants.queryItemVersionValue),
-        URLQueryItem(name: Constants.queryItemLandName, value: Constants.queryItemLandValue)
+    private let groupsParameters: Parameters = [
+        Constants.parameterTokenName: "\(Session.shared.token)",
+        Constants.parameterExtendedName: Constants.parameterExtendedValue,
+        Constants.parameterVName: Constants.parameterVersionValue,
+        Constants.parameterLandName: Constants.parameterLandValue
     ]
 
     // MARK: - Public Methods
 
-    func fetchFriends() {
-        loadData(componentsPath: .getFriends, queryItems: friendsQueryItem)
+    func fetchFriends(handler: @escaping (Result<VKResponse, NetworkError>) -> ()) {
+        loadData(componentsPath: .getFriends, parameters: friendsParameters, handler: handler)
     }
 
-    func fetchAllPhotos() {
-        loadData(componentsPath: .getAllPhotos, queryItems: allPhotosQueryItem)
+    func fetchAllPhotos(userId: Int, handler: @escaping (Result<PhotoResponse, NetworkError>) -> ()) {
+        loadData(componentsPath: .getAllPhotos, parameters: [
+            Constants.parameterTokenName: "\(Session.shared.token)",
+            Constants.parameterExtendedName: Constants.parameterExtendedValue,
+            Constants.parameterOwnerId: "-\(userId)",
+            Constants.parameterVName: Constants.parameterVersionValue
+        ], handler: handler)
     }
 
-    func fetchGroups() {
-        loadData(componentsPath: .getGroups, queryItems: groupsQueryItem)
+    func fetchGroups(handler: @escaping (Result<GroupResponse, NetworkError>) -> ()) {
+        loadData(componentsPath: .getGroups, parameters: groupsParameters, handler: handler)
     }
 
-    func fetchSearchGroups() {
-        loadData(componentsPath: .searchGroups, queryItems: searchGroupsQueryItem)
+    func fetchSearchGroups(searchingGroups: String, handler: @escaping (Result<GroupResponse, NetworkError>) -> ()) {
+        loadData(
+            componentsPath: .searchGroups,
+            parameters: [
+                Constants.parameterTokenName: "\(Session.shared.token)",
+                Constants.parameterQName: searchingGroups,
+                Constants.parameterVName: Constants.parameterVersionValue,
+                Constants.parameterLandName: Constants.parameterLandValue
+            ],
+            handler: handler
+        )
     }
 }
