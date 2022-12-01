@@ -3,8 +3,15 @@
 
 import RealmSwift
 
-///
+/// Сохранение и получение данных из рилма
 final class RealmService {
+    
+    // MARK: - Private Properties
+    
+    private var realm: Realm? = try? Realm()
+    
+    // MARK: - Public Methods
+    
     func save(items: [Object]) {
         do {
             try realm?.write {
@@ -14,7 +21,7 @@ final class RealmService {
             print(error.localizedDescription)
         }
     }
-
+    
     func fetch<T: Object>(
         _ type: T.Type
     ) -> Results<T>? {
@@ -27,11 +34,8 @@ final class RealmService {
             return nil
         }
     }
-
+    
     var fileUrl: String? {
         realm?.configuration.fileURL?.absoluteString
     }
-
-    private var realm: Realm? = try? Realm()
-//    private var config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
 }

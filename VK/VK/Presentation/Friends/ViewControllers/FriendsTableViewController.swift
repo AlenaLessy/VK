@@ -1,7 +1,6 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-import RealmSwift
 import UIKit
 
 // Экран друзей
@@ -41,12 +40,10 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private var dataProvider = DataProvider()
-
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
-    private var userToken: NotificationToken?
 
     private var birthdays: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
@@ -93,36 +90,6 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     // MARK: - Private Method
-
-    private func userTokenObserve(result: Results<Friend>) {
-        userToken = result.observe { change in
-            switch change {
-            case .initial:
-                break
-            case .error:
-                print("Ошибка обновления данных")
-            case .update:
-                self.friends = Array(result)
-                self.createSections()
-                self.tableView.reloadData()
-            }
-        }
-    }
-
-//    private func addUserToken(changes: [Friend]) {
-//        userToken = changes.observe { [weak self] change in
-//                 guard let self = self else { return }
-//                 switch change {
-//                 case .deleted:
-//                     break
-//                 case let .error(error):
-//                     print(error.localizedDescription)
-//                 case .change:
-//                     self.friends = changes
-//                     self.tableView.reloadData()
-//                 }
-//             }
-//         }
 
     private func observe() {
         dataProvider.observeFriends { [weak self] friends in

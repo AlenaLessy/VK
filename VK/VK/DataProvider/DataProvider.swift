@@ -4,7 +4,7 @@
 import Foundation
 import RealmSwift
 
-///
+/// Выбор получения данных
 final class DataProvider {
     // MARK: Private Properties
 
