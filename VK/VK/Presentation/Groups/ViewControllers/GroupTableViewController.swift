@@ -18,7 +18,7 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var networkService = NetworkService()
+    private let dataProvider = DataProvider()
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
 
@@ -28,6 +28,7 @@ final class GroupTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchGroups()
+        observe()
     }
 
     // MARK: - Public Methods
@@ -83,13 +84,18 @@ final class GroupTableViewController: UITableViewController {
         return cell
     }
 
+    private func observe() {
+        dataProvider.observeGroups { [weak self] groups in
+            self?.groups = groups
+            self?.tableView.reloadData()
+        }
+    }
+
     private func fetchGroups() {
-        networkService.fetchGroups { [weak self] result in
-            guard let self else { return }
+        dataProvider.getGroups { result in
             switch result {
-            case let .success(data):
-                self.groups = data.response.groups
-                self.tableView.reloadData()
+            case .success:
+                break
             case .failure(.unknown):
                 print(Constants.urlFailureName)
             case .failure(.decodingFailure):

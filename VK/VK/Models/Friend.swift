@@ -5,10 +5,10 @@ import RealmSwift
 
 /// Друзья
 final class Friend: Object, Decodable {
-    @objc dynamic var id: Int
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var imageName: String
+    @Persisted(primaryKey: true) var id = 0
+    @Persisted var firstName: String
+    @Persisted var lastName: String
+    @Persisted var imageName: String
 
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"

@@ -1,6 +1,7 @@
 // ProfileViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Профиль
@@ -29,13 +30,13 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var photoNames: [Photo] = []
     var userId = 0
 
     // MARK: - Private Properties
 
     private var index = 0
-    private var networkService = NetworkService()
+    private var photoName: [String] = []
+    private let dataProvider = DataProvider()
 
     // MARK: - Life Cycle
 
@@ -43,7 +44,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         addRightTapGestures()
         addLeftTapGestures()
-        fetchAllPhotos()
+        fetchFromWebAllPhotos()
     }
 
     // MARK: - Private Methods
@@ -59,12 +60,13 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func fetchAllPhotos() {
-        networkService.fetchAllPhotos(userId: userId) { [weak self] result in
+    private func fetchFromWebAllPhotos() {
+        dataProvider.getPhotos(id: userId) { [weak self] result in
             guard let self else { return }
             switch result {
-            case let .success(data):
-                self.photoNames = data.response.photos
+            case let .success(photos):
+                self.photoName = photos.map { $0.photoPaths.last?.url ?? "" }
+
                 self.setupImages()
             case .failure(.unknown):
                 print(Constants.urlFailureName)
@@ -77,9 +79,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setupImages() {
-        guard let imageName = photoNames.first?.photoPaths.last?.url
-        else { return }
-        profileImageView.loadImage(imageURL: imageName)
+        profileImageView.loadImage(imageURL: photoName[index])
     }
 
     private func addRightTapGestures() {
@@ -96,7 +96,7 @@ final class ProfileViewController: UIViewController {
 
     private func swipe(xShift: Int, currentIndex: Int) {
         index += currentIndex
-        guard index < photoNames.count,
+        guard index < photoName.count,
               index >= 0
         else {
             index -= currentIndex
@@ -117,6 +117,8 @@ final class ProfileViewController: UIViewController {
                 y: Constants.animateTranslationY
             )
             UIView.animate(withDuration: Constants.swipeAnimationDuration, animations: {
+                self.profileImageView.image = nil
+                self.setupImages()
                 self.profileImageView.layer.opacity = Constants.animateEmergingProfileImageViewLayerOpacity
                 self.profileImageView.transform = .identity
             })

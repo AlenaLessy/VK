@@ -53,24 +53,27 @@ final class NetworkService: LoadDataService {
 
     // MARK: - Public Methods
 
-    func fetchFriends(handler: @escaping (Result<VKResponse, NetworkError>) -> ()) {
+    func fetchFriends(handler: @escaping (Result<ItemsResponse<Friend>, NetworkError>) -> ()) {
         loadData(componentsPath: .getFriends, parameters: friendsParameters, handler: handler)
     }
 
-    func fetchAllPhotos(userId: Int, handler: @escaping (Result<PhotoResponse, NetworkError>) -> ()) {
+    func fetchAllPhotos(userId: Int, handler: @escaping (Result<ItemsResponse<Photo>, NetworkError>) -> ()) {
         loadData(componentsPath: .getAllPhotos, parameters: [
             Constants.parameterTokenName: "\(Session.shared.token)",
             Constants.parameterExtendedName: Constants.parameterExtendedValue,
-            Constants.parameterOwnerId: "-\(userId)",
+            Constants.parameterOwnerId: "\(userId)",
             Constants.parameterVName: Constants.parameterVersionValue
         ], handler: handler)
     }
 
-    func fetchGroups(handler: @escaping (Result<GroupResponse, NetworkError>) -> ()) {
+    func fetchGroups(handler: @escaping (Result<ItemsResponse<Group>, NetworkError>) -> ()) {
         loadData(componentsPath: .getGroups, parameters: groupsParameters, handler: handler)
     }
 
-    func fetchSearchGroups(searchingGroups: String, handler: @escaping (Result<GroupResponse, NetworkError>) -> ()) {
+    func fetchSearchGroups(
+        searchingGroups: String,
+        handler: @escaping (Result<ItemsResponse<Group>, NetworkError>) -> ()
+    ) {
         loadData(
             componentsPath: .searchGroups,
             parameters: [

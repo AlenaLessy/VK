@@ -25,12 +25,12 @@ final class RecommendationGroupTableViewController: UITableViewController {
 
     var backHandler: GoBackHandler?
     var recommendationGroups: [Group] = []
-    var networkService = NetworkService()
 
     // MARK: - Private Properties
 
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
+    private var dataProvider = DataProvider()
 
     // MARK: - Life Cycle
 
@@ -87,11 +87,11 @@ final class RecommendationGroupTableViewController: UITableViewController {
     }
 
     private func loadSearchGroups(searchingGroups: String) {
-        networkService.fetchSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
+        dataProvider.getSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
             guard let self else { return }
             switch result {
-            case let .success(data):
-                self.searchingResults = data.response.groups
+            case let .success(groups):
+                self.searchingResults = groups
                 self.tableView.reloadData()
             case .failure(.unknown):
                 print(Constants.urlFailureName)
