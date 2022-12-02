@@ -86,8 +86,9 @@ final class GroupTableViewController: UITableViewController {
 
     private func observe() {
         dataProvider.observeGroups { [weak self] groups in
-            self?.groups = groups
-            self?.tableView.reloadData()
+            guard let self else { return }
+            self.groups = groups
+            self.tableView.reloadData()
         }
     }
 

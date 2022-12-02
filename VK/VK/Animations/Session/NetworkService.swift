@@ -85,4 +85,12 @@ final class NetworkService: LoadDataService {
             handler: handler
         )
     }
+
+    func fetchFotoData(_ url: URL, handler: @escaping (Data) -> ()) {
+        DispatchQueue.main.async {
+            guard let data = try? Data(contentsOf: url)
+            else { return }
+            handler(data)
+        }
+    }
 }

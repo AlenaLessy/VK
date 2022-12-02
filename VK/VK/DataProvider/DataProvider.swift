@@ -1,6 +1,5 @@
 // DataProvider.swift
 // Copyright © RoadMap. All rights reserved.
-// swiftlint: disable all
 
 import Foundation
 import RealmSwift
@@ -44,8 +43,10 @@ final class DataProvider {
 
     func fetchPhotos(id: Int, handler: @escaping (Result<[Photo], NetworkError>) -> ()) {
         if let realmResults = realmService.fetch(Photo.self),
+           // swiftlint: disable all
            realmResults.contains(where: { $0.ownerId == id })
         {
+            // swiftlint: enable all
             let results = Array(realmResults).filter { $0.ownerId == id }
             handler(.success(results))
         } else {
@@ -87,8 +88,10 @@ final class DataProvider {
 
     func fetchSearchGroups(searchingGroups: String, handler: @escaping (Result<[Group], NetworkError>) -> ()) {
         if let realmResults = realmService.fetch(Group.self),
+           // swiftlint: disable all
            realmResults.contains(where: { $0.name == searchingGroups })
         {
+            // swiftlint: enable all
             let results = Array(realmResults).filter { $0.name == searchingGroups }
             handler(.success(results))
         } else {
