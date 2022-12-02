@@ -86,8 +86,8 @@ final class RecommendationGroupTableViewController: UITableViewController {
         return cell
     }
 
-    private func loadSearchGroups(searchingGroups: String) {
-        dataProvider.getSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
+    private func getSearchGroups(searchingGroups: String) {
+        dataProvider.fetchSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(groups):
@@ -111,7 +111,7 @@ extension RecommendationGroupTableViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             searchingResults = recommendationGroups
         } else {
-            loadSearchGroups(searchingGroups: searchText.lowercased())
+            getSearchGroups(searchingGroups: searchText.lowercased())
         }
         tableView.reloadData()
     }

@@ -59,7 +59,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        fetchFriends()
+        getFriends()
         observe()
     }
 
@@ -93,14 +93,15 @@ final class FriendsTableViewController: UITableViewController {
 
     private func observe() {
         dataProvider.observeFriends { [weak self] friends in
-            self?.friends = friends
-            self?.createSections()
-            self?.tableView.reloadData()
+            guard let self else { return }
+            self.friends = friends
+            self.createSections()
+            self.tableView.reloadData()
         }
     }
 
-    private func fetchFriends() {
-        dataProvider.getFriends { result in
+    private func getFriends() {
+        dataProvider.fetchFriends { result in
             switch result {
             case .success:
                 break

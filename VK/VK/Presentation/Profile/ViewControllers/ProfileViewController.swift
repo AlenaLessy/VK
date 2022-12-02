@@ -35,7 +35,7 @@ final class ProfileViewController: UIViewController {
     // MARK: - Private Properties
 
     private var index = 0
-    private var photoName: [String] = []
+    private var photoNames: [String] = []
     private let dataProvider = DataProvider()
 
     // MARK: - Life Cycle
@@ -44,7 +44,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         addRightTapGestures()
         addLeftTapGestures()
-        fetchFromWebAllPhotos()
+        getAllPhotos()
     }
 
     // MARK: - Private Methods
@@ -60,13 +60,12 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func fetchFromWebAllPhotos() {
-        dataProvider.getPhotos(id: userId) { [weak self] result in
+    private func getAllPhotos() {
+        dataProvider.fetchPhotos(id: userId) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(photos):
-                self.photoName = photos.map { $0.photoPaths.last?.url ?? "" }
-
+                self.photoNames = photos.map { $0.photoPaths.last?.url ?? "" }
                 self.setupImages()
             case .failure(.unknown):
                 print(Constants.urlFailureName)
@@ -79,7 +78,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setupImages() {
-        profileImageView.loadImage(imageURL: photoName[index])
+        profileImageView.loadImage(imageURL: photoNames[index])
     }
 
     private func addRightTapGestures() {
@@ -96,7 +95,7 @@ final class ProfileViewController: UIViewController {
 
     private func swipe(xShift: Int, currentIndex: Int) {
         index += currentIndex
-        guard index < photoName.count,
+        guard index < photoNames.count,
               index >= 0
         else {
             index -= currentIndex

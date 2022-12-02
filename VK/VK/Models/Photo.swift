@@ -2,6 +2,7 @@
 // Copyright © RoadMap. All rights reserved.
 
 import RealmSwift
+
 /// Фото
 final class Photo: Object, Decodable {
     @Persisted(primaryKey: true) var id = 0

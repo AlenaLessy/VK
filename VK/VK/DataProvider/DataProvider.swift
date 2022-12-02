@@ -1,5 +1,6 @@
 // DataProvider.swift
 // Copyright © RoadMap. All rights reserved.
+// swiftlint: disable all
 
 import Foundation
 import RealmSwift
@@ -31,7 +32,7 @@ final class DataProvider {
     func observeGroups(handler: @escaping ([Group]) -> ()) {
         let results = realmService.fetch(Group.self)
         guard let results else { return }
-        friendsToken = results.observe { change in
+        groupsToken = results.observe { change in
             switch change {
             case .update, .initial:
                 handler(Array(results))
@@ -41,8 +42,7 @@ final class DataProvider {
         }
     }
 
-    // swiftlint: disable all
-    func getPhotos(id: Int, handler: @escaping (Result<[Photo], NetworkError>) -> ()) {
+    func fetchPhotos(id: Int, handler: @escaping (Result<[Photo], NetworkError>) -> ()) {
         if let realmResults = realmService.fetch(Photo.self),
            realmResults.contains(where: { $0.ownerId == id })
         {
@@ -61,7 +61,7 @@ final class DataProvider {
         }
     }
 
-    func getGroups(handler: @escaping (Result<[Group], NetworkError>) -> ()) {
+    func fetchGroups(handler: @escaping (Result<[Group], NetworkError>) -> ()) {
         networkService.fetchGroups { [weak self] result in
             switch result {
             case let .success(response):
@@ -73,7 +73,7 @@ final class DataProvider {
         }
     }
 
-    func getFriends(handler: @escaping (Result<[Friend], NetworkError>) -> ()) {
+    func fetchFriends(handler: @escaping (Result<[Friend], NetworkError>) -> ()) {
         networkService.fetchFriends { [weak self] result in
             switch result {
             case let .success(response):
@@ -85,7 +85,7 @@ final class DataProvider {
         }
     }
 
-    func getSearchGroups(searchingGroups: String, handler: @escaping (Result<[Group], NetworkError>) -> ()) {
+    func fetchSearchGroups(searchingGroups: String, handler: @escaping (Result<[Group], NetworkError>) -> ()) {
         if let realmResults = realmService.fetch(Group.self),
            realmResults.contains(where: { $0.name == searchingGroups })
         {
