@@ -9,13 +9,10 @@ final class GroupTableViewCell: UITableViewCell {
 
     @IBOutlet private var groupImageView: UIImageView!
     @IBOutlet private var groupNameLabel: UILabel!
-    
-    // MARK: - Private Properties
-    private let networkService = NetworkService()
 
     // MARK: - Public Method
 
-    func configure(group: Group) {
+    func configure(group: Group, networkService: NetworkService) {
         groupImageView.loadImage(imageURL: group.photo, networkService: networkService)
         groupNameLabel.text = group.name
     }

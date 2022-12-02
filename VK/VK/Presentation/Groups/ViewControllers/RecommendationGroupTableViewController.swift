@@ -31,6 +31,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
     private var dataProvider = DataProvider()
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -82,7 +83,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = searchingResults[indexPath.row]
-        cell.configure(group: group)
+        cell.configure(group: group, networkService: networkService)
         return cell
     }
 

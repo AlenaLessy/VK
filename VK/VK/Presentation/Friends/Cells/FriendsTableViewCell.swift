@@ -16,9 +16,6 @@ final class FriendsTableViewCell: UITableViewCell {
 
     @IBOutlet private var userImageView: UIImageView!
     @IBOutlet private var userNameLabel: UILabel!
-    
-    // MARK: - Private Properties
-    private let networkService = NetworkService()
 
     // MARK: - LifeCycle
 
@@ -29,7 +26,7 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func update(friend: Friend) {
+    func update(friend: Friend, networkService: NetworkService) {
         userImageView.loadImage(imageURL: friend.imageName, networkService: networkService)
         userNameLabel.text = friend.firstName + " " + friend.lastName
     }

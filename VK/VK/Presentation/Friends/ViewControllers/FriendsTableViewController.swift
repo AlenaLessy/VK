@@ -44,6 +44,7 @@ final class FriendsTableViewController: UITableViewController {
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
+    private var networkService = NetworkService()
 
     private var birthdays: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
@@ -198,7 +199,7 @@ final class FriendsTableViewController: UITableViewController {
                     withIdentifier: Constants.friendsIdentifier,
                     for: indexPath
                 ) as? FriendsTableViewCell else { return UITableViewCell() }
-            cell.update(friend: friend)
+            cell.update(friend: friend, networkService: networkService)
             print(friend)
             return cell
         }

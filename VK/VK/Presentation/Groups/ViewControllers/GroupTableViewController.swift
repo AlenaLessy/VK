@@ -21,6 +21,7 @@ final class GroupTableViewController: UITableViewController {
     private let dataProvider = DataProvider()
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -80,7 +81,7 @@ final class GroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = groups[indexPath.row]
-        cell.configure(group: group)
+        cell.configure(group: group, networkService: networkService)
         return cell
     }
 

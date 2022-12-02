@@ -87,10 +87,12 @@ final class NetworkService: LoadDataService {
     }
 
     func fetchFotoData(_ url: URL, handler: @escaping (Data) -> ()) {
-        DispatchQueue.main.async {
-            guard let data = try? Data(contentsOf: url)
-            else { return }
-            handler(data)
-        }
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            DispatchQueue.main.async {
+                guard let data
+                else { return }
+                handler(data)
+            }
+        }.resume()
     }
 }
