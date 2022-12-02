@@ -37,6 +37,7 @@ final class ProfileViewController: UIViewController {
     private var index = 0
     private var photoNames: [String] = []
     private let dataProvider = DataProvider()
+    private let networkService = NetworkService()
 
     // MARK: - Life Cycle
 
@@ -78,7 +79,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setupImages() {
-        profileImageView.loadImage(imageURL: photoNames[index])
+        profileImageView.loadImage(imageURL: photoNames[index], networkService: networkService)
     }
 
     private func addRightTapGestures() {
