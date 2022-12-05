@@ -1,7 +1,6 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Alamofire
 import UIKit
 
 // Экран друзей
@@ -40,13 +39,12 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var networkService = NetworkService()
-
-//    private var friendSectionsMap: [Character: [Friend]] = [:]
+    private var dataProvider = DataProvider()
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
+    private var networkService = NetworkService()
 
     private var birthdays: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
@@ -62,7 +60,8 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        fetchFriends()
+        getFriends()
+        observe()
     }
 
     // MARK: - Public Method
@@ -93,14 +92,20 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func fetchFriends() {
-        networkService.fetchFriends { [weak self] result in
+    private func observe() {
+        dataProvider.observeFriends { [weak self] friends in
             guard let self else { return }
+            self.friends = friends
+            self.createSections()
+            self.tableView.reloadData()
+        }
+    }
+
+    private func getFriends() {
+        dataProvider.fetchFriends { result in
             switch result {
-            case let .success(data):
-                self.friends = data.response.friends
-                self.createSections()
-                self.tableView.reloadData()
+            case .success:
+                break
             case .failure(.unknown):
                 print(Constants.urlFailureName)
             case .failure(.decodingFailure):
@@ -194,7 +199,7 @@ final class FriendsTableViewController: UITableViewController {
                     withIdentifier: Constants.friendsIdentifier,
                     for: indexPath
                 ) as? FriendsTableViewCell else { return UITableViewCell() }
-            cell.update(friend: friend)
+            cell.update(friend: friend, networkService: networkService)
             print(friend)
             return cell
         }

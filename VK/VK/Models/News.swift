@@ -5,10 +5,15 @@ import Foundation
 
 /// Новости
 struct News {
+    /// Название аватарки пользователя
     let userImageName: String
+    /// Имя пользователя
     let userName: String
+    /// Дата поста
     let date: String
+    /// Текст поста
     let post: String
+    /// Название фотографий в посте
     let postImageName: FriendNews
 
     static func createNews() -> [News] {

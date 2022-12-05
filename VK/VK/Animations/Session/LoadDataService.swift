@@ -54,8 +54,9 @@ class LoadDataService {
         AF.request(url, parameters: parameters).responseData { response in
             guard let data = response.data else { return }
             do {
-                let vKResponse = try JSONDecoder().decode(T.self, from: data)
-                handler(.success(vKResponse))
+                let response = try JSONDecoder().decode(Response<T>.self, from: data)
+
+                handler(.success(response.response))
             } catch {
                 handler(.failure(.decodingFailure))
             }

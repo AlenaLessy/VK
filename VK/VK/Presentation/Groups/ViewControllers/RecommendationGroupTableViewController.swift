@@ -25,12 +25,14 @@ final class RecommendationGroupTableViewController: UITableViewController {
 
     var backHandler: GoBackHandler?
     var recommendationGroups: [Group] = []
-    var networkService = NetworkService()
 
     // MARK: - Private Properties
-
+    private let networkService = NetworkService()
+    
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
+    private var dataProvider = DataProvider()
+  
 
     // MARK: - Life Cycle
 
@@ -82,16 +84,16 @@ final class RecommendationGroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell else { return UITableViewCell() }
         let group = searchingResults[indexPath.row]
-        cell.configure(group: group)
+        cell.configure(group: group, networkService: networkService)
         return cell
     }
 
-    private func loadSearchGroups(searchingGroups: String) {
-        networkService.fetchSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
+    private func getSearchGroups(searchingGroups: String) {
+        dataProvider.fetchSearchGroups(searchingGroups: searchingGroups) { [weak self] result in
             guard let self else { return }
             switch result {
-            case let .success(data):
-                self.searchingResults = data.response.groups
+            case let .success(groups):
+                self.searchingResults = groups
                 self.tableView.reloadData()
             case .failure(.unknown):
                 print(Constants.urlFailureName)
@@ -111,7 +113,7 @@ extension RecommendationGroupTableViewController: UISearchBarDelegate {
         if searchText.isEmpty {
             searchingResults = recommendationGroups
         } else {
-            loadSearchGroups(searchingGroups: searchText.lowercased())
+            getSearchGroups(searchingGroups: searchText.lowercased())
         }
         tableView.reloadData()
     }
