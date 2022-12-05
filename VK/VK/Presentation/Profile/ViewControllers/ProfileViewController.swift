@@ -34,10 +34,12 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private var index = 0
-    private var photoNames: [String] = []
     private let dataProvider = DataProvider()
     private let networkService = NetworkService()
+    
+    private var index = 0
+    private var photoNames: [String] = []
+   
 
     // MARK: - Life Cycle
 

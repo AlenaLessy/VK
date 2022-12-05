@@ -19,9 +19,11 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private let dataProvider = DataProvider()
+    private let networkService = NetworkService()
+    
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
-    private let networkService = NetworkService()
+  
 
     // MARK: - Life Cycle
 
