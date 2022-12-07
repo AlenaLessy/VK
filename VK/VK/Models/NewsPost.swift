@@ -16,6 +16,7 @@ final class NewsPost: Decodable {
 
     var name: String?
     var photoUrl: String?
+//    var postPhotos: [String?] = []
 
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"
@@ -24,6 +25,7 @@ final class NewsPost: Decodable {
         case attachments
         case name
         case photoUrl
+//        case postPhotos
     }
 
     init(from decoder: Decoder) throws {

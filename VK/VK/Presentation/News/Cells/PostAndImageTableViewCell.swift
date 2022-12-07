@@ -28,6 +28,13 @@ final class PostAndImageTableViewCell: UITableViewCell, NewsConfigurable {
         setupCollectionView()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        textView.text = nil
+        newsDataSource = nil
+        collectionView.reloadData()
+    }
+
     // MARK: - Private Method
 
     private func setupCollectionView() {

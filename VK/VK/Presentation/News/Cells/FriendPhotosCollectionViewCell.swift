@@ -15,6 +15,11 @@ final class FriendPhotosCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public Method
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        friendImageView.image = nil
+    }
+
 //    func update(friend: FriendNews) {
 //        guard let imageName = friend.imageNames.first else { return }
 //        friendImageView.image = UIImage(named: imageName)
@@ -22,10 +27,12 @@ final class FriendPhotosCollectionViewCell: UICollectionViewCell {
 
     func update(news: NewsPost) {
         guard let photos = news.attachments.first?.photo?.url else { return }
+        print("/sss\(photos)")
         let networkService = NetworkService()
-//        for value in photos {
-//            guard let name = value?.url else { return }
+        // for value in photos {
+//            guard let name = value else { return }
         friendImageView.loadImage(imageURL: photos, networkService: networkService)
+        // }
     }
 
 //        let photos = response.postNews.reduce([NewsPhoto]()) {

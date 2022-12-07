@@ -12,6 +12,13 @@ final class NewsTableViewController: UITableViewController {
         static let newsNibName = "NewsTableViewCell"
         static let friendIdentifier = "Friend"
         static let friendNibName = "FriendCollectionViewCell"
+        static let headerCellIdentifier = "Header"
+        static let footerCellIdentifier = "Footer"
+        static let postAndImageCellIdentifier = "PostAndImageTableViewCell"
+        static let postCellIdentifier = "PostTableViewCell"
+        static let imageCellIdentifier = "ImageTableViewCell"
+        static let headerNibName = "HeaderTableViewCell"
+        static let footerNibName = "FooterTableViewCell"
     }
 
     // MARK: - Types
@@ -61,16 +68,17 @@ final class NewsTableViewController: UITableViewController {
             switch result {
             case let .success(response):
                 //   self.newsPost = response
-//                print("test \(self.newsPost)")
-//
-//                let photos = self.newsPost.reduce([NewsPhoto]()) {
+                //                print("test \(self.newsPost)")
+                //
+                //                let photos = self.newsPost.reduce([NewsPhoto]()) {
+                //                    $0 + $1.attachments.compactMap(\.photo)
+//                let photos = response.postNews.reduce([NewsPhoto]()) {
 //                    $0 + $1.attachments.compactMap(\.photo)
-                let photos = response.postNews.reduce([NewsPhoto]()) {
-                    $0 + $1.attachments.compactMap(\.photo)
-                }
-                print("test \(photos)")
+//                }
+
+//                print("test \(photos)")
                 self.createNews(response)
-                self.tableView.reloadData()
+//                self.tableView.reloadData()
             case .failure(.urlFailure):
                 print("urlFailure")
             case .failure(.decodingFailure):
@@ -89,6 +97,11 @@ final class NewsTableViewController: UITableViewController {
                 }).first else { return }
                 item.name = group.name
                 item.photoUrl = group.photo
+
+//                let photo = item.attachments.map(\.photo?.url)
+//                for value in photo {
+//                    item.postPhotos.append(value)
+//                }
             } else {
                 guard let friend = news.profilesInfo.filter({ friend in
                     friend.id == item.sourceId
@@ -109,58 +122,26 @@ final class NewsTableViewController: UITableViewController {
             forCellReuseIdentifier: Constants.newsIdentifier
         )
         tableView.register(
-            UINib(nibName: "HeaderTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "Header"
+            UINib(nibName: Constants.headerNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.headerCellIdentifier
         )
         tableView.register(
-            UINib(nibName: "FooterTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "Footer"
+            UINib(nibName: Constants.footerNibName, bundle: nil),
+            forCellReuseIdentifier: Constants.footerCellIdentifier
         )
         tableView.register(
-            UINib(nibName: "ImageTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "ImageTableViewCell"
+            UINib(nibName: Constants.imageCellIdentifier, bundle: nil),
+            forCellReuseIdentifier: Constants.imageCellIdentifier
         )
         tableView.register(
-            UINib(nibName: "PostTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "PostTableViewCell"
+            UINib(nibName: Constants.postCellIdentifier, bundle: nil),
+            forCellReuseIdentifier: Constants.postCellIdentifier
         )
         tableView.register(
-            UINib(nibName: "PostAndImageTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "PostAndImageTableViewCell"
+            UINib(nibName: Constants.postAndImageCellIdentifier, bundle: nil),
+            forCellReuseIdentifier: Constants.postAndImageCellIdentifier
         )
     }
-
-//    private func createCell(indexPath: IndexPath) -> UITableViewCell {
-//        let news = news[indexPath.section]
-//        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .header
-//        var cellIdentifier = ""
-//
-//        switch cellType {
-//        case .header:
-//            cellIdentifier = "Header"
-//        case .content:
-//            cellIdentifier = designationContentCellIdentifier(newsCellType: news)
-//        case .footer:
-//            cellIdentifier = "Footer"
-//        }
-//
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? NewsCell
-//        else { return UITableViewCell() }
-//        cell.update(news: news)
-//        return cell
-//    }
-
-//    private func designationContentCellIdentifier(newsCellType: News) -> String {
-//        switch newsCellType.postType {
-//        case .image:
-//            return "ImageTableViewCell"
-//        case .post:
-//            return "PostTableViewCell"
-//        case .imageAndPost:
-//            return "PostAndImageTableViewCell"
-//        }
-//    }
-    // }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
         guard let news = newsPost?.postNews[indexPath.section] else { return UITableViewCell() }
@@ -169,11 +150,11 @@ final class NewsTableViewController: UITableViewController {
 
         switch cellType {
         case .header:
-            cellIdentifier = "Header"
+            cellIdentifier = Constants.headerCellIdentifier
         case .content:
-            cellIdentifier = "PostAndImageTableViewCell"
+            cellIdentifier = Constants.postAndImageCellIdentifier
         case .footer:
-            cellIdentifier = "Footer"
+            cellIdentifier = Constants.footerCellIdentifier
         }
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? NewsCell
@@ -181,15 +162,4 @@ final class NewsTableViewController: UITableViewController {
         cell.update(news: news)
         return cell
     }
-
-//    private func designationContentCellIdentifier(newsCellType: NewsPost) -> String {
-//        switch newsCellType.postType {
-//        case .image:
-//            return "ImageTableViewCell"
-//        case .post:
-//            return "PostTableViewCell"
-//        case .imageAndPost:
-//            return "PostAndImageTableViewCell"
-//        }
-//    }
 }
