@@ -111,7 +111,6 @@ extension AuthorizationViewController: WKNavigationDelegate {
               let userId = params[Constants.userId]
         else { return }
         Session.shared.token = token
-        print("test \(token)")
         Session.shared.userId = userId
         decisionHandler(.cancel)
         showTabBarController()

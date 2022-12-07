@@ -19,7 +19,7 @@ final class ImageTableViewCell: UITableViewCell, NewsConfigurable {
     // MARK: - Private Properties
 
     private let networkService = NetworkService()
-    
+
     private var newsDataSource: NewsPost?
 
     // MARK: - Life Cycle
@@ -30,14 +30,14 @@ final class ImageTableViewCell: UITableViewCell, NewsConfigurable {
     }
 
     // MARK: - Public Method
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         newsDataSource = nil
         collectionView.reloadData()
     }
-    
-    func update(news: NewsPost, networkService: NetworkService?) {
+
+    func update(news: NewsPost, networkService: NetworkService) {
         newsDataSource = news
     }
 
@@ -66,10 +66,9 @@ extension ImageTableViewCell: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.friendPhotosIdentifier,
             for: indexPath
-        ) as? FriendPhotosCollectionViewCell
+        ) as? FriendPhotosCollectionViewCell,
+            let newsDataSource
         else { return UICollectionViewCell() }
-        // cell.cellHeightLayoutConstraint.constant = collectionViewCellHeight(indexPath: indexPath)
-        guard let newsDataSource else { return UICollectionViewCell() }
         cell.update(news: newsDataSource, networkService: networkService)
         return cell
     }

@@ -19,9 +19,9 @@ final class NewsTableViewController: UITableViewController {
         static let imageCellIdentifier = "ImageTableViewCell"
         static let headerNibName = "HeaderTableViewCell"
         static let footerNibName = "FooterTableViewCell"
-        static let unknownError = "Unknown Error"
-        static let decodingFailure = "Decoding Failure"
-        static let urlFailure = "URL Failure"
+        static let unknownErrorText = "Unknown Error"
+        static let decodingFailureText = "Decoding Failure"
+        static let urlFailureText = "URL Failure"
     }
 
     // MARK: - Types
@@ -71,11 +71,16 @@ final class NewsTableViewController: UITableViewController {
             case let .success(response):
                 self.newsFiltered(response)
             case .failure(.urlFailure):
-                print(Constants.urlFailure)
+                self.showAlert(title: "Внимание!", message: Constants.urlFailureText, actionTitle: nil, handler: nil)
             case .failure(.decodingFailure):
-                print(Constants.decodingFailure)
+                self.showAlert(
+                    title: "Внимание!",
+                    message: Constants.decodingFailureText,
+                    actionTitle: nil,
+                    handler: nil
+                )
             case .failure(.unknown):
-                print(Constants.unknownError)
+                self.showAlert(title: "Внимание!", message: Constants.unknownErrorText, actionTitle: nil, handler: nil)
             }
         }
     }
@@ -94,7 +99,7 @@ final class NewsTableViewController: UITableViewController {
                 guard let friend = news.profilesInfo.filter({ friend in
                     friend.id == item.sourceId
                 }).first else { return }
-                item.name = friend.firstName + " " + friend.lastName
+                item.name = "\(friend.firstName) \(friend.lastName)"
                 item.photoUrlName = friend.imageName
             }
         }

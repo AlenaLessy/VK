@@ -14,10 +14,5 @@ final class FooterTableViewCell: UITableViewCell, NewsConfigurable {
 
     // MARK: - Public Methods
 
-    func update(news: NewsPost, networkService: NetworkService?) {
-//        numberOfLikesLabel.text = String(news.likesCount)
-//        numberOfCommentsLabel.text = String(news.commentsCount)
-//        numberOfRepostsLabel.text = String(news.repostsCount)
-//        numberOfViewsLabel.text = String(news.viewsCount)
-    }
+    func update(news: NewsPost, networkService: NetworkService) {}
 }
