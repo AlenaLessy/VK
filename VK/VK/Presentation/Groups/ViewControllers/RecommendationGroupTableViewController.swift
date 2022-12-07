@@ -27,12 +27,12 @@ final class RecommendationGroupTableViewController: UITableViewController {
     var recommendationGroups: [Group] = []
 
     // MARK: - Private Properties
+
     private let networkService = NetworkService()
-    
+
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
     private var dataProvider = DataProvider()
-  
 
     // MARK: - Life Cycle
 

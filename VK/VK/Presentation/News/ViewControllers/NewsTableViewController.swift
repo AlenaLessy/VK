@@ -14,23 +14,39 @@ final class NewsTableViewController: UITableViewController {
         static let friendNibName = "FriendCollectionViewCell"
     }
 
+    // MARK: - Types
+
+    private enum NewsCellTypes: Int, CaseIterable {
+        case header
+        case content
+        case footer
+    }
+
     // MARK: - Private Properties
 
     private var currentIndex = 0
 
-    private var newsDataCourse: [News] = News.createNews()
+    private var news: [News] = News.createNews()
+    private var newsPost: ItemsNewsResponse?
+    private let networkService = NetworkService()
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        fetchNews()
     }
 
     // MARK: - Public Method
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        guard let count = newsPost?.postNews.count else { return 0 }
+        return count
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        newsDataCourse.count
+        NewsCellTypes.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,72 +55,141 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
+    private func fetchNews() {
+        networkService.fetchNewsPost { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(response):
+                //   self.newsPost = response
+//                print("test \(self.newsPost)")
+//
+//                let photos = self.newsPost.reduce([NewsPhoto]()) {
+//                    $0 + $1.attachments.compactMap(\.photo)
+                let photos = response.postNews.reduce([NewsPhoto]()) {
+                    $0 + $1.attachments.compactMap(\.photo)
+                }
+                print("test \(photos)")
+                self.createNews(response)
+                self.tableView.reloadData()
+            case .failure(.urlFailure):
+                print("urlFailure")
+            case .failure(.decodingFailure):
+                print("decodingFailure")
+            case .failure(.unknown):
+                print("unknown")
+            }
+        }
+    }
+
+    private func createNews(_ news: ItemsNewsResponse) {
+        news.postNews.forEach { item in
+            if item.sourceId < 0 {
+                guard let group = news.groupsInfo.filter({ group in
+                    group.id == item.sourceId * -1
+                }).first else { return }
+                item.name = group.name
+                item.photoUrl = group.photo
+            } else {
+                guard let friend = news.profilesInfo.filter({ friend in
+                    friend.id == item.sourceId
+                }).first else { return }
+                item.name = friend.firstName + " " + friend.lastName
+                item.photoUrl = friend.imageName
+            }
+        }
+        DispatchQueue.main.async {
+            self.newsPost = news
+            self.tableView.reloadData()
+        }
+    }
+
     private func configureTableView() {
         tableView.register(
             UINib(nibName: Constants.newsNibName, bundle: nil),
             forCellReuseIdentifier: Constants.newsIdentifier
         )
+        tableView.register(
+            UINib(nibName: "HeaderTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "Header"
+        )
+        tableView.register(
+            UINib(nibName: "FooterTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "Footer"
+        )
+        tableView.register(
+            UINib(nibName: "ImageTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "ImageTableViewCell"
+        )
+        tableView.register(
+            UINib(nibName: "PostTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "PostTableViewCell"
+        )
+        tableView.register(
+            UINib(nibName: "PostAndImageTableViewCell", bundle: nil),
+            forCellReuseIdentifier: "PostAndImageTableViewCell"
+        )
     }
+
+//    private func createCell(indexPath: IndexPath) -> UITableViewCell {
+//        let news = news[indexPath.section]
+//        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .header
+//        var cellIdentifier = ""
+//
+//        switch cellType {
+//        case .header:
+//            cellIdentifier = "Header"
+//        case .content:
+//            cellIdentifier = designationContentCellIdentifier(newsCellType: news)
+//        case .footer:
+//            cellIdentifier = "Footer"
+//        }
+//
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? NewsCell
+//        else { return UITableViewCell() }
+//        cell.update(news: news)
+//        return cell
+//    }
+
+//    private func designationContentCellIdentifier(newsCellType: News) -> String {
+//        switch newsCellType.postType {
+//        case .image:
+//            return "ImageTableViewCell"
+//        case .post:
+//            return "PostTableViewCell"
+//        case .imageAndPost:
+//            return "PostAndImageTableViewCell"
+//        }
+//    }
+    // }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.newsIdentifier,
-            for: indexPath
-        ) as? NewsTableViewCell else { return UITableViewCell() }
-        let news = newsDataCourse[indexPath.row]
-        currentIndex = indexPath.row
-        cell.update(news: news)
-        cell.collectionView.dataSource = self
-        cell.collectionView.delegate = self
-        cell.collectionView.register(
-            UINib(nibName: Constants.friendNibName, bundle: nil),
-            forCellWithReuseIdentifier: Constants.friendIdentifier
-        )
-        return cell
-    }
+        guard let news = newsPost?.postNews[indexPath.section] else { return UITableViewCell() }
+        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .header
+        var cellIdentifier = ""
 
-    private func collectionViewCellHeight(indexPath: IndexPath) -> CGFloat {
-        guard indexPath.row < newsDataCourse.count else { return 0 }
-        let numberImages = newsDataCourse[indexPath.row].postImageName.imageNames.count
-        switch numberImages {
-        case 1:
-            return view.bounds.width
-        default:
-            return (view.bounds.width / 2) * CGFloat(lroundf(Float(numberImages) / 2))
+        switch cellType {
+        case .header:
+            cellIdentifier = "Header"
+        case .content:
+            cellIdentifier = "PostAndImageTableViewCell"
+        case .footer:
+            cellIdentifier = "Footer"
         }
-    }
-}
 
-/// UICollectionViewDataSource
-extension NewsTableViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.friendIdentifier,
-            for: indexPath
-        ) as? FriendCollectionViewCell
-        else { return UICollectionViewCell() }
-        cell.cellHeightLayoutConstraint.constant = collectionViewCellHeight(indexPath: indexPath)
-        let news = newsDataCourse[currentIndex]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? NewsCell
+        else { return UITableViewCell() }
         cell.update(news: news)
         return cell
     }
-}
 
-/// UICollectionViewDelegateFlowLayout
-extension NewsTableViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        let side = UIScreen.main.bounds.width
-        return CGSize(width: side, height: side)
-    }
+//    private func designationContentCellIdentifier(newsCellType: NewsPost) -> String {
+//        switch newsCellType.postType {
+//        case .image:
+//            return "ImageTableViewCell"
+//        case .post:
+//            return "PostTableViewCell"
+//        case .imageAndPost:
+//            return "PostAndImageTableViewCell"
+//        }
+//    }
 }

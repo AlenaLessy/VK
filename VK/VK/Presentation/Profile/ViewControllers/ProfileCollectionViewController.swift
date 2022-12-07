@@ -36,23 +36,23 @@ final class ProfileCollectionViewController: UICollectionViewController {
 
     // MARK: - Public Method
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
-    }
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        1
+//    }
 
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        guard
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: Constants.FriendCellIdentifier,
-                for: indexPath
-            ) as? FriendCollectionViewCell,
-            let model = friend else { return UICollectionViewCell() }
-        cell.update(friend: model)
-        return cell
-    }
+//    override func collectionView(
+//        _ collectionView: UICollectionView,
+//        cellForItemAt indexPath: IndexPath
+//    ) -> UICollectionViewCell {
+//        guard
+//            let cell = collectionView.dequeueReusableCell(
+//                withReuseIdentifier: Constants.FriendCellIdentifier,
+//                for: indexPath
+//            ) as? FriendCollectionViewCell,
+//            let model = friend else { return UICollectionViewCell() }
+//        cell.update(friend: model)
+//        return cell
+//    }
 
     // MARK: - Private Methods
 

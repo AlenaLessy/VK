@@ -13,6 +13,7 @@ class LoadDataService {
         static let getAllPhotosDescription = "/method/photos.getAll"
         static let getGroupsDescription = "/method/groups.get"
         static let searchGroupsDescription = "/method/groups.search"
+        static let getNewsFeedDescription = "/method/newsfeed.get"
         static let baseUrl = "https://api.vk.com/"
     }
 
@@ -23,6 +24,7 @@ class LoadDataService {
         case getAllPhotos
         case getGroups
         case searchGroups
+        case getNewsFeed
 
         var description: String {
             switch self {
@@ -34,6 +36,8 @@ class LoadDataService {
                 return Constants.getGroupsDescription
             case .searchGroups:
                 return Constants.searchGroupsDescription
+            case .getNewsFeed:
+                return Constants.getNewsFeedDescription
             }
         }
     }
