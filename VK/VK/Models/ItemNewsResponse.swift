@@ -5,8 +5,11 @@ import Foundation
 
 /// Элементы ответа на новости ВК
 struct ItemsNewsResponse: Decodable {
-    let postNews: [NewsPost]
+    /// Новостные посты
+    var postNews: [NewsPost]
+    /// Информация о друзьях
     let profilesInfo: [Friend]
+    /// Информация о группах
     let groupsInfo: [Group]
 
     enum CodingKeys: String, CodingKey {
@@ -14,11 +17,4 @@ struct ItemsNewsResponse: Decodable {
         case profilesInfo = "profiles"
         case groupsInfo = "groups"
     }
-
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        postNews = try container.decode([NewsPost].self, forKey: .postNews)
-//        profilesInfo = try container.decode([Friend].self, forKey: .profilesInfo)
-//        groupsInfo = try container.decode([Group].self, forKey: .groupsInfo)
-//    }
 }

@@ -4,7 +4,7 @@
 import UIKit
 
 /// Футер новости
-class FooterTableViewCell: UITableViewCell, NewsConfigurable {
+final class FooterTableViewCell: UITableViewCell, NewsConfigurable {
     // MARK: - Private Outlets
 
     @IBOutlet private var numberOfLikesLabel: UILabel!
@@ -14,7 +14,7 @@ class FooterTableViewCell: UITableViewCell, NewsConfigurable {
 
     // MARK: - Public Methods
 
-    func update(news: NewsPost) {
+    func update(news: NewsPost, networkService: NetworkService?) {
 //        numberOfLikesLabel.text = String(news.likesCount)
 //        numberOfCommentsLabel.text = String(news.commentsCount)
 //        numberOfRepostsLabel.text = String(news.repostsCount)

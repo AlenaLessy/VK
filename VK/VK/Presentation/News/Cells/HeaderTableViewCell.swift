@@ -13,11 +13,10 @@ final class HeaderTableViewCell: UITableViewCell, NewsConfigurable {
 
     // MARK: - Public Methods
 
-    func update(news: NewsPost) {
+    func update(news: NewsPost, networkService: NetworkService?) {
         userNameLabel.text = news.name
-        guard let photoURL = news.photoUrl else { return }
+        guard let photoURL = news.photoUrlName else { return }
         let networkService = NetworkService()
         userImageView.loadImage(imageURL: photoURL, networkService: networkService)
-        //  dateLabel.text = news.att
     }
 }

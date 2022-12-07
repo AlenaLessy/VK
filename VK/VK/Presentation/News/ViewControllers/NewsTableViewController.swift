@@ -19,6 +19,9 @@ final class NewsTableViewController: UITableViewController {
         static let imageCellIdentifier = "ImageTableViewCell"
         static let headerNibName = "HeaderTableViewCell"
         static let footerNibName = "FooterTableViewCell"
+        static let unknownError = "Unknown Error"
+        static let decodingFailure = "Decoding Failure"
+        static let urlFailure = "URL Failure"
     }
 
     // MARK: - Types
@@ -31,18 +34,17 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var currentIndex = 0
-
-    private var news: [News] = News.createNews()
-    private var newsPost: ItemsNewsResponse?
     private let networkService = NetworkService()
+
+    private var currentIndex = 0
+    private var newsPost: ItemsNewsResponse?
 
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        fetchNews()
+        getNews()
     }
 
     // MARK: - Public Method
@@ -62,52 +64,38 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func fetchNews() {
+    private func getNews() {
         networkService.fetchNewsPost { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):
-                //   self.newsPost = response
-                //                print("test \(self.newsPost)")
-                //
-                //                let photos = self.newsPost.reduce([NewsPhoto]()) {
-                //                    $0 + $1.attachments.compactMap(\.photo)
-//                let photos = response.postNews.reduce([NewsPhoto]()) {
-//                    $0 + $1.attachments.compactMap(\.photo)
-//                }
-
-//                print("test \(photos)")
-                self.createNews(response)
-//                self.tableView.reloadData()
+                self.newsFiltered(response)
             case .failure(.urlFailure):
-                print("urlFailure")
+                print(Constants.urlFailure)
             case .failure(.decodingFailure):
-                print("decodingFailure")
+                print(Constants.decodingFailure)
             case .failure(.unknown):
-                print("unknown")
+                print(Constants.unknownError)
             }
         }
     }
 
-    private func createNews(_ news: ItemsNewsResponse) {
+    private func newsFiltered(_ news: ItemsNewsResponse) {
+        var news = news
+        news.postNews = news.postNews.filter { $0.attachments.contains(where: { $0.type == .photo }) }
         news.postNews.forEach { item in
             if item.sourceId < 0 {
                 guard let group = news.groupsInfo.filter({ group in
                     group.id == item.sourceId * -1
                 }).first else { return }
                 item.name = group.name
-                item.photoUrl = group.photo
-
-//                let photo = item.attachments.map(\.photo?.url)
-//                for value in photo {
-//                    item.postPhotos.append(value)
-//                }
+                item.photoUrlName = group.photo
             } else {
                 guard let friend = news.profilesInfo.filter({ friend in
                     friend.id == item.sourceId
                 }).first else { return }
                 item.name = friend.firstName + " " + friend.lastName
-                item.photoUrl = friend.imageName
+                item.photoUrlName = friend.imageName
             }
         }
         DispatchQueue.main.async {
@@ -152,14 +140,26 @@ final class NewsTableViewController: UITableViewController {
         case .header:
             cellIdentifier = Constants.headerCellIdentifier
         case .content:
-            cellIdentifier = Constants.postAndImageCellIdentifier
+            // swiftlint: disable all
+            if news.attachments.first?.type == .photo,
+               !news.post.isEmpty
+            {
+                cellIdentifier = Constants.postAndImageCellIdentifier
+            } else if !news.post.isEmpty,
+                      news.attachments.first?.type != .photo
+            {
+                cellIdentifier = Constants.postCellIdentifier
+            } else if news.attachments.first?.type == .photo,
+                      news.post.isEmpty
+            {
+                cellIdentifier = Constants.imageCellIdentifier
+            }
         case .footer:
             cellIdentifier = Constants.footerCellIdentifier
         }
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? NewsCell
         else { return UITableViewCell() }
-        cell.update(news: news)
+        cell.update(news: news, networkService: networkService)
         return cell
     }
 }

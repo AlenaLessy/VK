@@ -19,6 +19,7 @@ final class PostAndImageTableViewCell: UITableViewCell, NewsConfigurable {
 
     // MARK: - Private Properties
 
+    private let networkService = NetworkService()
     private var newsDataSource: NewsPost?
 
     // MARK: - Life Cycle
@@ -27,12 +28,19 @@ final class PostAndImageTableViewCell: UITableViewCell, NewsConfigurable {
         super.awakeFromNib()
         setupCollectionView()
     }
-
+    
+    // MARK: - Public Method
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         textView.text = nil
         newsDataSource = nil
         collectionView.reloadData()
+    }
+    
+    func update(news: NewsPost, networkService: NetworkService?) {
+        newsDataSource = news
+        textView.text = news.post
     }
 
     // MARK: - Private Method
@@ -44,11 +52,6 @@ final class PostAndImageTableViewCell: UITableViewCell, NewsConfigurable {
         )
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
-
-    func update(news: NewsPost) {
-        newsDataSource = news
-        textView.text = news.post
     }
 }
 
@@ -69,7 +72,7 @@ extension PostAndImageTableViewCell: UICollectionViewDataSource {
         else { return UICollectionViewCell() }
         // cell.cellHeightLayoutConstraint.constant = collectionViewCellHeight(indexPath: indexPath)
         guard let newsDataSource else { return UICollectionViewCell() }
-        cell.update(news: newsDataSource)
+        cell.update(news: newsDataSource, networkService: networkService)
         return cell
     }
 }

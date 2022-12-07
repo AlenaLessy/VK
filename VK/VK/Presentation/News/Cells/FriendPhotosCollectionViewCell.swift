@@ -20,24 +20,8 @@ final class FriendPhotosCollectionViewCell: UICollectionViewCell {
         friendImageView.image = nil
     }
 
-//    func update(friend: FriendNews) {
-//        guard let imageName = friend.imageNames.first else { return }
-//        friendImageView.image = UIImage(named: imageName)
-//    }
-
-    func update(news: NewsPost) {
+    func update(news: NewsPost, networkService: NetworkService) {
         guard let photos = news.attachments.first?.photo?.url else { return }
-        print("/sss\(photos)")
-        let networkService = NetworkService()
-        // for value in photos {
-//            guard let name = value else { return }
         friendImageView.loadImage(imageURL: photos, networkService: networkService)
-        // }
     }
-
-//        let photos = response.postNews.reduce([NewsPhoto]()) {
-//            $0 + $1.attachments.compactMap(\.photo)
-//        }
-//        guard let imageName = news.postImageName?.imageNames.first else { return }
-//        friendImageView.image = UIImage(named: imageName)
 }
