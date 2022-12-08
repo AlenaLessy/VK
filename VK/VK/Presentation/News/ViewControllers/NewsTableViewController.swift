@@ -22,6 +22,8 @@ final class NewsTableViewController: UITableViewController {
         static let unknownErrorText = "Unknown Error"
         static let decodingFailureText = "Decoding Failure"
         static let urlFailureText = "URL Failure"
+        static let alertTitleText = "Внимание!"
+        static let alertActionTitleText = "ok"
     }
 
     // MARK: - Types
@@ -44,13 +46,13 @@ final class NewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getNews()
+        fetchNews()
     }
 
     // MARK: - Public Method
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = newsPost?.postNews.count else { return 0 }
+        guard let count = newsPost?.newsPost.count else { return 0 }
         return count
     }
 
@@ -64,39 +66,49 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func getNews() {
+    private func fetchNews() {
         networkService.fetchNewsPost { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):
                 self.newsFiltered(response)
             case .failure(.urlFailure):
-                self.showAlert(title: "Внимание!", message: Constants.urlFailureText, actionTitle: nil, handler: nil)
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.urlFailureText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
             case .failure(.decodingFailure):
                 self.showAlert(
-                    title: "Внимание!",
+                    title: Constants.alertTitleText,
                     message: Constants.decodingFailureText,
-                    actionTitle: nil,
+                    actionTitle: Constants.alertActionTitleText,
                     handler: nil
                 )
             case .failure(.unknown):
-                self.showAlert(title: "Внимание!", message: Constants.unknownErrorText, actionTitle: nil, handler: nil)
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.unknownErrorText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
             }
         }
     }
 
     private func newsFiltered(_ news: ItemsNewsResponse) {
         var news = news
-        news.postNews = news.postNews.filter { $0.attachments.contains(where: { $0.type == .photo }) }
-        news.postNews.forEach { item in
+        news.newsPost = news.newsPost.filter { $0.attachments.contains(where: { $0.type == .photo }) }
+        news.newsPost.forEach { item in
             if item.sourceId < 0 {
-                guard let group = news.groupsInfo.filter({ group in
+                guard let group = news.groups.filter({ group in
                     group.id == item.sourceId * -1
                 }).first else { return }
                 item.name = group.name
                 item.photoUrlName = group.photo
             } else {
-                guard let friend = news.profilesInfo.filter({ friend in
+                guard let friend = news.friends.filter({ friend in
                     friend.id == item.sourceId
                 }).first else { return }
                 item.name = "\(friend.firstName) \(friend.lastName)"
@@ -137,7 +149,7 @@ final class NewsTableViewController: UITableViewController {
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        guard let news = newsPost?.postNews[indexPath.section] else { return UITableViewCell() }
+        guard let news = newsPost?.newsPost[indexPath.section] else { return UITableViewCell() }
         let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .header
         var cellIdentifier = ""
 

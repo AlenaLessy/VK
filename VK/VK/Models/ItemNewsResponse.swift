@@ -6,15 +6,15 @@ import Foundation
 /// Элементы ответа на новости ВК
 struct ItemsNewsResponse: Decodable {
     /// Информация о друзьях
-    let profilesInfo: [Friend]
+    let friends: [Friend]
     /// Информация о группах
-    let groupsInfo: [Group]
+    let groups: [Group]
     /// Новостные посты
-    var postNews: [NewsPost]
+    var newsPost: [NewsPost]
 
     enum CodingKeys: String, CodingKey {
-        case postNews = "items"
-        case profilesInfo = "profiles"
-        case groupsInfo = "groups"
+        case newsPost = "items"
+        case friends = "profiles"
+        case groups
     }
 }

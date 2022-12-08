@@ -5,7 +5,7 @@ import Foundation
 
 /// Фото в новости в ленте
 struct NewsPhoto: Decodable {
-    /// URL  фотографии
+    /// URL  - path фотографии
     let url: String?
 
     enum CodingKeys: CodingKey {
