@@ -21,7 +21,7 @@ final class AuthorizationViewController: UIViewController {
         static let queryItemsRevokeName = "revoke"
         static let queryItemsURLRedirectValue = "https://oauth.vk.com/blank.html"
         static let queryItemsDisplayValue = "mobile"
-        static let queryItemsScopeValue = "262150"
+        static let queryItemsScopeValue = "8198"
         static let queryItemsResponseTypeValue = "token"
         static let queryItemsVersionValue = "5.131"
         static let queryItemsRevokeValue = "0"

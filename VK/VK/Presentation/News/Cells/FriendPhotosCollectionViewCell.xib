@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="FriendPhotosCollectionViewCell" id="gTV-IL-0wX" customClass="FriendPhotosCollectionViewCell" customModule="VK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E3-pm-Wgd" userLabel="ContentView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6" translatesAutoresizingMaskIntoConstraints="NO" id="uA0-h2-e0N">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="320" id="Eta-9d-Yzf"/>
+                            <constraint firstAttribute="trailing" secondItem="uA0-h2-e0N" secondAttribute="trailing" id="Mlf-Mh-KtI"/>
+                            <constraint firstAttribute="bottom" secondItem="uA0-h2-e0N" secondAttribute="bottom" id="Zcv-Oc-CfE"/>
+                            <constraint firstAttribute="width" secondItem="4E3-pm-Wgd" secondAttribute="height" multiplier="1:1" id="gFN-cU-hmj"/>
+                            <constraint firstItem="uA0-h2-e0N" firstAttribute="leading" secondItem="4E3-pm-Wgd" secondAttribute="leading" id="kRK-Nc-dj5"/>
+                            <constraint firstItem="uA0-h2-e0N" firstAttribute="top" secondItem="4E3-pm-Wgd" secondAttribute="top" id="mm1-p0-LS6"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="4E3-pm-Wgd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BY0-ZO-btD"/>
+                <constraint firstAttribute="trailing" secondItem="4E3-pm-Wgd" secondAttribute="trailing" id="QOC-Sh-Cpc"/>
+                <constraint firstAttribute="bottom" secondItem="4E3-pm-Wgd" secondAttribute="bottom" id="SbA-uN-ayb"/>
+                <constraint firstItem="4E3-pm-Wgd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gOC-cC-712"/>
+            </constraints>
+            <size key="customSize" width="320" height="320"/>
+            <connections>
+                <outlet property="cellHeightLayoutConstraint" destination="Eta-9d-Yzf" id="FSL-8v-W2h"/>
+                <outlet property="friendImageView" destination="uA0-h2-e0N" id="vhD-l1-q3u"/>
+            </connections>
+            <point key="canvasLocation" x="299.23664122137404" y="114.08450704225352"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="6" width="267" height="189"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

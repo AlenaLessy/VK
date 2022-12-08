@@ -24,6 +24,8 @@ final class NetworkService: LoadDataService {
         static let parameterQValue = "Bears"
         static let parameterOrderValue = "order"
         static let parameterOrderName = "name"
+        static let parameterFiltersValue = "post"
+        static let parameterFiltersName = "filters"
     }
 
     // MARK: - Private Properties
@@ -49,6 +51,12 @@ final class NetworkService: LoadDataService {
         Constants.parameterExtendedName: Constants.parameterExtendedValue,
         Constants.parameterVName: Constants.parameterVersionValue,
         Constants.parameterLandName: Constants.parameterLandValue
+    ]
+
+    private let newsPostParameters: Parameters = [
+        Constants.parameterTokenName: "\(Session.shared.token)",
+        Constants.parameterFiltersName: Constants.parameterFiltersValue,
+        Constants.parameterVName: Constants.parameterVersionValue,
     ]
 
     // MARK: - Public Methods
@@ -94,5 +102,15 @@ final class NetworkService: LoadDataService {
                 handler(data)
             }
         }.resume()
+    }
+
+    func fetchNewsPost(
+        handler: @escaping (Result<ItemsNewsResponse, NetworkError>) -> ()
+    ) {
+        loadData(
+            componentsPath: .getNewsFeed,
+            parameters: newsPostParameters,
+            handler: handler
+        )
     }
 }

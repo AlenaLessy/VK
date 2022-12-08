@@ -36,10 +36,8 @@ final class ProfileViewController: UIViewController {
 
     private let dataProvider = DataProvider()
     private let networkService = NetworkService()
-    
     private var index = 0
     private var photoNames: [String] = []
-   
 
     // MARK: - Life Cycle
 
