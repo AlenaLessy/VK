@@ -15,6 +15,7 @@ class LoadDataService {
         static let searchGroupsDescription = "/method/groups.search"
         static let getNewsFeedDescription = "/method/newsfeed.get"
         static let baseUrl = "https://api.vk.com/"
+        static let emptyString = ""
     }
 
     // MARK: - Types
@@ -86,7 +87,7 @@ class LoadDataService {
         let baseURL = Constants.baseUrl
         let path = "\(componentsPath.description)"
         let url = URL(string: baseURL + path)
-        let request = AF.request(url ?? "", parameters: parameters)
+        let request = AF.request(url ?? Constants.emptyString, parameters: parameters)
         return request
     }
 }

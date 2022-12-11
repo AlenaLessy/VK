@@ -1,4 +1,4 @@
-// ParseGroupDataOperation.swift
+// ParseDataOperation.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
@@ -9,7 +9,7 @@ final class ParseDataOperation<T: Decodable>: Operation {
 
     var items: [T] = []
 
-    // MARK: - Private Methods
+    // MARK: - Public Methods
 
     override func main() {
         guard let getDataOperation = dependencies.first as? GetDataOperation,

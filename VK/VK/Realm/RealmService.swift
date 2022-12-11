@@ -1,7 +1,6 @@
 // RealmService.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
 /// Сохранение и получение данных из рилма

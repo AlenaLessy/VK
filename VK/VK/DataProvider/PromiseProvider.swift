@@ -5,7 +5,7 @@ import Foundation
 import PromiseKit
 import RealmSwift
 
-/// Выбор получения данных
+/// Выбор получения данных друзей
 final class PromiseProvider {
     // MARK: Private Properties
 

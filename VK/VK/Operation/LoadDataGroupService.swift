@@ -2,10 +2,11 @@
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
-import Foundation
 
 /// Формирование запроса группы
-class LoadDataGroupService {
+final class LoadDataGroupService {
+    // MARK: - Private Constants
+
     private enum Constants {
         static let getGroupsDescription = "/method/groups.get"
         static let searchGroupsDescription = "/method/groups.search"

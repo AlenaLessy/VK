@@ -79,7 +79,7 @@
 		57CF2F4F29446E1F009C2C8E /* LoadDataGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F4E29446E1F009C2C8E /* LoadDataGroupService.swift */; };
 		57CF2F52294497FC009C2C8E /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F51294497FC009C2C8E /* AsyncOperation.swift */; };
 		57CF2F54294499AE009C2C8E /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F53294499AE009C2C8E /* GetDataOperation.swift */; };
-		57CF2F562944A12A009C2C8E /* ParseGroupDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F552944A12A009C2C8E /* ParseGroupDataOperation.swift */; };
+		57CF2F562944A12A009C2C8E /* ParseDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F552944A12A009C2C8E /* ParseDataOperation.swift */; };
 		57CF2F5D2944AF60009C2C8E /* SaveToRealmGroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F5C2944AF60009C2C8E /* SaveToRealmGroupOperation.swift */; };
 		57CF2F5F2944C563009C2C8E /* PromiseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2F5E2944C563009C2C8E /* PromiseService.swift */; };
 		57D1C6CF2916DCCB006731B1 /* BirthdayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D1C6CD2916DCCB006731B1 /* BirthdayTableViewCell.swift */; };
@@ -166,7 +166,7 @@
 		57CF2F4E29446E1F009C2C8E /* LoadDataGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDataGroupService.swift; sourceTree = "<group>"; };
 		57CF2F51294497FC009C2C8E /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		57CF2F53294499AE009C2C8E /* GetDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
-		57CF2F552944A12A009C2C8E /* ParseGroupDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseGroupDataOperation.swift; sourceTree = "<group>"; };
+		57CF2F552944A12A009C2C8E /* ParseDataOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDataOperation.swift; sourceTree = "<group>"; };
 		57CF2F5C2944AF60009C2C8E /* SaveToRealmGroupOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToRealmGroupOperation.swift; sourceTree = "<group>"; };
 		57CF2F5E2944C563009C2C8E /* PromiseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseService.swift; sourceTree = "<group>"; };
 		57D1C6CD2916DCCB006731B1 /* BirthdayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayTableViewCell.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				57CF2F4E29446E1F009C2C8E /* LoadDataGroupService.swift */,
 				57CF2F51294497FC009C2C8E /* AsyncOperation.swift */,
 				57CF2F53294499AE009C2C8E /* GetDataOperation.swift */,
-				57CF2F552944A12A009C2C8E /* ParseGroupDataOperation.swift */,
+				57CF2F552944A12A009C2C8E /* ParseDataOperation.swift */,
 				57CF2F5C2944AF60009C2C8E /* SaveToRealmGroupOperation.swift */,
 			);
 			path = Operation;
@@ -707,7 +707,7 @@
 				571EB0D9291DC2E700295BED /* CustomInteractiveTransition.swift in Sources */,
 				577BAB11291882C000BD741B /* GradientView.swift in Sources */,
 				57CF2F54294499AE009C2C8E /* GetDataOperation.swift in Sources */,
-				57CF2F562944A12A009C2C8E /* ParseGroupDataOperation.swift in Sources */,
+				57CF2F562944A12A009C2C8E /* ParseDataOperation.swift in Sources */,
 				57CF2F492940D5DE009C2C8E /* Attachment.swift in Sources */,
 				577BAB082918416000BD741B /* RecommendationGroupTableViewController.swift in Sources */,
 				571EB0CC291BFF6D00295BED /* Loading.swift in Sources */,
