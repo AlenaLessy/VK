@@ -62,16 +62,20 @@ final class DataProvider {
         }
     }
 
-    func fetchGroups(handler: @escaping (Result<[Group], NetworkError>) -> ()) {
-        networkService.fetchGroups { [weak self] result in
-            switch result {
-            case let .success(response):
-                handler(.success(response.items))
-                self?.realmService.save(items: response.items)
-            case let .failure(error):
-                handler(.failure(error))
-            }
-        }
+//    func fetchGroups(handler: @escaping (Result<[Group], NetworkError>) -> ()) {
+//        networkService.fetchGroups { [weak self] result in
+//            switch result {
+//            case let .success(response):
+//                handler(.success(response.items))
+//                self?.realmService.save(items: response.items)
+//            case let .failure(error):
+//                handler(.failure(error))
+//            }
+//        }
+//    }
+
+    func fetchGroups() {
+        networkService.fetchGroups()
     }
 
     func fetchFriends(handler: @escaping (Result<[Friend], NetworkError>) -> ()) {
