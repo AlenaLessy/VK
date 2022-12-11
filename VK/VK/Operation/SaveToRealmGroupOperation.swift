@@ -7,7 +7,7 @@ import RealmSwift
 final class SaveToRealmOperation<T: Object & Decodable>: Operation {
     // MARK: - Public Properties
 
-    var realmService = RealmService()
+    let realmService = RealmService()
 
     // MARK: - Public Methods
 

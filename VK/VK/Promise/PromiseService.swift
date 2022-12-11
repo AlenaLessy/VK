@@ -39,7 +39,7 @@ final class PromiseService {
         let promise = Promise<Response<ItemsResponse<Friend>>> { resolve in
             let baseURL = Constants.baseUrl
             let path = "\(Constants.getFriendsMethod)"
-            let url = URL(string: baseURL + path)
+            let url = URL(string: "\(baseURL)\(path)")
             AF.request(url ?? "", parameters: friendsParameters).responseData { response in
                 guard let data = response.data else { return }
                 do {

@@ -60,7 +60,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getFriends()
+        fetchFriends()
         observe()
     }
 
@@ -101,7 +101,7 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    private func getFriends() {
+    private func fetchFriends() {
         promiseProvider.fetchFriends()
     }
 

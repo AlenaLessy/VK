@@ -38,7 +38,7 @@ final class LoadDataGroupService {
     ) {
         let baseURL = Constants.baseUrl
         let path = "\(componentsPath.description)"
-        guard let url = URL(string: baseURL + path) else {
+        guard let url = URL(string: "\(baseURL)\(path)") else {
             handler(.failure(.urlFailure))
             return
         }
@@ -46,7 +46,6 @@ final class LoadDataGroupService {
             guard let data = response.data else { return }
             do {
                 let response = try JSONDecoder().decode(Response<T>.self, from: data)
-
                 handler(.success(response.response))
             } catch {
                 handler(.failure(.decodingFailure))

@@ -32,8 +32,8 @@ final class PromiseProvider {
     func fetchFriends() {
         firstly {
             promiseService.fetchFriends()
-        }.done { [weak self] friends in
-            self?.realmService.save(items: friends.response.items)
+        }.done { friends in
+            self.realmService.save(items: friends.response.items)
         }.catch { error in
             print(error.localizedDescription)
         }

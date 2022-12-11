@@ -86,7 +86,7 @@ class LoadDataService {
     private func groupRequest(componentsPath: NetworkServiceMethodKind, parameters: Parameters) -> DataRequest {
         let baseURL = Constants.baseUrl
         let path = "\(componentsPath.description)"
-        let url = URL(string: baseURL + path)
+        let url = URL(string: "\(baseURL)\(path)")
         let request = AF.request(url ?? Constants.emptyString, parameters: parameters)
         return request
     }
