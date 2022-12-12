@@ -86,7 +86,7 @@ final class GroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell
         else { return UITableViewCell() }
-        cell.configure(group: groups[indexPath.row], indexPath: indexPath, photoService: photoService)
+        cell.configure(group: groups[indexPath.row], photoService: photoService)
         return cell
     }
 

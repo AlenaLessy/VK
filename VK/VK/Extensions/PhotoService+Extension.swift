@@ -18,8 +18,8 @@ extension PhotoService {
 
         // MARK: - Public Methods
 
-        func reloadRow(atIndexpath indexPath: IndexPath) {
-            tableViewController.tableView.reloadRows(at: [indexPath], with: .none)
+        func reloadData() {
+            tableViewController.tableView.reloadData()
         }
     }
 
@@ -36,8 +36,8 @@ extension PhotoService {
 
         // MARK: - Public Methods
 
-        func reloadRow(atIndexpath indexPath: IndexPath) {
-            collectionViewController.collectionView.reloadItems(at: [indexPath])
+        func reloadData() {
+            collectionViewController.collectionView.reloadData()
         }
     }
 }

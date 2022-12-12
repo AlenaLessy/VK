@@ -83,7 +83,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
             for: indexPath
         ) as? GroupTableViewCell
         else { return UITableViewCell() }
-        cell.configure(group: searchingResults[indexPath.row], indexPath: indexPath, photoService: photoService)
+        cell.configure(group: searchingResults[indexPath.row], photoService: photoService)
         return cell
     }
 

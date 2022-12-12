@@ -189,7 +189,7 @@ final class FriendsTableViewController: UITableViewController {
                     for: indexPath
                 ) as? FriendsTableViewCell
             else { return UITableViewCell() }
-            cell.configure(friend: friend, indexPath: indexPath, photoService: photoService)
+            cell.configure(friend: friend, photoService: photoService)
             return cell
         }
     }
