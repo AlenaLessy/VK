@@ -20,7 +20,7 @@ final class GroupTableViewController: UITableViewController {
 
     private let dataProvider = DataProvider()
 
-    private var photoService: PhotoService?
+    private lazy var photoService = PhotoService(container: self)
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
 
@@ -30,8 +30,7 @@ final class GroupTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchGroups()
-        observe()
-        photoServiceConfigure()
+        observeGroups()
     }
 
     // MARK: - Public Methods
@@ -85,14 +84,13 @@ final class GroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
-        ) as? GroupTableViewCell,
-            let groupImage = photoService?.photo(atIndexpath: indexPath, byUrl: groups[indexPath.row].photo)
+        ) as? GroupTableViewCell
         else { return UITableViewCell() }
-        cell.configure(group: groups[indexPath.row], groupImage: groupImage)
+        cell.configure(group: groups[indexPath.row], indexPath: indexPath, photoService: photoService)
         return cell
     }
 
-    private func observe() {
+    private func observeGroups() {
         dataProvider.observeGroups { [weak self] groups in
             guard let self else { return }
             self.groups = groups

@@ -40,10 +40,10 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private let promiseProvider = PromiseProvider()
+    private lazy var photoService = PhotoService(container: self)
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
-    private var photoService: PhotoService?
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
 
     private var birthdays: [Birthday] = [
@@ -61,8 +61,7 @@ final class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchFriends()
-        observe()
-        photoServiceConfigure()
+        observeFriends()
     }
 
     // MARK: - Public Method
@@ -93,11 +92,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func photoServiceConfigure() {
-        photoService = PhotoService(container: self)
-    }
-
-    private func observe() {
+    private func observeFriends() {
         promiseProvider.observeFriends { [weak self] friends in
             guard let self else { return }
             self.friends = friends
@@ -192,10 +187,9 @@ final class FriendsTableViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: Constants.friendsIdentifier,
                     for: indexPath
-                ) as? FriendsTableViewCell,
-                let friendImage = photoService?.photo(atIndexpath: indexPath, byUrl: friend.imageName)
+                ) as? FriendsTableViewCell
             else { return UITableViewCell() }
-            cell.update(friend: friend, friendImage: friendImage)
+            cell.configure(friend: friend, indexPath: indexPath, photoService: photoService)
             return cell
         }
     }
