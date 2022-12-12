@@ -15,6 +15,7 @@ class LoadDataService {
         static let searchGroupsDescription = "/method/groups.search"
         static let getNewsFeedDescription = "/method/newsfeed.get"
         static let baseUrl = "https://api.vk.com/"
+        static let emptyString = ""
     }
 
     // MARK: - Types
@@ -65,5 +66,28 @@ class LoadDataService {
                 handler(.failure(.decodingFailure))
             }
         }
+    }
+
+    func loadGroups(componentsPath: NetworkServiceMethodKind, parameters: Parameters) {
+        let operationQueue = OperationQueue()
+        let request = groupRequest(componentsPath: componentsPath, parameters: parameters)
+        let getDataOperation = GetDataOperation(request: request)
+        operationQueue.addOperation(getDataOperation)
+        let parseGroupDataOperation = ParseDataOperation<Group>()
+        parseGroupDataOperation.addDependency(getDataOperation)
+        operationQueue.addOperation(parseGroupDataOperation)
+        let saveToRealmGroupOperation = SaveToRealmOperation<Group>()
+        saveToRealmGroupOperation.addDependency(parseGroupDataOperation)
+        operationQueue.addOperation(saveToRealmGroupOperation)
+    }
+
+    // MARK: - Private Methods
+
+    private func groupRequest(componentsPath: NetworkServiceMethodKind, parameters: Parameters) -> DataRequest {
+        let baseURL = Constants.baseUrl
+        let path = "\(componentsPath.description)"
+        let url = URL(string: "\(baseURL)\(path)")
+        let request = AF.request(url ?? Constants.emptyString, parameters: parameters)
+        return request
     }
 }

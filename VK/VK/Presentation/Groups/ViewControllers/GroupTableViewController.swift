@@ -29,7 +29,7 @@ final class GroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getGroups()
+        fetchGroups()
         observe()
     }
 
@@ -94,18 +94,7 @@ final class GroupTableViewController: UITableViewController {
         }
     }
 
-    private func getGroups() {
-        dataProvider.fetchGroups { result in
-            switch result {
-            case .success:
-                break
-            case .failure(.unknown):
-                print(Constants.urlFailureName)
-            case .failure(.decodingFailure):
-                print(Constants.decodingFailureName)
-            case .failure(.urlFailure):
-                print(Constants.urlFailureName)
-            }
-        }
+    private func fetchGroups() {
+        dataProvider.fetchGroups()
     }
 }

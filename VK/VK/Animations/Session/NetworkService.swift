@@ -74,10 +74,6 @@ final class NetworkService: LoadDataService {
         ], handler: handler)
     }
 
-    func fetchGroups(handler: @escaping (Result<ItemsResponse<Group>, NetworkError>) -> ()) {
-        loadData(componentsPath: .getGroups, parameters: groupsParameters, handler: handler)
-    }
-
     func fetchSearchGroups(
         searchingGroups: String,
         handler: @escaping (Result<ItemsResponse<Group>, NetworkError>) -> ()
@@ -112,5 +108,9 @@ final class NetworkService: LoadDataService {
             parameters: newsPostParameters,
             handler: handler
         )
+    }
+
+    func fetchGroups() {
+        loadGroups(componentsPath: .getGroups, parameters: groupsParameters)
     }
 }

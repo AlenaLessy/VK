@@ -1,7 +1,6 @@
 // ProfileViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
-import RealmSwift
 import UIKit
 
 /// Профиль

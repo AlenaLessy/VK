@@ -39,12 +39,12 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var dataProvider = DataProvider()
+    private let promiseProvider = PromiseProvider()
+    private let networkService = NetworkService()
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
     private var sections: [SectionType] = [.friendsSearch, .friendsInfo, .friendsRequest, .birthday]
-    private var networkService = NetworkService()
 
     private var birthdays: [Birthday] = [
         Birthday(name: "Михалыч", imageName: "mi5"),
@@ -60,7 +60,7 @@ final class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        getFriends()
+        fetchFriends()
         observe()
     }
 
@@ -93,7 +93,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Method
 
     private func observe() {
-        dataProvider.observeFriends { [weak self] friends in
+        promiseProvider.observeFriends { [weak self] friends in
             guard let self else { return }
             self.friends = friends
             self.createSections()
@@ -101,19 +101,8 @@ final class FriendsTableViewController: UITableViewController {
         }
     }
 
-    private func getFriends() {
-        dataProvider.fetchFriends { result in
-            switch result {
-            case .success:
-                break
-            case .failure(.unknown):
-                print(Constants.urlFailureName)
-            case .failure(.decodingFailure):
-                print(Constants.decodingFailureName)
-            case .failure(.urlFailure):
-                print(Constants.urlFailureName)
-            }
-        }
+    private func fetchFriends() {
+        promiseProvider.fetchFriends()
     }
 
     private func configureTableView() {
