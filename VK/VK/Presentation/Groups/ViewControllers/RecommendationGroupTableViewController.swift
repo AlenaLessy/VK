@@ -28,8 +28,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private let networkService = NetworkService()
-
+    private var photoService: PhotoService?
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
     private var dataProvider = DataProvider()
@@ -39,6 +38,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        photoServiceConfigure()
     }
 
     // MARK: - Public Methods
@@ -58,6 +58,10 @@ final class RecommendationGroupTableViewController: UITableViewController {
     }
 
     // MARK: - Private Methods
+
+    private func photoServiceConfigure() {
+        photoService = PhotoService(container: self)
+    }
 
     private func goToRootVC(indexPath: IndexPath) {
         let group = searchingResults[indexPath.row]
@@ -82,9 +86,10 @@ final class RecommendationGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        let group = searchingResults[indexPath.row]
-        cell.configure(group: group, networkService: networkService)
+        ) as? GroupTableViewCell,
+            let groupImage = photoService?.photo(atIndexpath: indexPath, byUrl: searchingResults[indexPath.row].photo)
+        else { return UITableViewCell() }
+        cell.configure(group: searchingResults[indexPath.row], groupImage: groupImage)
         return cell
     }
 
