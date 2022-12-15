@@ -24,6 +24,7 @@ final class NewsTableViewController: UITableViewController {
         static let urlFailureText = "URL Failure"
         static let alertTitleText = "Внимание!"
         static let alertActionTitleText = "ok"
+        static let loadingText = "Loading..."
     }
 
     // MARK: - Types
@@ -39,7 +40,9 @@ final class NewsTableViewController: UITableViewController {
     private let networkService = NetworkService()
 
     private var currentIndex = 0
-    private var newsPost: ItemsNewsResponse?
+    private var news: [NewsPost] = []
+    private var isLoading = false
+    private var nextPage: String?
 
     // MARK: - LifeCycle
 
@@ -47,13 +50,13 @@ final class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchNews()
+        setupRefreshControl()
     }
 
     // MARK: - Public Method
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard let count = newsPost?.newsPost.count else { return 0 }
-        return count
+        news.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,14 +67,39 @@ final class NewsTableViewController: UITableViewController {
         createCell(indexPath: indexPath)
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let news = news[indexPath.section]
+
+        guard let cellType = NewsCellTypes(rawValue: indexPath.row),
+              cellType == .content,
+              news.attachments.first?.type == .photo,
+              let photo = news.attachments.first?.photo
+        else { return UITableView.automaticDimension }
+        let tableWidth = tableView.bounds.width
+        let cellHeight = (tableWidth * photo.aspectRation) - 200
+        return cellHeight
+    }
+
     // MARK: - Private Method
 
-    private func fetchNews() {
-        networkService.fetchNewsPost { [weak self] result in
+    @objc private func refreshControlAction() {
+        var mostFreshDate: TimeInterval?
+        if let firstItem = news.first {
+            mostFreshDate = firstItem.date + 1
+            fetchNewNews(mostFreshDate: mostFreshDate)
+        }
+    }
+
+    private func fetchNewNews(mostFreshDate: TimeInterval?) {
+        networkService.fetchNewsPost(startTime: mostFreshDate) { [weak self] result in
             guard let self else { return }
             switch result {
             case let .success(response):
-                self.newsFiltered(response)
+                self.refreshControl?.endRefreshing()
+                DispatchQueue.main.async {
+                    self.news = response.newsPost + self.news
+                    self.tableView.reloadData()
+                }
             case .failure(.urlFailure):
                 self.showAlert(
                     title: Constants.alertTitleText,
@@ -97,31 +125,51 @@ final class NewsTableViewController: UITableViewController {
         }
     }
 
-    private func newsFiltered(_ news: ItemsNewsResponse) {
-        var news = news
-        news.newsPost = news.newsPost.filter { $0.attachments.contains(where: { $0.type == .photo }) }
-        news.newsPost.forEach { item in
-            if item.sourceId < 0 {
-                guard let group = news.groups.filter({ group in
-                    group.id == item.sourceId * -1
-                }).first else { return }
-                item.name = group.name
-                item.photoUrlName = group.photo
-            } else {
-                guard let friend = news.friends.filter({ friend in
-                    friend.id == item.sourceId
-                }).first else { return }
-                item.name = "\(friend.firstName) \(friend.lastName)"
-                item.photoUrlName = friend.imageName
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = .black
+        refreshControl?.attributedTitle = NSAttributedString(string: Constants.loadingText)
+        refreshControl?.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
+    }
+
+    private func fetchNews() {
+        networkService.fetchNewsPost { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(response):
+                DispatchQueue.main.async {
+                    self.news = response.newsPost
+                    self.nextPage = response.nextPage
+                    self.tableView.reloadData()
+                }
+            case .failure(.urlFailure):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.urlFailureText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
+            case .failure(.decodingFailure):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.decodingFailureText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
+            case .failure(.unknown):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.unknownErrorText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
             }
-        }
-        DispatchQueue.main.async {
-            self.newsPost = news
-            self.tableView.reloadData()
         }
     }
 
     private func configureTableView() {
+        tableView.prefetchDataSource = self
+
         tableView.register(
             UINib(nibName: Constants.newsNibName, bundle: nil),
             forCellReuseIdentifier: Constants.newsIdentifier
@@ -149,7 +197,7 @@ final class NewsTableViewController: UITableViewController {
     }
 
     private func createCell(indexPath: IndexPath) -> UITableViewCell {
-        guard let news = newsPost?.newsPost[indexPath.section] else { return UITableViewCell() }
+        let news = news[indexPath.section]
         let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .header
         var cellIdentifier = ""
 
@@ -178,5 +226,51 @@ final class NewsTableViewController: UITableViewController {
         else { return UITableViewCell() }
         cell.update(news: news, networkService: networkService)
         return cell
+    }
+}
+
+/// UITableViewDataSourcePrefetching
+extension NewsTableViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxRow = indexPaths.map(\.section).max(),
+              maxRow > news.count - 3,
+              isLoading == false
+        else { return }
+        isLoading = true
+        networkService.fetchNewsPost(startFrom: nextPage) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(response):
+                let oldNewsCount = self.news.count
+                let newSections = (oldNewsCount ..< (oldNewsCount + response.newsPost.count)).map { $0 }
+                self.news.append(contentsOf: response.newsPost)
+                DispatchQueue.main.async {
+                    self.tableView.insertSections(IndexSet(newSections), with: .automatic)
+                }
+                self.nextPage = response.nextPage
+                self.isLoading = false
+            case .failure(.urlFailure):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.urlFailureText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
+            case .failure(.decodingFailure):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.decodingFailureText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
+            case .failure(.unknown):
+                self.showAlert(
+                    title: Constants.alertTitleText,
+                    message: Constants.unknownErrorText,
+                    actionTitle: Constants.alertActionTitleText,
+                    handler: nil
+                )
+            }
+        }
     }
 }

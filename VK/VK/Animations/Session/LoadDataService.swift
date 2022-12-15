@@ -68,6 +68,29 @@ class LoadDataService {
         }
     }
 
+    func loadNewsData(
+        componentsPath: NetworkServiceMethodKind,
+        parameters: Parameters,
+        handler: @escaping (Result<ItemsNewsResponse, NetworkError>) -> ()
+    ) {
+        let baseURL = Constants.baseUrl
+        let path = "\(componentsPath.description)"
+        guard let url = URL(string: baseURL + path) else {
+            handler(.failure(.urlFailure))
+            return
+        }
+        AF.request(url, parameters: parameters).responseData { [weak self] response in
+            guard let self else { return }
+            guard let data = response.data else { return }
+            do {
+                let response = try JSONDecoder().decode(Response<ItemsNewsResponse>.self, from: data)
+                handler(.success(self.newsFiltered(response.response)))
+            } catch {
+                handler(.failure(.decodingFailure))
+            }
+        }
+    }
+
     func loadGroups(componentsPath: NetworkServiceMethodKind, parameters: Parameters) {
         let operationQueue = OperationQueue()
         let request = groupRequest(componentsPath: componentsPath, parameters: parameters)
@@ -89,5 +112,26 @@ class LoadDataService {
         let url = URL(string: "\(baseURL)\(path)")
         let request = AF.request(url ?? Constants.emptyString, parameters: parameters)
         return request
+    }
+
+    private func newsFiltered(_ news: ItemsNewsResponse) -> ItemsNewsResponse {
+        var news = news
+        news.newsPost = news.newsPost.filter { $0.attachments.contains(where: { $0.type == .photo }) }
+        news.newsPost.forEach { item in
+            if item.sourceId < 0 {
+                guard let group = news.groups.filter({ group in
+                    group.id == item.sourceId * -1
+                }).first else { return }
+                item.name = group.name
+                item.photoUrlName = group.photo
+            } else {
+                guard let friend = news.friends.filter({ friend in
+                    friend.id == item.sourceId
+                }).first else { return }
+                item.name = "\(friend.firstName) \(friend.lastName)"
+                item.photoUrlName = friend.imageName
+            }
+        }
+        return news
     }
 }

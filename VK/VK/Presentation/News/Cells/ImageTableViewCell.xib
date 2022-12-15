@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,7 +23,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ut6-J2-YhK">
                                 <rect key="frame" x="0.0" y="10" width="510" height="390"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="black"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="510" id="bec-Xn-s7m"/>
                                 </constraints>
@@ -35,7 +35,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="black"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="510" id="Duw-CK-1GK"/>
                             <constraint firstAttribute="height" constant="400" id="f2M-Cw-e6o"/>
@@ -46,6 +46,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" name="black"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="aX8-xN-la9" secondAttribute="bottom" id="ENS-EQ-2Jc"/>
                     <constraint firstItem="aX8-xN-la9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="aAz-Kn-ecC"/>
@@ -61,8 +62,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="black">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

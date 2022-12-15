@@ -17,7 +17,8 @@ final class NewsPost: Decodable {
     var name: String?
     /// Имя аватара
     var photoUrlName: String?
-    //    var postPhotos: [String?] = []
+    /// Дата
+    var date: Double
 
     enum CodingKeys: String, CodingKey {
         case sourceId = "source_id"
@@ -26,6 +27,7 @@ final class NewsPost: Decodable {
         case attachments
         case name
         case photoUrl
+        case date
     }
 
     init(from decoder: Decoder) throws {
@@ -34,5 +36,6 @@ final class NewsPost: Decodable {
         postType = try container.decode(String.self, forKey: .postType)
         post = try container.decode(String.self, forKey: .post)
         attachments = (try container.decodeIfPresent([Attachment].self, forKey: .attachments)) ?? []
+        date = try container.decode(Double.self, forKey: .date)
     }
 }
