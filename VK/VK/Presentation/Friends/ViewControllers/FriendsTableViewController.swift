@@ -40,7 +40,7 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private let promiseProvider = PromiseProvider()
-    private let networkService = NetworkService()
+    private lazy var photoService = PhotoService(container: self)
     private var friendSectionsMap: [Character: [Friend]] = [:]
     private var sectionTitles: [Character] = []
     private var generalSectionsCount = 4
@@ -61,7 +61,7 @@ final class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchFriends()
-        observe()
+        observeFriends()
     }
 
     // MARK: - Public Method
@@ -92,7 +92,7 @@ final class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Method
 
-    private func observe() {
+    private func observeFriends() {
         promiseProvider.observeFriends { [weak self] friends in
             guard let self else { return }
             self.friends = friends
@@ -187,9 +187,9 @@ final class FriendsTableViewController: UITableViewController {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: Constants.friendsIdentifier,
                     for: indexPath
-                ) as? FriendsTableViewCell else { return UITableViewCell() }
-            cell.update(friend: friend, networkService: networkService)
-            print(friend)
+                ) as? FriendsTableViewCell
+            else { return UITableViewCell() }
+            cell.configure(friend: friend, photoService: photoService)
             return cell
         }
     }

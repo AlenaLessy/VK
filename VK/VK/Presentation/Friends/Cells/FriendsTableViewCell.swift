@@ -26,9 +26,9 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func update(friend: Friend, networkService: NetworkService) {
-        userImageView.loadImage(imageURL: friend.imageName, networkService: networkService)
-        userNameLabel.text = friend.firstName + " " + friend.lastName
+    func configure(friend: Friend, photoService: PhotoService) {
+        userImageView.image = photoService.photo(byUrl: friend.imageName)
+        userNameLabel.text = "\(friend.firstName) \(friend.lastName)"
     }
 
     // MARK: - Private Methods

@@ -12,8 +12,13 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public Method
 
-    func configure(group: Group, networkService: NetworkService) {
-        groupImageView.loadImage(imageURL: group.photo, networkService: networkService)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        groupImageView.image = UIImage(named: "mi2")
+    }
+
+    func configure(group: Group, photoService: PhotoService) {
+        groupImageView.image = photoService.photo(byUrl: group.photo)
         groupNameLabel.text = group.name
     }
 }

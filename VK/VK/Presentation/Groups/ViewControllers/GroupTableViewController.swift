@@ -19,8 +19,8 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private let dataProvider = DataProvider()
-    private let networkService = NetworkService()
 
+    private lazy var photoService = PhotoService(container: self)
     private var groups: [Group] = []
     private var recommendationGroups: [Group] = []
 
@@ -30,7 +30,7 @@ final class GroupTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         fetchGroups()
-        observe()
+        observeGroups()
     }
 
     // MARK: - Public Methods
@@ -69,6 +69,10 @@ final class GroupTableViewController: UITableViewController {
 
     // MARK: - Private Methods
 
+    private func photoServiceConfigure() {
+        photoService = PhotoService(container: self)
+    }
+
     private func configureTableView() {
         tableView.register(
             UINib(nibName: Constants.groupNibName, bundle: nil),
@@ -80,13 +84,13 @@ final class GroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        let group = groups[indexPath.row]
-        cell.configure(group: group, networkService: networkService)
+        ) as? GroupTableViewCell
+        else { return UITableViewCell() }
+        cell.configure(group: groups[indexPath.row], photoService: photoService)
         return cell
     }
 
-    private func observe() {
+    private func observeGroups() {
         dataProvider.observeGroups { [weak self] groups in
             guard let self else { return }
             self.groups = groups

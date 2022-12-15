@@ -28,8 +28,7 @@ final class RecommendationGroupTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private let networkService = NetworkService()
-
+    private lazy var photoService = PhotoService(container: self)
     private var selectedGroup: Group?
     private var searchingResults: [Group] = []
     private var dataProvider = DataProvider()
@@ -82,9 +81,9 @@ final class RecommendationGroupTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.groupIdentifier,
             for: indexPath
-        ) as? GroupTableViewCell else { return UITableViewCell() }
-        let group = searchingResults[indexPath.row]
-        cell.configure(group: group, networkService: networkService)
+        ) as? GroupTableViewCell
+        else { return UITableViewCell() }
+        cell.configure(group: searchingResults[indexPath.row], photoService: photoService)
         return cell
     }
 
