@@ -16,8 +16,7 @@ struct NewsPhoto: Decodable {
     var aspectRation: CGFloat {
         guard let height,
               let width,
-              width != 0,
-              height != 0
+              width != 0
         else { return 0 }
         return CGFloat(width) / CGFloat(height)
     }
