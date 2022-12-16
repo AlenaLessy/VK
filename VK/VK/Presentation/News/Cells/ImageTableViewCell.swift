@@ -82,6 +82,9 @@ extension ImageTableViewCell: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let side = UIScreen.main.bounds.width
-        return CGSize(width: side, height: side)
+        guard let height = newsDataSource?.attachments.first?.photo?.aspectRation
+        else { return CGSize(width: 0, height: 0) }
+        let result = side / height
+        return CGSize(width: side, height: result)
     }
 }

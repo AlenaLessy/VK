@@ -9,6 +9,8 @@ struct ItemsNewsResponse: Decodable {
     let friends: [Friend]
     /// Информация о группах
     let groups: [Group]
+    /// Cледующая страница
+    let nextPage: String?
     /// Новостные посты
     var newsPost: [NewsPost]
 
@@ -16,5 +18,6 @@ struct ItemsNewsResponse: Decodable {
         case newsPost = "items"
         case friends = "profiles"
         case groups
+        case nextPage = "next_from"
     }
 }

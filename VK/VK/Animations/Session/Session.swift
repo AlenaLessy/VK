@@ -11,7 +11,7 @@ final class Session {
 
     var token = ""
     var userId = ""
-    var clientId = 51_497_189
+    var clientId = 51_504_187
 
     // MARK: - Private Initializers
 

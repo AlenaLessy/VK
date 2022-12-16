@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,16 +21,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E3-pm-Wgd" userLabel="ContentView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6" translatesAutoresizingMaskIntoConstraints="NO" id="uA0-h2-e0N">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-photo" translatesAutoresizingMaskIntoConstraints="NO" id="uA0-h2-e0N">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="black"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="320" id="Eta-9d-Yzf"/>
                             <constraint firstAttribute="trailing" secondItem="uA0-h2-e0N" secondAttribute="trailing" id="Mlf-Mh-KtI"/>
                             <constraint firstAttribute="bottom" secondItem="uA0-h2-e0N" secondAttribute="bottom" id="Zcv-Oc-CfE"/>
-                            <constraint firstAttribute="width" secondItem="4E3-pm-Wgd" secondAttribute="height" multiplier="1:1" id="gFN-cU-hmj"/>
                             <constraint firstItem="uA0-h2-e0N" firstAttribute="leading" secondItem="4E3-pm-Wgd" secondAttribute="leading" id="kRK-Nc-dj5"/>
                             <constraint firstItem="uA0-h2-e0N" firstAttribute="top" secondItem="4E3-pm-Wgd" secondAttribute="top" id="mm1-p0-LS6"/>
                         </constraints>
@@ -38,6 +37,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" name="black"/>
             <constraints>
                 <constraint firstItem="4E3-pm-Wgd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BY0-ZO-btD"/>
                 <constraint firstAttribute="trailing" secondItem="4E3-pm-Wgd" secondAttribute="trailing" id="QOC-Sh-Cpc"/>
@@ -46,16 +46,15 @@
             </constraints>
             <size key="customSize" width="320" height="320"/>
             <connections>
-                <outlet property="cellHeightLayoutConstraint" destination="Eta-9d-Yzf" id="FSL-8v-W2h"/>
                 <outlet property="friendImageView" destination="uA0-h2-e0N" id="vhD-l1-q3u"/>
             </connections>
             <point key="canvasLocation" x="299.23664122137404" y="114.08450704225352"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="6" width="267" height="189"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="no-photo" width="150" height="150"/>
+        <namedColor name="black">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

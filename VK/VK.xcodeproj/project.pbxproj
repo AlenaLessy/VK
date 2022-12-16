@@ -315,6 +315,7 @@
 				57CF2F38293E5FD1009C2C8E /* NewsConfigurable.swift */,
 				57CF2F3E293F5FAB009C2C8E /* PostAndImageTableViewCell.swift */,
 				57CF2F3F293F5FAB009C2C8E /* PostAndImageTableViewCell.xib */,
+				577BAB2A291B558D00BD741B /* ImageTableViewCell.swift */,
 				577BAB2B291B558D00BD741B /* ImageTableViewCell.xib */,
 				578D8A91293E3F7500CA7C0B /* HeaderTableViewCell.swift */,
 				57CF2F3A293F5E36009C2C8E /* PostTableViewCell.swift */,
@@ -331,7 +332,6 @@
 		577CCE7C2946FE9200DF19E0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				577BAB2A291B558D00BD741B /* ImageTableViewCell.swift */,
 				577CCE7D2946FEBA00DF19E0 /* DataReloadable.swift */,
 			);
 			name = Protocols;

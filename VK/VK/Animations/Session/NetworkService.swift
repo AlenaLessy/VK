@@ -26,6 +26,8 @@ final class NetworkService: LoadDataService {
         static let parameterOrderName = "name"
         static let parameterFiltersValue = "post"
         static let parameterFiltersName = "filters"
+        static let countNewsName = "count"
+        static let countNewsValue = "3"
     }
 
     // MARK: - Private Properties
@@ -53,10 +55,11 @@ final class NetworkService: LoadDataService {
         Constants.parameterLandName: Constants.parameterLandValue
     ]
 
-    private let newsPostParameters: Parameters = [
+    private var newsPostParameters: Parameters = [
         Constants.parameterTokenName: "\(Session.shared.token)",
         Constants.parameterFiltersName: Constants.parameterFiltersValue,
         Constants.parameterVName: Constants.parameterVersionValue,
+        Constants.countNewsName: Constants.countNewsValue
     ]
 
     // MARK: - Public Methods
@@ -101,13 +104,17 @@ final class NetworkService: LoadDataService {
     }
 
     func fetchNewsPost(
+        startTime: TimeInterval? = nil,
+        startFrom: String? = nil,
         handler: @escaping (Result<ItemsNewsResponse, NetworkError>) -> ()
     ) {
-        loadData(
-            componentsPath: .getNewsFeed,
-            parameters: newsPostParameters,
-            handler: handler
-        )
+        if let startTime {
+            newsPostParameters["start_time"] = "\(startTime)"
+        }
+        if let startFrom {
+            newsPostParameters["start_from"] = "\(startFrom)"
+        }
+        loadNewsData(componentsPath: .getNewsFeed, parameters: newsPostParameters, handler: handler)
     }
 
     func fetchGroups() {
