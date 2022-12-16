@@ -75,9 +75,9 @@ final class NewsTableViewController: UITableViewController {
               news.attachments.first?.type == .photo,
               let photo = news.attachments.first?.photo
         else { return UITableView.automaticDimension }
-        let tableWidth = tableView.bounds.width
-        let cellHeight = (tableWidth * photo.aspectRation) - 200
-        return cellHeight
+        let tableWidth = UIScreen.main.bounds.width
+        let height = (tableWidth / photo.aspectRation)
+        return UITableView.automaticDimension
     }
 
     // MARK: - Private Method
@@ -96,10 +96,8 @@ final class NewsTableViewController: UITableViewController {
             switch result {
             case let .success(response):
                 self.refreshControl?.endRefreshing()
-                DispatchQueue.main.async {
-                    self.news = response.newsPost + self.news
-                    self.tableView.reloadData()
-                }
+                self.news = response.newsPost + self.news
+                self.tableView.reloadData()
             case .failure(.urlFailure):
                 self.showAlert(
                     title: Constants.alertTitleText,
@@ -137,11 +135,9 @@ final class NewsTableViewController: UITableViewController {
             guard let self else { return }
             switch result {
             case let .success(response):
-                DispatchQueue.main.async {
-                    self.news = response.newsPost
-                    self.nextPage = response.nextPage
-                    self.tableView.reloadData()
-                }
+                self.news = response.newsPost
+                self.nextPage = response.nextPage
+                self.tableView.reloadData()
             case .failure(.urlFailure):
                 self.showAlert(
                     title: Constants.alertTitleText,
@@ -227,16 +223,8 @@ final class NewsTableViewController: UITableViewController {
         cell.update(news: news, networkService: networkService)
         return cell
     }
-}
 
-/// UITableViewDataSourcePrefetching
-extension NewsTableViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        guard let maxRow = indexPaths.map(\.section).max(),
-              maxRow > news.count - 3,
-              isLoading == false
-        else { return }
-        isLoading = true
+    private func fetchNewsNextPage() {
         networkService.fetchNewsPost(startFrom: nextPage) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -272,5 +260,17 @@ extension NewsTableViewController: UITableViewDataSourcePrefetching {
                 )
             }
         }
+    }
+}
+
+/// UITableViewDataSourcePrefetching
+extension NewsTableViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxRow = indexPaths.map(\.section).max(),
+              maxRow > news.count - 3,
+              isLoading == false
+        else { return }
+        isLoading = true
+        fetchNewsNextPage()
     }
 }

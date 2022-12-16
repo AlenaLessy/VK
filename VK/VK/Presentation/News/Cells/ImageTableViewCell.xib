@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="510" height="400"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ut6-J2-YhK">
-                                <rect key="frame" x="0.0" y="10" width="510" height="390"/>
+                                <rect key="frame" x="0.0" y="0.0" width="510" height="400"/>
                                 <color key="backgroundColor" name="black"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="510" id="bec-Xn-s7m"/>
@@ -39,7 +39,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="510" id="Duw-CK-1GK"/>
                             <constraint firstAttribute="height" constant="400" id="f2M-Cw-e6o"/>
-                            <constraint firstItem="Ut6-J2-YhK" firstAttribute="top" secondItem="aX8-xN-la9" secondAttribute="top" constant="10" id="j0m-Cd-cY3"/>
+                            <constraint firstItem="Ut6-J2-YhK" firstAttribute="top" secondItem="aX8-xN-la9" secondAttribute="top" id="j0m-Cd-cY3"/>
                             <constraint firstItem="Ut6-J2-YhK" firstAttribute="leading" secondItem="aX8-xN-la9" secondAttribute="leading" id="ohw-zI-b0N"/>
                             <constraint firstAttribute="trailing" secondItem="Ut6-J2-YhK" secondAttribute="trailing" id="rS1-U2-KU4"/>
                             <constraint firstAttribute="bottom" secondItem="Ut6-J2-YhK" secondAttribute="bottom" id="rgy-Qj-5Ko"/>

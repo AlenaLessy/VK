@@ -52,7 +52,7 @@ class LoadDataService {
     ) {
         let baseURL = Constants.baseUrl
         let path = "\(componentsPath.description)"
-        guard let url = URL(string: baseURL + path) else {
+        guard let url = URL(string: "\(baseURL)\(path)") else {
             handler(.failure(.urlFailure))
             return
         }
@@ -75,12 +75,11 @@ class LoadDataService {
     ) {
         let baseURL = Constants.baseUrl
         let path = "\(componentsPath.description)"
-        guard let url = URL(string: baseURL + path) else {
+        guard let url = URL(string: "\(baseURL)\(path)") else {
             handler(.failure(.urlFailure))
             return
         }
-        AF.request(url, parameters: parameters).responseData { [weak self] response in
-            guard let self else { return }
+        AF.request(url, parameters: parameters).responseData { response in
             guard let data = response.data else { return }
             do {
                 let response = try JSONDecoder().decode(Response<ItemsNewsResponse>.self, from: data)
@@ -115,21 +114,23 @@ class LoadDataService {
     }
 
     private func newsFiltered(_ news: ItemsNewsResponse) -> ItemsNewsResponse {
-        var news = news
-        news.newsPost = news.newsPost.filter { $0.attachments.contains(where: { $0.type == .photo }) }
-        news.newsPost.forEach { item in
-            if item.sourceId < 0 {
-                guard let group = news.groups.filter({ group in
-                    group.id == item.sourceId * -1
-                }).first else { return }
-                item.name = group.name
-                item.photoUrlName = group.photo
-            } else {
-                guard let friend = news.friends.filter({ friend in
-                    friend.id == item.sourceId
-                }).first else { return }
-                item.name = "\(friend.firstName) \(friend.lastName)"
-                item.photoUrlName = friend.imageName
+        DispatchQueue.global().async {
+            var news = news
+            news.newsPost = news.newsPost.filter { $0.attachments.contains(where: { $0.type == .photo }) }
+            news.newsPost.forEach { item in
+                if item.sourceId < 0 {
+                    guard let group = news.groups.filter({ group in
+                        group.id == item.sourceId * -1
+                    }).first else { return }
+                    item.name = group.name
+                    item.photoUrlName = group.photo
+                } else {
+                    guard let friend = news.friends.filter({ friend in
+                        friend.id == item.sourceId
+                    }).first else { return }
+                    item.name = "\(friend.firstName) \(friend.lastName)"
+                    item.photoUrlName = friend.imageName
+                }
             }
         }
         return news
